@@ -29,8 +29,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <Compile Include="..\..\..\UtilitiesDotNet\sources\RI.Utilities\Exceptions\ExceptionExtensions.cs" Link="Utilities\ExceptionExtensions.cs"/>
-    <Compile Include="..\..\..\UtilitiesDotNet\sources\RI.Utilities\Dates\DateTimeExtensions.cs" Link="Utilities\DateTimeExtensions.cs"/>
   </ItemGroup>
 
   <ItemGroup>

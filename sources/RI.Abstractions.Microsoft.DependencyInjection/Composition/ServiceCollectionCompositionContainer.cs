@@ -121,7 +121,7 @@ namespace RI.Abstractions.Composition
                         }
                         break;
 
-                    case { } r when r.Mode == CompositionRegistrationMode.None:
+                    case { } r when r.Mode == CompositionRegistrationMode.Temporary:
                         break;
 
                     default:

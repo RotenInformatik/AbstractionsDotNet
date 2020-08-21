@@ -6,24 +6,24 @@
 namespace RI.Abstractions.Composition
 {
     /// <summary>
-    ///     Indicates the service registration mode of a <see cref="CompositionRegistration" />.
+    ///     Indicates the registration mode of a <see cref="CompositionRegistration" /> in a <see cref="ICompositionContainer"/>.
     /// </summary>
     [Serializable,]
     public enum CompositionRegistrationMode
     {
         /// <summary>
-        ///     The service is registered as a singleton (one instance shared with all requests).
+        ///     The service is registered as a singleton (one instance shared with all instance requests).
         /// </summary>
         Singleton = 0,
 
         /// <summary>
-        ///     The service is registered as a transient (one unique instance per requests).
+        ///     The service is registered as a transient (one unique instance per instance requests).
         /// </summary>
         Transient = 1,
 
         /// <summary>
-        ///     The service is registered for exclusive use by the domain service builder itself and wont be registered in the used composition container.
+        ///     The service is not registered (e.g. when only exclusively used by a <see cref="BuilderBase"/> during the build stage).
         /// </summary>
-        None = 2,
+        Temporary = 2,
     }
 }

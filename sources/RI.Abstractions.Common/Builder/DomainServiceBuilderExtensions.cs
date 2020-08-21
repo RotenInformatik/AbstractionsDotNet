@@ -486,7 +486,7 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Removes all registrations which are registered as <see cref="CompositionRegistrationMode.None" />.
+        ///     Removes all registrations which are registered as <see cref="CompositionRegistrationMode.Temporary" />.
         /// </summary>
         /// <param name="builder"> The service builder being used. </param>
         /// <returns> The number of removed registrations or zero if no build-only registrations were found to be removed. </returns>
@@ -501,7 +501,7 @@ namespace RI.Abstractions.Builder
 
             builder.ThrowIfAlreadyBuilt();
 
-            return builder.Registrations.RemoveAll(x => x.Mode == CompositionRegistrationMode.None);
+            return builder.Registrations.RemoveAll(x => x.Mode == CompositionRegistrationMode.Temporary);
         }
 
         /// <summary>

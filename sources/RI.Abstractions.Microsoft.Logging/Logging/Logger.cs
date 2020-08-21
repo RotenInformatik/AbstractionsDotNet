@@ -67,11 +67,11 @@ namespace RI.Abstractions.Logging
         #endregion
 
         /// <inheritdoc />
-        public void Log(DateTime timestampUtc, int threadId, LogLevel level, string source, string format, Exception exception, params object[] args)
+        public void Log(DateTime timestampUtc, int threadId, LogLevel level, string source, Exception exception, string format, params object[] args)
         {
             if (exception != null)
             {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{timestampUtc.ToSortableString('-')}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{exception.ToDetailedString()}{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}");
+                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{timestampUtc.ToSortableString('-')}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{exception.ToDetailedString()}");
             }
             else
             {

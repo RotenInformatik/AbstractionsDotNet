@@ -1,12 +1,14 @@
 ﻿using System;
 
+using RI.Utilities.Reflection;
+
 
 
 
 namespace RI.Abstractions.Composition
 {
     /// <summary>
-    ///     A single domain service registration used by domain service builders to configure and build the required types.
+    ///     A single registration for a <see cref="ICompositionContainer"/>.
     /// </summary>
     /// <threadsafety static="false" instance="false" />
     public sealed class CompositionRegistration
@@ -14,13 +16,13 @@ namespace RI.Abstractions.Composition
         #region Static Methods
 
         /// <summary>
-        ///     Creates a build-only domain service registration specifying an implementation type.
+        ///     Creates a registration which will not be registered, specifying an implementation type.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="implementation"> The implementation type. </param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="implementation" /> is null. </exception>
-        public static CompositionRegistration BuildOnly (Type contract, Type implementation)
+        public static CompositionRegistration Temporary (Type contract, Type implementation)
         {
             if (contract == null)
             {
@@ -38,18 +40,19 @@ namespace RI.Abstractions.Composition
                 Implementation = implementation,
                 Factory = null,
                 Instance = null,
-                Mode = CompositionRegistrationMode.None,
+                Mode = CompositionRegistrationMode.Temporary,
+                AlwaysRegister = false,
             };
         }
 
         /// <summary>
-        ///     Creates a build-only domain service registration specifying a factory.
+        ///     Creates a registration which will not be registered, specifying a factory.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="factory"> The factory. </param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="factory" /> is null. </exception>
-        public static CompositionRegistration BuildOnly (Type contract, Func<IServiceProvider, object> factory)
+        public static CompositionRegistration Temporary(Type contract, Func<IServiceProvider, object> factory)
         {
             if (contract == null)
             {
@@ -67,18 +70,19 @@ namespace RI.Abstractions.Composition
                 Implementation = null,
                 Factory = factory,
                 Instance = null,
-                Mode = CompositionRegistrationMode.None,
+                Mode = CompositionRegistrationMode.Temporary,
+                AlwaysRegister = false,
             };
         }
 
         /// <summary>
-        ///     Creates a build-only domain service registration specifying an implementation instance.
+        ///     Creates a registration which will not be registered, specifying an implementation instance.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="instance"> The implementation instance. </param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="instance" /> is null. </exception>
-        public static CompositionRegistration BuildOnly (Type contract, object instance)
+        public static CompositionRegistration Temporary(Type contract, object instance)
         {
             if (contract == null)
             {
@@ -96,18 +100,20 @@ namespace RI.Abstractions.Composition
                 Implementation = null,
                 Factory = null,
                 Instance = instance,
-                Mode = CompositionRegistrationMode.None,
+                Mode = CompositionRegistrationMode.Temporary,
+                AlwaysRegister = false,
             };
         }
 
         /// <summary>
-        ///     Creates a singleton domain service registration specifying an implementation type.
+        ///     Creates a singleton registration specifying an implementation type.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="implementation"> The implementation type. </param>
+        /// <param name="alwaysRegister">whether the registration should be registered even if the contract (<paramref name="contract"/>) is already registered.</param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="implementation" /> is null. </exception>
-        public static CompositionRegistration Singleton (Type contract, Type implementation)
+        public static CompositionRegistration Singleton (Type contract, Type implementation, bool alwaysRegister = true)
         {
             if (contract == null)
             {
@@ -126,17 +132,19 @@ namespace RI.Abstractions.Composition
                 Factory = null,
                 Instance = null,
                 Mode = CompositionRegistrationMode.Singleton,
+                AlwaysRegister = alwaysRegister,
             };
         }
 
         /// <summary>
-        ///     Creates a singleton domain service registration specifying a factory.
+        ///     Creates a singleton registration specifying a factory.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="factory"> The factory. </param>
+        /// <param name="alwaysRegister">whether the registration should be registered even if the contract (<paramref name="contract"/>) is already registered.</param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="factory" /> is null. </exception>
-        public static CompositionRegistration Singleton (Type contract, Func<IServiceProvider, object> factory)
+        public static CompositionRegistration Singleton (Type contract, Func<IServiceProvider, object> factory, bool alwaysRegister = true)
         {
             if (contract == null)
             {
@@ -155,17 +163,19 @@ namespace RI.Abstractions.Composition
                 Factory = factory,
                 Instance = null,
                 Mode = CompositionRegistrationMode.Singleton,
+                AlwaysRegister = alwaysRegister,
             };
         }
 
         /// <summary>
-        ///     Creates a singleton domain service registration specifying an implementation instance.
+        ///     Creates a singleton registration specifying an implementation instance.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="instance"> The implementation instance. </param>
+        /// <param name="alwaysRegister">whether the registration should be registered even if the contract (<paramref name="contract"/>) is already registered.</param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="instance" /> is null. </exception>
-        public static CompositionRegistration Singleton (Type contract, object instance)
+        public static CompositionRegistration Singleton (Type contract, object instance, bool alwaysRegister = true)
         {
             if (contract == null)
             {
@@ -184,17 +194,19 @@ namespace RI.Abstractions.Composition
                 Factory = null,
                 Instance = instance,
                 Mode = CompositionRegistrationMode.Singleton,
+                AlwaysRegister = alwaysRegister,
             };
         }
 
         /// <summary>
-        ///     Creates a transient domain service registration specifying an implementation type.
+        ///     Creates a transient registration specifying an implementation type.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="implementation"> The implementation type. </param>
+        /// <param name="alwaysRegister">whether the registration should be registered even if the contract (<paramref name="contract"/>) is already registered.</param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="implementation" /> is null. </exception>
-        public static CompositionRegistration Transient (Type contract, Type implementation)
+        public static CompositionRegistration Transient (Type contract, Type implementation, bool alwaysRegister = true)
         {
             if (contract == null)
             {
@@ -213,17 +225,19 @@ namespace RI.Abstractions.Composition
                 Factory = null,
                 Instance = null,
                 Mode = CompositionRegistrationMode.Transient,
+                AlwaysRegister = alwaysRegister,
             };
         }
 
         /// <summary>
-        ///     Creates a transient domain service registration specifying a factory.
+        ///     Creates a transient registration specifying a factory.
         /// </summary>
         /// <param name="contract"> The contract type. </param>
         /// <param name="factory"> The factory. </param>
+        /// <param name="alwaysRegister">whether the registration should be registered even if the contract (<paramref name="contract"/>) is already registered.</param>
         /// <returns> The created service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="contract" /> or <paramref name="factory" /> is null. </exception>
-        public static CompositionRegistration Transient (Type contract, Func<IServiceProvider, object> factory)
+        public static CompositionRegistration Transient (Type contract, Func<IServiceProvider, object> factory, bool alwaysRegister = true)
         {
             if (contract == null)
             {
@@ -242,6 +256,7 @@ namespace RI.Abstractions.Composition
                 Factory = factory,
                 Instance = null,
                 Mode = CompositionRegistrationMode.Transient,
+                AlwaysRegister = alwaysRegister,
             };
         }
 
@@ -277,21 +292,27 @@ namespace RI.Abstractions.Composition
         public Type Implementation { get; internal set; }
 
         /// <summary>
-        ///     Gets the implementation type.
+        ///     Gets the implementation instance.
         /// </summary>
         /// <value>
-        ///     The implementation type or null if implementation type or factory is used.
+        ///     The implementation instance or null if implementation type or factory is used.
         /// </value>
         public object Instance { get; internal set; }
 
         /// <summary>
-        ///     Gets the service registration mode.
+        ///     Gets the registration mode.
         /// </summary>
         /// <value>
-        ///     The service registration mode.
+        ///     The registration mode.
         /// </value>
         public CompositionRegistrationMode Mode { get; internal set; }
 
+        /// <summary>
+        /// Gets whether the registration should be registered even if the contract (<see cref="Contract"/>) is already registered in the used <see cref="ICompositionContainer"/>.
+        /// </summary>
+        /// <value>
+        ///true if the registration should always be registered, false otherwise.
+        /// </value>
         public bool AlwaysRegister { get; internal set; }
 
         #endregion
@@ -301,14 +322,14 @@ namespace RI.Abstractions.Composition
 
 
         /// <summary>
-        ///     Attempts to get or create the instance registered by this domain service registration.
+        ///     Attempts to get or create the instance registered by this registration.
         /// </summary>
-        /// <param name="serviceProviderForFactories"> An optional <see cref="IServiceProvider" /> which is forwarded to potential factory methods if used.. </param>
+        /// <param name="serviceProviderForFactories"> An optional <see cref="IServiceProvider" /> which is forwarded to potential factory methods if applicable. </param>
         /// <returns> The instance. </returns>
         /// <remarks>
         ///     <note type="important">
-        ///         The instance creation is limited as it only support basic construction of instances, either by using a registered instance, factory method, or parameterless constructor.
-        ///         Constructors of services which have parameters are not supported.
+        ///         The instance creation capabilities are limited as it only supports basic construction of instances, either by using a registered instance, factory method, or parameterless constructor.
+        ///         Constructors which have parameters are not supported.
         ///     </note>
         /// </remarks>
         /// <exception cref="NotSupportedException"> The registration does not support instance creation (e.g. does not have a parameterless constructor, the creation threw an exception, etc.) </exception>
@@ -322,11 +343,11 @@ namespace RI.Abstractions.Composition
                 {
                     instance = this.Instance;
                 }
-                else if ((this.Factory != null) && (this.Mode == CompositionRegistrationMode.None))
+                else if ((this.Factory != null) && (this.Mode != CompositionRegistrationMode.Singleton))
                 {
                     instance = this.Factory(serviceProviderForFactories);
                 }
-                else if ((this.Implementation != null) && (this.Mode == CompositionRegistrationMode.None))
+                else if ((this.Implementation != null) && (this.Mode != CompositionRegistrationMode.Singleton))
                 {
                     instance = Activator.CreateInstance(this.Implementation);
                 }
@@ -347,7 +368,7 @@ namespace RI.Abstractions.Composition
             }
             catch (Exception exception)
             {
-                throw new NotSupportedException($"Registration not supported (creation failed): {this}", exception);
+                throw new NotSupportedException($"Registration not supported (instance creation failed): {this}", exception);
             }
         }
 
@@ -357,7 +378,7 @@ namespace RI.Abstractions.Composition
         #region Overrides
 
         /// <inheritdoc />
-        public override string ToString () => $"{nameof(CompositionRegistration)}; Mode={this.Mode}; Contract={this.Contract?.Name ?? "[null]"}; Implementation={this.Implementation?.Name ?? "[null]"}; Factory={this.Factory?.GetFullName() ?? "[null]"}; Instance={this.Instance ?? "[null]"}";
+        public override string ToString () => $"{nameof(CompositionRegistration)}; Mode={this.Mode}; AlwaysRegister={this.AlwaysRegister}; Contract={this.Contract?.Name ?? "[null]"}; Implementation={this.Implementation?.Name ?? "[null]"}; Factory={this.Factory?.GetFullName() ?? "[null]"}; Instance={this.Instance?.ToString() ?? "[null]"}";
 
         #endregion
     }
