@@ -25,14 +25,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <Compile Include="..\..\..\UtilitiesDotNet\sources\RI.Utilities\Exceptions\ExceptionExtensions.cs" Link="Internals\ExceptionExtensions.cs" />
-    <Compile Include="..\..\..\UtilitiesDotNet\sources\RI.Utilities\Dates\DateTimeExtensions.cs" Link="Internals\DateTimeExtensions.cs" />
-    <Compile Include="..\..\..\UtilitiesDotNet\sources\RI.Utilities\Reflection\DelegateExtensions.cs" Link="Internals\DelegateExtensions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ComponentModel\" />
-    <Folder Include="Builder\" />
   </ItemGroup>
 
 </Project>

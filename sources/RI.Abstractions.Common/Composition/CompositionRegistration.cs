@@ -1,7 +1,5 @@
 ﻿using System;
 
-using RI.Utilities.Reflection;
-
 
 
 
@@ -378,7 +376,7 @@ namespace RI.Abstractions.Composition
         #region Overrides
 
         /// <inheritdoc />
-        public override string ToString () => $"{nameof(CompositionRegistration)}; Mode={this.Mode}; AlwaysRegister={this.AlwaysRegister}; Contract={this.Contract?.Name ?? "[null]"}; Implementation={this.Implementation?.Name ?? "[null]"}; Factory={this.Factory?.GetFullName() ?? "[null]"}; Instance={this.Instance?.ToString() ?? "[null]"}";
+        public override string ToString () => $"{nameof(CompositionRegistration)}; Mode={this.Mode}; AlwaysRegister={this.AlwaysRegister}; Contract={this.Contract?.Name ?? "[null]"}; Implementation={this.Implementation?.Name ?? "[null]"}; Factory={this.Factory?.Method.DeclaringType?.Name ?? "[null]"}.{this.Factory?.Method.Name ?? "[null]"}; Instance={this.Instance?.ToString() ?? "[null]"}";
 
         #endregion
     }

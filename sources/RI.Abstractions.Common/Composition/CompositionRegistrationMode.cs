@@ -1,5 +1,7 @@
 ﻿using System;
 
+using RI.Abstractions.Builder;
+
 
 
 
@@ -22,7 +24,7 @@ namespace RI.Abstractions.Composition
         Transient = 1,
 
         /// <summary>
-        ///     The service is not registered (e.g. when only exclusively used by a <see cref="BuilderBase"/> during the build stage).
+        ///     The service is not registered (e.g. when only exclusively used by a <see cref="IBuilder"/> implementation during the build stage).
         /// </summary>
         Temporary = 2,
     }

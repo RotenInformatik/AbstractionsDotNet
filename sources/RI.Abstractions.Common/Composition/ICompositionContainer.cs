@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using RI.Abstractions.Builder;
+
 
 
 
@@ -14,7 +16,7 @@ namespace RI.Abstractions.Composition
     ///<see cref="ICompositionContainer"/> is used to abstract away the used composition, container and/or dependency injection library and mechanism.
     /// </para>
     /// <para>
-    ///<see cref="ICompositionContainer"/> is intended to provide a mechanism (through <see cref="Register"/>) for one-time registration of services (e.g. by a <see cref="BuilderBase"/> during the build stage)
+    ///<see cref="ICompositionContainer"/> is intended to provide a mechanism (through <see cref="Register"/>) for one-time registration of services (e.g. by a <see cref="IBuilder"/> implementation during the build stage)
     /// </para>
     /// </remarks>
     public interface ICompositionContainer

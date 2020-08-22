@@ -1,9 +1,7 @@
 ﻿using System;
+using System.Globalization;
 
 using Microsoft.Extensions.Logging;
-
-using RI.Utilities.Dates;
-using RI.Utilities.Exceptions;
 
 
 
@@ -71,11 +69,11 @@ namespace RI.Abstractions.Logging
         {
             if (exception != null)
             {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{timestampUtc.ToSortableString('-')}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{exception.ToDetailedString()}");
+                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{exception}");
             }
             else
             {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), $"[{timestampUtc.ToSortableString('-')}] [{threadId}] [{level}] [{source}] {string.Format(format, args)}");
+                this.UsedLogger.Log(this.TranslateLogLevel(level), $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}] {string.Format(format, args)}");
             }
         }
 
@@ -97,5 +95,7 @@ namespace RI.Abstractions.Logging
                     return Microsoft.Extensions.Logging.LogLevel.None;
             }
         }
+
+        private string FormatTimestamp (DateTime timestamp) => timestamp.ToString("yyyy'-'MM'-'dd'-'HH'-'mm'-'ss'-'fff", CultureInfo.InvariantCulture);
     }
 }

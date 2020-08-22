@@ -10,10 +10,10 @@ using RI.Abstractions.Composition;
 namespace RI.Abstractions.Builder
 {
     /// <summary>
-    ///     Provides utility/extension methods for the <see cref="DomainServiceBuilder" /> type.
+    ///     Provides utility/extension methods for the <see cref="IBuilder" /> type.
     /// </summary>
     /// <threadsafety static="false" instance="false" />
-    public static class DomainServiceBuilderExtensions
+    public static class IBuilderExtensions
     {
         #region Static Methods
 
@@ -26,7 +26,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="implementation" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddBuildOnly (this DomainServiceBuilder builder, Type contract, Type implementation)
+        public static CompositionRegistration AddBuildOnly (this BuilderBase builder, Type contract, Type implementation)
         {
             if (builder == null)
             {
@@ -59,7 +59,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="factory" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddBuildOnly (this DomainServiceBuilder builder, Type contract, Func<IServiceProvider, object> factory)
+        public static CompositionRegistration AddBuildOnly (this BuilderBase builder, Type contract, Func<IServiceProvider, object> factory)
         {
             if (builder == null)
             {
@@ -92,7 +92,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="instance" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddBuildOnly (this DomainServiceBuilder builder, Type contract, object instance)
+        public static CompositionRegistration AddBuildOnly (this BuilderBase builder, Type contract, object instance)
         {
             if (builder == null)
             {
@@ -125,7 +125,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="implementation" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddSingleton (this DomainServiceBuilder builder, Type contract, Type implementation)
+        public static CompositionRegistration AddSingleton (this BuilderBase builder, Type contract, Type implementation)
         {
             if (builder == null)
             {
@@ -158,7 +158,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="factory" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddSingleton (this DomainServiceBuilder builder, Type contract, Func<IServiceProvider, object> factory)
+        public static CompositionRegistration AddSingleton (this BuilderBase builder, Type contract, Func<IServiceProvider, object> factory)
         {
             if (builder == null)
             {
@@ -191,7 +191,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="instance" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddSingleton (this DomainServiceBuilder builder, Type contract, object instance)
+        public static CompositionRegistration AddSingleton (this BuilderBase builder, Type contract, object instance)
         {
             if (builder == null)
             {
@@ -224,7 +224,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="implementation" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddTransient (this DomainServiceBuilder builder, Type contract, Type implementation)
+        public static CompositionRegistration AddTransient (this BuilderBase builder, Type contract, Type implementation)
         {
             if (builder == null)
             {
@@ -257,7 +257,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The added service registration. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="factory" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static CompositionRegistration AddTransient (this DomainServiceBuilder builder, Type contract, Func<IServiceProvider, object> factory)
+        public static CompositionRegistration AddTransient (this BuilderBase builder, Type contract, Func<IServiceProvider, object> factory)
         {
             if (builder == null)
             {
@@ -282,11 +282,11 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Checks whether the specified domain service builder has already <see cref="DomainServiceBuilder.Build" /> called and if so throws a <see cref="InvalidOperationException" />.
+        ///     Checks whether the specified domain service builder has already <see cref="BuilderBase.Build" /> called and if so throws a <see cref="InvalidOperationException" />.
         /// </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built. </exception>
-        public static void ThrowIfAlreadyBuilt (this DomainServiceBuilder builder)
+        public static void ThrowIfAlreadyBuilt (this BuilderBase builder)
         {
             if (builder == null)
             {
@@ -301,7 +301,7 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Gets a service instance from the domain service registrations of a an <see cref="DomainServiceBuilder" />.
+        ///     Gets a service instance from the domain service registrations of a an <see cref="BuilderBase" />.
         /// </summary>
         /// <typeparam name="TContract"> The type of the requested service. </typeparam>
         /// <param name="builder"> The service builder. </param>
@@ -315,7 +315,7 @@ namespace RI.Abstractions.Builder
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and services should no longer be retrieved from the registrations. </exception>
         /// <exception cref="NotSupportedException"> The resolved registration does not support instance creation (e.g. does not have a parameterless constructor, the creation threw an exception, etc.) </exception>
-        public static TContract GetService <TContract> (this DomainServiceBuilder builder)
+        public static TContract GetService <TContract> (this BuilderBase builder)
             where TContract : class
         {
             if (builder == null)
@@ -330,7 +330,7 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Gets a service instance from the domain service registrations of a an <see cref="DomainServiceBuilder" />.
+        ///     Gets a service instance from the domain service registrations of a an <see cref="BuilderBase" />.
         /// </summary>
         /// <param name="builder"> The service builder. </param>
         /// <param name="contract"> The type of the requested service. </param>
@@ -344,7 +344,7 @@ namespace RI.Abstractions.Builder
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and services should no longer be retrieved from the registrations. </exception>
         /// <exception cref="NotSupportedException"> The resolved registration does not support instance creation (e.g. does not have a parameterless constructor, the creation threw an exception, etc.) </exception>
-        public static object GetService (this DomainServiceBuilder builder, Type contract)
+        public static object GetService (this BuilderBase builder, Type contract)
         {
             if (builder == null)
             {
@@ -363,7 +363,7 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Gets a service instance from the domain service registrations of a an <see cref="DomainServiceBuilder" />.
+        ///     Gets a service instance from the domain service registrations of a an <see cref="BuilderBase" />.
         /// </summary>
         /// <param name="builder"> The service builder. </param>
         /// <param name="registration"> The domain service registration. </param>
@@ -377,7 +377,7 @@ namespace RI.Abstractions.Builder
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="registration" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and services should no longer be retrieved from the registrations. </exception>
         /// <exception cref="NotSupportedException"> The resolved registration does not support instance creation (e.g. does not have a parameterless constructor, the creation threw an exception, etc.) </exception>
-        public static object GetService (this DomainServiceBuilder builder, CompositionRegistration registration)
+        public static object GetService (this BuilderBase builder, CompositionRegistration registration)
         {
             if (builder == null)
             {
@@ -396,7 +396,7 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Gets an <see cref="IServiceProvider" /> which can be used to access the domain service registrations of an <see cref="DomainServiceBuilder" />.
+        ///     Gets an <see cref="IServiceProvider" /> which can be used to access the domain service registrations of an <see cref="BuilderBase" />.
         /// </summary>
         /// <param name="builder"> The service builder. </param>
         /// <returns> The <see cref="IServiceProvider" /> (one new instance for each call to <see cref="GetServiceProvider" />). </returns>
@@ -408,7 +408,7 @@ namespace RI.Abstractions.Builder
         /// </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and services should no longer be retrieved from the registrations. </exception>
-        public static IServiceProvider GetServiceProvider (this DomainServiceBuilder builder)
+        public static IServiceProvider GetServiceProvider (this BuilderBase builder)
         {
             if (builder == null)
             {
@@ -421,7 +421,7 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Gets all service instances from the domain service registrations of a an <see cref="DomainServiceBuilder" />.
+        ///     Gets all service instances from the domain service registrations of a an <see cref="BuilderBase" />.
         /// </summary>
         /// <typeparam name="TContract"> The type of the requested service. </typeparam>
         /// <param name="builder"> The service builder. </param>
@@ -435,7 +435,7 @@ namespace RI.Abstractions.Builder
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and services should no longer be retrieved from the registrations. </exception>
         /// <exception cref="NotSupportedException"> The resolved registration does not support instance creation (e.g. does not have a parameterless constructor, the creation threw an exception, etc.) </exception>
-        public static IList<TContract> GetServices <TContract> (this DomainServiceBuilder builder)
+        public static IList<TContract> GetServices <TContract> (this BuilderBase builder)
             where TContract : class
         {
             if (builder == null)
@@ -453,7 +453,7 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        ///     Gets all service instances from the domain service registrations of a an <see cref="DomainServiceBuilder" />.
+        ///     Gets all service instances from the domain service registrations of a an <see cref="BuilderBase" />.
         /// </summary>
         /// <param name="builder"> The service builder. </param>
         /// <param name="contract"> The type of the requested service. </param>
@@ -467,7 +467,7 @@ namespace RI.Abstractions.Builder
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and services should no longer be retrieved from the registrations. </exception>
         /// <exception cref="NotSupportedException"> The resolved registration does not support instance creation (e.g. does not have a parameterless constructor, the creation threw an exception, etc.) </exception>
-        public static IList<object> GetServices (this DomainServiceBuilder builder, Type contract)
+        public static IList<object> GetServices (this BuilderBase builder, Type contract)
         {
             if (builder == null)
             {
@@ -492,7 +492,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The number of removed registrations or zero if no build-only registrations were found to be removed. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static int RemoveBuildOnlyContracts (this DomainServiceBuilder builder)
+        public static int RemoveBuildOnlyContracts (this BuilderBase builder)
         {
             if (builder == null)
             {
@@ -512,7 +512,7 @@ namespace RI.Abstractions.Builder
         /// <returns> The number of removed registrations or zero if no contracts were found to be removed. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
-        public static int RemoveContract (this DomainServiceBuilder builder, Type contract)
+        public static int RemoveContract (this BuilderBase builder, Type contract)
         {
             if (builder == null)
             {
@@ -536,7 +536,7 @@ namespace RI.Abstractions.Builder
         /// <param name="contract"> The contract type. </param>
         /// <returns>The number of registrations for <paramref name="contract"/>.</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
-        public static int CountContracts (this DomainServiceBuilder builder, Type contract)
+        public static int CountContracts (this BuilderBase builder, Type contract)
         {
             if (builder == null)
             {
@@ -552,15 +552,15 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
-        /// Checks whether the specified domain service builder has an exact amount of a specified contract registered or throws a <see cref="DomainServiceBuilderException" /> if not.
+        /// Checks whether the specified domain service builder has an exact amount of a specified contract registered or throws a <see cref="BuilderException" /> if not.
         /// </summary>
         /// <param name="builder"> The service builder being used. </param>
         /// <param name="contract"> The contract type. </param>
         /// <param name="exactCount">The exact amount of registered contracts required.</param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="exactCount"/> is less than zero.</exception>
-        /// <exception cref="DomainServiceBuilderException">The builder does not contain the exact amount of contracts.</exception>
-        public static void ThrowIfNotExactContractCount (this DomainServiceBuilder builder, Type contract, int exactCount)
+        /// <exception cref="BuilderException">The builder does not contain the exact amount of contracts.</exception>
+        public static void ThrowIfNotExactContractCount (this BuilderBase builder, Type contract, int exactCount)
         {
             if (builder == null)
             {
@@ -581,20 +581,20 @@ namespace RI.Abstractions.Builder
 
             if (actualCount != exactCount)
             {
-                throw new DomainServiceBuilderException($"{builder.GetType().Name} requires exact {exactCount} contracts of type {contract.Name} but has {actualCount}.");
+                throw new BuilderException($"{builder.GetType().Name} requires exact {exactCount} contracts of type {contract.Name} but has {actualCount}.");
             }
         }
 
         /// <summary>
-        /// Checks whether the specified domain service builder has a minimum amount of a specified contract registered or throws a <see cref="DomainServiceBuilderException" /> if not.
+        /// Checks whether the specified domain service builder has a minimum amount of a specified contract registered or throws a <see cref="BuilderException" /> if not.
         /// </summary>
         /// <param name="builder"> The service builder being used. </param>
         /// <param name="contract"> The contract type. </param>
         /// <param name="minCount">The minimum amount of registered contracts required.</param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="minCount"/> is less than zero.</exception>
-        /// <exception cref="DomainServiceBuilderException">The builder does not contain the minimum amount of contracts.</exception>
-        public static void ThrowIfNotMinContractCount(this DomainServiceBuilder builder, Type contract, int minCount)
+        /// <exception cref="BuilderException">The builder does not contain the minimum amount of contracts.</exception>
+        public static void ThrowIfNotMinContractCount(this BuilderBase builder, Type contract, int minCount)
         {
             if (builder == null)
             {
@@ -615,20 +615,20 @@ namespace RI.Abstractions.Builder
 
             if (actualCount < minCount)
             {
-                throw new DomainServiceBuilderException($"{builder.GetType().Name} requires at least {minCount} contracts of type {contract.Name} but has {actualCount}.");
+                throw new BuilderException($"{builder.GetType().Name} requires at least {minCount} contracts of type {contract.Name} but has {actualCount}.");
             }
         }
 
         /// <summary>
-        /// Checks whether the specified domain service builder has a maximum amount of a specified contract registered or throws a <see cref="DomainServiceBuilderException" /> if not.
+        /// Checks whether the specified domain service builder has a maximum amount of a specified contract registered or throws a <see cref="BuilderException" /> if not.
         /// </summary>
         /// <param name="builder"> The service builder being used. </param>
         /// <param name="contract"> The contract type. </param>
         /// <param name="maxCount">The maximum amount of registered contracts required.</param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="maxCount"/> is less than zero.</exception>
-        /// <exception cref="DomainServiceBuilderException">The builder does contain more than the maximum amount of contracts.</exception>
-        public static void ThrowIfNotMaxContractCount(this DomainServiceBuilder builder, Type contract, int maxCount)
+        /// <exception cref="BuilderException">The builder does contain more than the maximum amount of contracts.</exception>
+        public static void ThrowIfNotMaxContractCount(this BuilderBase builder, Type contract, int maxCount)
         {
             if (builder == null)
             {
@@ -649,7 +649,7 @@ namespace RI.Abstractions.Builder
 
             if (actualCount > maxCount)
             {
-                throw new DomainServiceBuilderException($"{builder.GetType().Name} requires at most {maxCount} contracts of type {contract.Name} but has {actualCount}.");
+                throw new BuilderException($"{builder.GetType().Name} requires at most {maxCount} contracts of type {contract.Name} but has {actualCount}.");
             }
         }
 
@@ -664,7 +664,7 @@ namespace RI.Abstractions.Builder
         {
             #region Instance Constructor/Destructor
 
-            public ServiceProviderWrapper (DomainServiceBuilder builder)
+            public ServiceProviderWrapper (BuilderBase builder)
             {
                 if (builder == null)
                 {
@@ -681,7 +681,7 @@ namespace RI.Abstractions.Builder
 
             #region Instance Properties/Indexer
 
-            private DomainServiceBuilder Builder { get; }
+            private BuilderBase Builder { get; }
 
             #endregion
 
