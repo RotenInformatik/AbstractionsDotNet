@@ -3,10 +3,10 @@
 
 
 
-namespace RI.Abstractions.Composition
+namespace RI.Abstractions.Builder
 {
     /// <summary>
-    ///     Contains contracts and types to abstract composition containers used for dependency injection.
+    ///     Contains contracts and types to abstract builders.
     /// </summary>
     [CompilerGenerated]
     public sealed class NamespaceDoc

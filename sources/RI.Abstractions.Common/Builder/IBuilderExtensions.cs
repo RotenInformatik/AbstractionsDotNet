@@ -669,7 +669,7 @@ namespace RI.Abstractions.Builder
         {
             #region Instance Constructor/Destructor
 
-            public ServiceProviderWrapper (BuilderBase builder)
+            public ServiceProviderWrapper (IBuilder builder)
             {
                 if (builder == null)
                 {
@@ -686,7 +686,7 @@ namespace RI.Abstractions.Builder
 
             #region Instance Properties/Indexer
 
-            private BuilderBase Builder { get; }
+            private IBuilder Builder { get; }
 
             #endregion
 

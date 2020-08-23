@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
+using System.Reflection;
 
 using Microsoft.Extensions.Logging;
 
@@ -69,7 +71,7 @@ namespace RI.Abstractions.Logging
         {
             if (exception != null)
             {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{exception}");
+                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{this.FormatException(exception)}");
             }
             else
             {
@@ -97,5 +99,46 @@ namespace RI.Abstractions.Logging
         }
 
         private string FormatTimestamp (DateTime timestamp) => timestamp.ToString("yyyy'-'MM'-'dd'-'HH'-'mm'-'ss'-'fff", CultureInfo.InvariantCulture);
+
+        private Func<Exception, string> ExceptionFormatter { get; set; }
+
+        private string FormatException (Exception exception)
+        {
+            if (this.ExceptionFormatter == null)
+            {
+                try
+                {
+                    MethodInfo method = AppDomain.CurrentDomain.GetAssemblies()
+                                                 .SelectMany(x => x.GetExportedTypes())
+                                                 .Where(x => x.FullName == "RI.Utilities.Exceptions.ExceptionExtensions")
+                                                 .Select(x => x.GetMethod("ToDetailedString", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, new[]
+                                                 {
+                                                     typeof(Exception),
+                                                     typeof(char)
+                                                 }, null))
+                                                 .FirstOrDefault();
+
+                    if (method != null)
+                    {
+                        this.ExceptionFormatter = x => (string)method.Invoke(null, new object[]
+                        {
+                            x,
+                            '-'
+                        });
+                    }
+                }
+                catch
+                {
+                    // We want this to silently fail because this is just a "let us give it a try..." approach.
+                }
+            }
+
+            if (this.ExceptionFormatter == null)
+            {
+                this.ExceptionFormatter = x => x.ToString();
+            }
+
+            return this.ExceptionFormatter(exception);
+        }
     }
 }
