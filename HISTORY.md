@@ -1,21 +1,11 @@
-# RI.Abstractions
+# History
 
 [![Nuget](https://img.shields.io/nuget/v/RI.Abstractions.Common)](https://www.nuget.org/packages/RI.Abstractions.Common/) [![License](https://img.shields.io/github/license/RotenInformatik/AbstractionsDotNet)](LICENSE) [![Repository](https://img.shields.io/badge/repo-AbstractionsDotNet-lightgrey)](https://github.com/RotenInformatik/AbstractionsDotNet) [![Documentation](https://img.shields.io/badge/docs-Readme-yellowgreen)](README.md) [![Documentation](https://img.shields.io/badge/docs-History-yellowgreen)](HISTORY.md) [![Documentation](https://img.shields.io/badge/docs-API-yellowgreen)](https://roteninformatik.github.io/AbstractionsDotNet/api/)
 
 ---
 
-Infrastructure and cross-cutting-concern abstractions for .NET.
+## 1.0.0
 
-Based on .NET Standard 2.0, with minimal dependencies.
+First version.
 
----
-
-These abstractions are mainly used by other projects/libraries worked on by [RotenInformatik](https://github.com/RotenInformatik/), both public and private ones.
-
-Therefore, these abstractions are tailored for the needs of those projects/libraries - but anyone can use them.
-
-Currently, the following abstractions are implemented:
-
-* **Builder** (boilerplate for implementing the builder pattern)
-* **Composition container** (registration abstraction for dependency injection)
-* **Logging** (simple logging abstraction)
+Partial successor of [Decoupling & Utilities Framework](https://github.com/RotenInformatik/RI_Framework), which is being archived.

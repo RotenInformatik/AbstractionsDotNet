@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Title="Start" Url="html/ccefe60f-e9ae-412d-88f8-5c9cd2c98a0a.htm" />
+  <HelpTOCNode Title="Assemblies" Url="html/b63e72a8-f17e-48cb-be8f-5f34333c9c26.htm" />
+  <HelpTOCNode Id="f7109b43-a4b4-4615-93ee-7e6760072e51" Title="Namespaces" Url="html/R_Project_RI_Abstractions.htm">
+    <HelpTOCNode Id="7c08c4de-3a69-4e40-9581-cf3ff3cfbead" Title="RI.Abstractions.Builder" Url="html/N_RI_Abstractions_Builder.htm">
+      <HelpTOCNode Id="4ddec3f1-134d-49ab-ae2f-76fb77718f62" Title="BuilderBase Class" Url="html/T_RI_Abstractions_Builder_BuilderBase.htm">
+        <HelpTOCNode Title="BuilderBase Constructor " Url="html/M_RI_Abstractions_Builder_BuilderBase__ctor.htm" />
+        <HelpTOCNode Id="cca95754-9822-47b0-a25e-ad0fa263420a" Title="BuilderBase Properties" Url="html/Properties_T_RI_Abstractions_Builder_BuilderBase.htm">
+          <HelpTOCNode Title="AlreadyBuilt Property " Url="html/P_RI_Abstractions_Builder_BuilderBase_AlreadyBuilt.htm" />
+          <HelpTOCNode Title="Registrations Property " Url="html/P_RI_Abstractions_Builder_BuilderBase_Registrations.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="cf1fffbf-493a-44be-8ae0-0bc2394814df" Title="BuilderBase Methods" Url="html/Methods_T_RI_Abstractions_Builder_BuilderBase.htm">
+          <HelpTOCNode Title="Build Method " Url="html/M_RI_Abstractions_Builder_BuilderBase_Build.htm" />
+          <HelpTOCNode Title="PerformRegistrations Method " Url="html/M_RI_Abstractions_Builder_BuilderBase_PerformRegistrations.htm" />
+          <HelpTOCNode Title="PrepareRegistrations Method " Url="html/M_RI_Abstractions_Builder_BuilderBase_PrepareRegistrations.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="c0b661a0-e298-4a63-bd55-ba80133526b1" Title="BuilderException Class" Url="html/T_RI_Abstractions_Builder_BuilderException.htm">
+        <HelpTOCNode Id="f136ce03-1284-4419-84ef-cc5b839b2bac" Title="BuilderException Constructor " Url="html/Overload_RI_Abstractions_Builder_BuilderException__ctor.htm">
+          <HelpTOCNode Title="BuilderException Constructor " Url="html/M_RI_Abstractions_Builder_BuilderException__ctor.htm" />
+          <HelpTOCNode Title="BuilderException Constructor (Exception)" Url="html/M_RI_Abstractions_Builder_BuilderException__ctor_1.htm" />
+          <HelpTOCNode Title="BuilderException Constructor (String)" Url="html/M_RI_Abstractions_Builder_BuilderException__ctor_3.htm" />
+          <HelpTOCNode Title="BuilderException Constructor (SerializationInfo, StreamingContext)" Url="html/M_RI_Abstractions_Builder_BuilderException__ctor_2.htm" />
+          <HelpTOCNode Title="BuilderException Constructor (String, Exception)" Url="html/M_RI_Abstractions_Builder_BuilderException__ctor_4.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="BuilderException Properties" Url="html/Properties_T_RI_Abstractions_Builder_BuilderException.htm" />
+        <HelpTOCNode Title="BuilderException Methods" Url="html/Methods_T_RI_Abstractions_Builder_BuilderException.htm" />
+        <HelpTOCNode Title="BuilderException Events" Url="html/Events_T_RI_Abstractions_Builder_BuilderException.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="6fba5870-7f82-49cf-ba57-adccd0c30a30" Title="IBuilder Interface" Url="html/T_RI_Abstractions_Builder_IBuilder.htm">
+        <HelpTOCNode Id="3dca75b8-f13a-4563-8500-5799a861c021" Title="IBuilder Properties" Url="html/Properties_T_RI_Abstractions_Builder_IBuilder.htm">
+          <HelpTOCNode Title="AlreadyBuilt Property " Url="html/P_RI_Abstractions_Builder_IBuilder_AlreadyBuilt.htm" />
+          <HelpTOCNode Title="Registrations Property " Url="html/P_RI_Abstractions_Builder_IBuilder_Registrations.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="ca5f1383-343d-4928-92d2-efc03ddc8c0c" Title="IBuilder Methods" Url="html/Methods_T_RI_Abstractions_Builder_IBuilder.htm">
+          <HelpTOCNode Title="Build Method " Url="html/M_RI_Abstractions_Builder_IBuilder_Build.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="2a430d82-27db-4259-a17e-bfa0c6917e82" Title="IBuilderExtensions Class" Url="html/T_RI_Abstractions_Builder_IBuilderExtensions.htm">
+        <HelpTOCNode Id="341c5a9a-bc56-414a-b938-c02a4600d4d7" Title="IBuilderExtensions Methods" Url="html/Methods_T_RI_Abstractions_Builder_IBuilderExtensions.htm">
+          <HelpTOCNode Id="faa5e120-2781-44ff-bd14-a51ab592a006" Title="AddSingleton Method " Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddSingleton.htm">
+            <HelpTOCNode Title="AddSingleton Method (IBuilder, Type, Func(IServiceProvider, Object), Boolean)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddSingleton.htm" />
+            <HelpTOCNode Title="AddSingleton Method (IBuilder, Type, Object, Boolean)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddSingleton_1.htm" />
+            <HelpTOCNode Title="AddSingleton Method (IBuilder, Type, Type, Boolean)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddSingleton_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="f19623de-76b1-45a0-b62a-1362deaa2373" Title="AddTemporary Method " Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddTemporary.htm">
+            <HelpTOCNode Title="AddTemporary Method (IBuilder, Type, Func(IServiceProvider, Object))" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddTemporary.htm" />
+            <HelpTOCNode Title="AddTemporary Method (IBuilder, Type, Object)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddTemporary_1.htm" />
+            <HelpTOCNode Title="AddTemporary Method (IBuilder, Type, Type)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddTemporary_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="9045b21e-efd4-40a6-8e23-ba02b69877c2" Title="AddTransient Method " Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddTransient.htm">
+            <HelpTOCNode Title="AddTransient Method (IBuilder, Type, Func(IServiceProvider, Object), Boolean)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddTransient.htm" />
+            <HelpTOCNode Title="AddTransient Method (IBuilder, Type, Type, Boolean)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_AddTransient_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="CountContracts Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_CountContracts.htm" />
+          <HelpTOCNode Id="e073b65a-10b5-4972-9962-bc000855fd6e" Title="GetInstance Method " Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_GetInstance.htm">
+            <HelpTOCNode Title="GetInstance(TContract) Method (IBuilder)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetInstance__1.htm" />
+            <HelpTOCNode Title="GetInstance Method (IBuilder, CompositionRegistration)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetInstance.htm" />
+            <HelpTOCNode Title="GetInstance Method (IBuilder, Type)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetInstance_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="58fa1947-9f8a-4b34-9213-152a719e921d" Title="GetInstances Method " Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_GetInstances.htm">
+            <HelpTOCNode Title="GetInstances(TContract) Method (IBuilder)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetInstances__1.htm" />
+            <HelpTOCNode Title="GetInstances Method (IBuilder, Type)" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetInstances.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="GetServiceProvider Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetServiceProvider.htm" />
+          <HelpTOCNode Title="RemoveContracts Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_RemoveContracts.htm" />
+          <HelpTOCNode Title="RemoveTemporaryContracts Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_RemoveTemporaryContracts.htm" />
+          <HelpTOCNode Title="ThrowIfAlreadyBuilt Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfAlreadyBuilt.htm" />
+          <HelpTOCNode Title="ThrowIfNotExactContractCount Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotExactContractCount.htm" />
+          <HelpTOCNode Title="ThrowIfNotMaxContractCount Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotMaxContractCount.htm" />
+          <HelpTOCNode Title="ThrowIfNotMinContractCount Method " Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotMinContractCount.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="971f7364-7fd0-48f5-a56f-fb97df81872f" Title="LoggerBuilderExtensions Class" Url="html/T_RI_Abstractions_Builder_LoggerBuilderExtensions.htm">
+        <HelpTOCNode Id="66a27a0b-5ff4-49d7-a49d-005aebb28e58" Title="LoggerBuilderExtensions Methods" Url="html/Methods_T_RI_Abstractions_Builder_LoggerBuilderExtensions.htm">
+          <HelpTOCNode Title="UseLogger(T) Method " Url="html/M_RI_Abstractions_Builder_LoggerBuilderExtensions_UseLogger__1.htm" />
+          <HelpTOCNode Title="UseLoggerFactory(T) Method " Url="html/M_RI_Abstractions_Builder_LoggerBuilderExtensions_UseLoggerFactory__1.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="bb2c2ae0-3290-43f7-a85c-15d3ba01befe" Title="ServiceCollectionBuilderExtensions Class" Url="html/T_RI_Abstractions_Builder_ServiceCollectionBuilderExtensions.htm">
+        <HelpTOCNode Id="9ea4a8f1-1ccc-44a3-bc23-3b5fb45bb7f3" Title="ServiceCollectionBuilderExtensions Methods" Url="html/Methods_T_RI_Abstractions_Builder_ServiceCollectionBuilderExtensions.htm">
+          <HelpTOCNode Title="UseServiceCollection(T) Method " Url="html/M_RI_Abstractions_Builder_ServiceCollectionBuilderExtensions_UseServiceCollection__1.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d5bb2260-7e09-42ab-a852-23734ddc1ca1" Title="RI.Abstractions.Composition" Url="html/N_RI_Abstractions_Composition.htm">
+      <HelpTOCNode Id="38ff122d-2667-417b-a042-fe1ad4c40521" Title="CompositionRegistration Class" Url="html/T_RI_Abstractions_Composition_CompositionRegistration.htm">
+        <HelpTOCNode Title="CompositionRegistration Constructor " Url="html/M_RI_Abstractions_Composition_CompositionRegistration__ctor.htm" />
+        <HelpTOCNode Id="d2aaffa1-1fc3-4fb4-82ef-c8397751e637" Title="CompositionRegistration Properties" Url="html/Properties_T_RI_Abstractions_Composition_CompositionRegistration.htm">
+          <HelpTOCNode Title="AlwaysRegister Property " Url="html/P_RI_Abstractions_Composition_CompositionRegistration_AlwaysRegister.htm" />
+          <HelpTOCNode Title="Contract Property " Url="html/P_RI_Abstractions_Composition_CompositionRegistration_Contract.htm" />
+          <HelpTOCNode Title="Factory Property " Url="html/P_RI_Abstractions_Composition_CompositionRegistration_Factory.htm" />
+          <HelpTOCNode Title="Implementation Property " Url="html/P_RI_Abstractions_Composition_CompositionRegistration_Implementation.htm" />
+          <HelpTOCNode Title="Instance Property " Url="html/P_RI_Abstractions_Composition_CompositionRegistration_Instance.htm" />
+          <HelpTOCNode Title="Mode Property " Url="html/P_RI_Abstractions_Composition_CompositionRegistration_Mode.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="d9c21e2a-73fe-4ec7-9825-ed86d57c423c" Title="CompositionRegistration Methods" Url="html/Methods_T_RI_Abstractions_Composition_CompositionRegistration.htm">
+          <HelpTOCNode Title="GetOrCreateInstance Method " Url="html/M_RI_Abstractions_Composition_CompositionRegistration_GetOrCreateInstance.htm" />
+          <HelpTOCNode Id="85332e1e-d747-4c7d-be61-8a9ff66a4dd7" Title="Singleton Method " Url="html/Overload_RI_Abstractions_Composition_CompositionRegistration_Singleton.htm">
+            <HelpTOCNode Title="Singleton Method (Type, Func(IServiceProvider, Object), Boolean)" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Singleton.htm" />
+            <HelpTOCNode Title="Singleton Method (Type, Object, Boolean)" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Singleton_1.htm" />
+            <HelpTOCNode Title="Singleton Method (Type, Type, Boolean)" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Singleton_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="60ad3297-a01f-4ab9-9451-8ca63a8c7cb9" Title="Temporary Method " Url="html/Overload_RI_Abstractions_Composition_CompositionRegistration_Temporary.htm">
+            <HelpTOCNode Title="Temporary Method (Type, Func(IServiceProvider, Object))" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Temporary.htm" />
+            <HelpTOCNode Title="Temporary Method (Type, Object)" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Temporary_1.htm" />
+            <HelpTOCNode Title="Temporary Method (Type, Type)" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Temporary_2.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="ToString Method " Url="html/M_RI_Abstractions_Composition_CompositionRegistration_ToString.htm" />
+          <HelpTOCNode Id="cc3eb361-47c5-474a-bb54-3c0bf1054073" Title="Transient Method " Url="html/Overload_RI_Abstractions_Composition_CompositionRegistration_Transient.htm">
+            <HelpTOCNode Title="Transient Method (Type, Func(IServiceProvider, Object), Boolean)" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Transient.htm" />
+            <HelpTOCNode Title="Transient Method (Type, Type, Boolean)" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_Transient_1.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="CompositionRegistrationMode Enumeration" Url="html/T_RI_Abstractions_Composition_CompositionRegistrationMode.htm" />
+      <HelpTOCNode Id="0def3bb0-95c9-4166-a95b-0fd8ee3e001b" Title="ICompositionContainer Interface" Url="html/T_RI_Abstractions_Composition_ICompositionContainer.htm">
+        <HelpTOCNode Id="2eecf967-464e-4e54-a5c3-4f79f949dd2d" Title="ICompositionContainer Methods" Url="html/Methods_T_RI_Abstractions_Composition_ICompositionContainer.htm">
+          <HelpTOCNode Title="Register Method " Url="html/M_RI_Abstractions_Composition_ICompositionContainer_Register.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="2affd66c-eaaf-43cf-a802-b59142ebf955" Title="ServiceCollectionCompositionContainer Class" Url="html/T_RI_Abstractions_Composition_ServiceCollectionCompositionContainer.htm">
+        <HelpTOCNode Title="ServiceCollectionCompositionContainer Constructor " Url="html/M_RI_Abstractions_Composition_ServiceCollectionCompositionContainer__ctor.htm" />
+        <HelpTOCNode Id="46f751f2-ee08-4950-baf1-9dd570ed82a8" Title="ServiceCollectionCompositionContainer Properties" Url="html/Properties_T_RI_Abstractions_Composition_ServiceCollectionCompositionContainer.htm">
+          <HelpTOCNode Title="UsedServiceCollection Property " Url="html/P_RI_Abstractions_Composition_ServiceCollectionCompositionContainer_UsedServiceCollection.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="04cd4b9c-fba9-47c4-9574-da7475c049bf" Title="ServiceCollectionCompositionContainer Methods" Url="html/Methods_T_RI_Abstractions_Composition_ServiceCollectionCompositionContainer.htm">
+          <HelpTOCNode Title="Register Method " Url="html/M_RI_Abstractions_Composition_ServiceCollectionCompositionContainer_Register.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="46bb6cc2-45e4-467d-ac0b-a9c61059d13a" Title="RI.Abstractions.Logging" Url="html/N_RI_Abstractions_Logging.htm">
+      <HelpTOCNode Id="cd3f70bd-612d-4cd2-b806-f704ca8830fa" Title="ILogger Interface" Url="html/T_RI_Abstractions_Logging_ILogger.htm">
+        <HelpTOCNode Id="891d5fbe-14ae-4893-be1f-bbe539be18ac" Title="ILogger Methods" Url="html/Methods_T_RI_Abstractions_Logging_ILogger.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M_RI_Abstractions_Logging_ILogger_Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="089973c1-002e-4c45-9ffe-5ae69a8b225d" Title="ILoggerExtensions Class" Url="html/T_RI_Abstractions_Logging_ILoggerExtensions.htm">
+        <HelpTOCNode Id="ebdaf8b5-b13a-4b67-9048-f935f50e377a" Title="ILoggerExtensions Methods" Url="html/Methods_T_RI_Abstractions_Logging_ILoggerExtensions.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M_RI_Abstractions_Logging_ILoggerExtensions_Log.htm" />
+          <HelpTOCNode Title="LogDebug Method " Url="html/M_RI_Abstractions_Logging_ILoggerExtensions_LogDebug.htm" />
+          <HelpTOCNode Title="LogError Method " Url="html/M_RI_Abstractions_Logging_ILoggerExtensions_LogError.htm" />
+          <HelpTOCNode Title="LogFatal Method " Url="html/M_RI_Abstractions_Logging_ILoggerExtensions_LogFatal.htm" />
+          <HelpTOCNode Title="LogInformation Method " Url="html/M_RI_Abstractions_Logging_ILoggerExtensions_LogInformation.htm" />
+          <HelpTOCNode Title="LogWarning Method " Url="html/M_RI_Abstractions_Logging_ILoggerExtensions_LogWarning.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="b701a6c3-cb29-4e19-b3ff-932bd99d18d9" Title="Logger Class" Url="html/T_RI_Abstractions_Logging_Logger.htm">
+        <HelpTOCNode Id="98cdf474-3788-463e-946b-7360dfd1554b" Title="Logger Constructor " Url="html/Overload_RI_Abstractions_Logging_Logger__ctor.htm">
+          <HelpTOCNode Title="Logger Constructor (ILogger)" Url="html/M_RI_Abstractions_Logging_Logger__ctor.htm" />
+          <HelpTOCNode Title="Logger Constructor (ILoggerFactory, String)" Url="html/M_RI_Abstractions_Logging_Logger__ctor_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="e63cda13-70d5-4b35-9bf1-77856e09c175" Title="Logger Properties" Url="html/Properties_T_RI_Abstractions_Logging_Logger.htm">
+          <HelpTOCNode Title="UsedLogger Property " Url="html/P_RI_Abstractions_Logging_Logger_UsedLogger.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="d7d2229d-a471-4d19-85ea-d182e277c833" Title="Logger Methods" Url="html/Methods_T_RI_Abstractions_Logging_Logger.htm">
+          <HelpTOCNode Title="Log Method " Url="html/M_RI_Abstractions_Logging_Logger_Log.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="LogLevel Enumeration" Url="html/T_RI_Abstractions_Logging_LogLevel.htm" />
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>
