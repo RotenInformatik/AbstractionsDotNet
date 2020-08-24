@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("RI.Abstractions.Microsoft.Logging"),]
 [assembly: AssemblyDescription("Infrastructure and cross-cutting-concern abstractions for .NET"),]
-[assembly: Guid("20EBC452-7615-4D59-8581-6E98A7D2CDB6"),]
+[assembly: Guid("9A1D556F-1E3A-48D8-8AD9-87FFA0A54504"),]
 
 [assembly: AssemblyProduct("RotenInformatik/AbstractionsDotNet"),]
 [assembly: AssemblyCompany("Roten Informatik"),]

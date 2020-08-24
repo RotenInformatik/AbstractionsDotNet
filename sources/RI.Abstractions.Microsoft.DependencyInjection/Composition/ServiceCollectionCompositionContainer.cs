@@ -43,7 +43,7 @@ namespace RI.Abstractions.Composition
         ///     Gets the used Service Collection.
         /// </summary>
         /// <value>
-        /// The used Service Collection.
+        ///     The used Service Collection.
         /// </value>
         public IServiceCollection UsedServiceCollection { get; }
 
@@ -75,6 +75,7 @@ namespace RI.Abstractions.Composition
                         {
                             this.UsedServiceCollection.TryAddTransient(r.Contract, r.Implementation);
                         }
+
                         break;
 
                     case { } r when (r.Mode == CompositionRegistrationMode.Transient) && (r.Factory != null):
@@ -86,6 +87,7 @@ namespace RI.Abstractions.Composition
                         {
                             this.UsedServiceCollection.TryAddTransient(r.Contract, r.Factory);
                         }
+
                         break;
 
                     case { } r when (r.Mode == CompositionRegistrationMode.Singleton) && (r.Implementation != null):
@@ -97,6 +99,7 @@ namespace RI.Abstractions.Composition
                         {
                             this.UsedServiceCollection.TryAddSingleton(r.Contract, r.Implementation);
                         }
+
                         break;
 
                     case { } r when (r.Mode == CompositionRegistrationMode.Singleton) && (r.Factory != null):
@@ -108,6 +111,7 @@ namespace RI.Abstractions.Composition
                         {
                             this.UsedServiceCollection.TryAddSingleton(r.Contract, r.Factory);
                         }
+
                         break;
 
                     case { } r when (r.Mode == CompositionRegistrationMode.Singleton) && (r.Instance != null):
@@ -117,8 +121,9 @@ namespace RI.Abstractions.Composition
                         }
                         else
                         {
-                            this.UsedServiceCollection.TryAddSingleton(r.Contract, (_)=> r.Instance);
+                            this.UsedServiceCollection.TryAddSingleton(r.Contract, _ => r.Instance);
                         }
+
                         break;
 
                     case { } r when r.Mode == CompositionRegistrationMode.Temporary:

@@ -23,7 +23,7 @@ namespace RI.Abstractions.Logging
         /// </summary>
         /// <param name="logger"> The logger to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="logger" /> is null. </exception>
-        public Logger(Microsoft.Extensions.Logging.ILogger logger)
+        public Logger (Microsoft.Extensions.Logging.ILogger logger)
         {
             if (logger == null)
             {
@@ -39,7 +39,7 @@ namespace RI.Abstractions.Logging
         /// <param name="loggerFactory"> The logger factory to use. </param>
         /// <param name="categoryName"> The category name for messages produced by the logger. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="loggerFactory" /> is null. </exception>
-        public Logger(ILoggerFactory loggerFactory, string categoryName = nameof(Logging.Logger))
+        public Logger (ILoggerFactory loggerFactory, string categoryName = nameof(Logger))
         {
             if (loggerFactory == null)
             {
@@ -60,47 +60,18 @@ namespace RI.Abstractions.Logging
         ///     Gets the logger to use.
         /// </summary>
         /// <value>
-        /// The logger to use.
+        ///     The logger to use.
         /// </value>
         public Microsoft.Extensions.Logging.ILogger UsedLogger { get; }
 
+        private Func<Exception, string> ExceptionFormatter { get; set; }
+
         #endregion
 
-        /// <inheritdoc />
-        public void Log(DateTime timestampUtc, int threadId, LogLevel level, string source, Exception exception, string format, params object[] args)
-        {
-            if (exception != null)
-            {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{this.FormatException(exception)}");
-            }
-            else
-            {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}] {string.Format(format, args)}");
-            }
-        }
 
-        private Microsoft.Extensions.Logging.LogLevel TranslateLogLevel (LogLevel level)
-        {
-            switch (level)
-            {
-                case LogLevel.Debug:
-                    return Microsoft.Extensions.Logging.LogLevel.Debug;
-                case LogLevel.Information:
-                    return Microsoft.Extensions.Logging.LogLevel.Information;
-                case LogLevel.Warning:
-                    return Microsoft.Extensions.Logging.LogLevel.Warning;
-                case LogLevel.Error:
-                    return Microsoft.Extensions.Logging.LogLevel.Error;
-                case LogLevel.Fatal:
-                    return Microsoft.Extensions.Logging.LogLevel.Critical;
-                default:
-                    return Microsoft.Extensions.Logging.LogLevel.None;
-            }
-        }
 
-        private string FormatTimestamp (DateTime timestamp) => timestamp.ToString("yyyy'-'MM'-'dd'-'HH'-'mm'-'ss'-'fff", CultureInfo.InvariantCulture);
 
-        private Func<Exception, string> ExceptionFormatter { get; set; }
+        #region Instance Methods
 
         private string FormatException (Exception exception)
         {
@@ -114,7 +85,7 @@ namespace RI.Abstractions.Logging
                                                  .Select(x => x.GetMethod("ToDetailedString", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, new[]
                                                  {
                                                      typeof(Exception),
-                                                     typeof(char)
+                                                     typeof(char),
                                                  }, null))
                                                  .FirstOrDefault();
 
@@ -123,7 +94,7 @@ namespace RI.Abstractions.Logging
                         this.ExceptionFormatter = x => (string)method.Invoke(null, new object[]
                         {
                             x,
-                            '-'
+                            '-',
                         });
                     }
                 }
@@ -140,5 +111,45 @@ namespace RI.Abstractions.Logging
 
             return this.ExceptionFormatter(exception);
         }
+
+        private string FormatTimestamp (DateTime timestamp)
+        {
+            return timestamp.ToString("yyyy'-'MM'-'dd'-'HH'-'mm'-'ss'-'fff", CultureInfo.InvariantCulture);
+        }
+
+        private Microsoft.Extensions.Logging.LogLevel TranslateLogLevel (LogLevel level)
+        {
+            return level switch
+            {
+                LogLevel.Debug => Microsoft.Extensions.Logging.LogLevel.Debug,
+                LogLevel.Information => Microsoft.Extensions.Logging.LogLevel.Information,
+                LogLevel.Warning => Microsoft.Extensions.Logging.LogLevel.Warning,
+                LogLevel.Error => Microsoft.Extensions.Logging.LogLevel.Error,
+                LogLevel.Fatal => Microsoft.Extensions.Logging.LogLevel.Critical,
+                _ => Microsoft.Extensions.Logging.LogLevel.None
+            };
+        }
+
+        #endregion
+
+
+
+
+        #region Interface: ILogger
+
+        /// <inheritdoc />
+        public void Log (DateTime timestampUtc, int threadId, LogLevel level, string source, Exception exception, string format, params object[] args)
+        {
+            if (exception != null)
+            {
+                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{this.FormatException(exception)}");
+            }
+            else
+            {
+                this.UsedLogger.Log(this.TranslateLogLevel(level), $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}] {string.Format(format, args)}");
+            }
+        }
+
+        #endregion
     }
 }

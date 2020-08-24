@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace RI.Abstractions.Builder
 {
     /// <summary>
-    ///     The <see cref="BuilderException" /> is thrown when an <see cref="IBuilder" /> could not successfully perform its <see cref="IBuilder.Build"/>.
+    ///     The <see cref="BuilderException" /> is thrown when an <see cref="IBuilder" /> could not successfully perform its <see cref="IBuilder.Build" />.
     /// </summary>
     /// <threadsafety static="false" instance="false" />
     [Serializable,]

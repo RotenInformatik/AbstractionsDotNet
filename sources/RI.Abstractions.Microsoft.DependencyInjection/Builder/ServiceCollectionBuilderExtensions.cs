@@ -24,7 +24,7 @@ namespace RI.Abstractions.Builder
         /// <param name="services"> The service collection to use. </param>
         /// <returns> The builder being configured. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="services" /> is null. </exception>
-        public static T UseServiceCollection<T>(this T builder, IServiceCollection services)
+        public static T UseServiceCollection <T> (this T builder, IServiceCollection services)
             where T : IBuilder
         {
             if (builder == null)

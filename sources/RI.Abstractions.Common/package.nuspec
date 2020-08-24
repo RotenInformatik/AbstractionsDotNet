@@ -1,25 +1,28 @@
 ﻿<?xml version="1.0"?>
+
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
-    <metadata>
-      <id>RI.Abstractions.Common</id>
-      <version>1.0.0.0</version>
-      <authors>RotenInformatik</authors>
-      <owners>RotenInformatik</owners>
-      <title>RI.Abstractions.Common</title>
-      <copyright>Copyright (c) 2017-2020 Roten Informatik</copyright>
-      <description>Infrastructure and cross-cutting-concern abstractions for .NET</description>
-      <tags>dotnet abstractions</tags>
-      <icon>images\ICON.png</icon>
-      <requireLicenseAcceptance>true</requireLicenseAcceptance>
-      <license type="expression">Apache-2.0</license>
-      <projectUrl>https://github.com/RotenInformatik/AbstractionsDotNet</projectUrl>
-      <dependencies>
-        <group targetFramework=".NETStandard2.1" />
-      </dependencies>
-    </metadata>
+  <metadata>
+    <id>RI.Abstractions.Common</id>
+    <version>1.0.0.0</version>
+    <authors>RotenInformatik</authors>
+    <owners>RotenInformatik</owners>
+    <title>RI.Abstractions.Common</title>
+    <copyright>Copyright (c) 2017-2020 Roten Informatik</copyright>
+    <description>Infrastructure and cross-cutting-concern abstractions for .NET</description>
+    <tags>dotnet abstractions builder logging dependency-injection</tags>
+    <icon>images\ICON.png</icon>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <projectUrl>https://github.com/RotenInformatik/AbstractionsDotNet</projectUrl>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
   <files>
-    <file src="bin\Debug\netstandard2.1\RI.Abstractions.Common.dll" target="lib\netstandard2.1\RI.Abstractions.Common.dll" />
-    <file src="bin\Debug\netstandard2.1\RI.Abstractions.Common.xml" target="lib\netstandard2.1\RI.Abstractions.Common.xml" />
+    <file src="bin\Debug\netstandard2.0\RI.Abstractions.Common.dll"
+          target="lib\netstandard2.0\RI.Abstractions.Common.dll" />
+    <file src="bin\Debug\netstandard2.0\RI.Abstractions.Common.xml"
+          target="lib\netstandard2.0\RI.Abstractions.Common.xml" />
     <file src="..\..\ICON.png" target="images\ICON.png" />
   </files>
 </package>

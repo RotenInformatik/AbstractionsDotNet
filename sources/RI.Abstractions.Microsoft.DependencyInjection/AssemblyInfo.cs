@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("RI.Abstractions.Microsoft.DependencyInjection"),]
 [assembly: AssemblyDescription("Infrastructure and cross-cutting-concern abstractions for .NET"),]
-[assembly: Guid("20EBC452-7615-4D59-8581-6E98A7D2CDB6"),]
+[assembly: Guid("CF628B48-B6E5-4339-B53D-ABCAB45A724F"),]
 
 [assembly: AssemblyProduct("RotenInformatik/AbstractionsDotNet"),]
 [assembly: AssemblyCompany("Roten Informatik"),]

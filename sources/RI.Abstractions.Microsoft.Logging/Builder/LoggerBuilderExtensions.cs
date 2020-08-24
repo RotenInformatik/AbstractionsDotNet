@@ -26,8 +26,8 @@ namespace RI.Abstractions.Builder
         /// <param name="logger"> The logger to use. </param>
         /// <returns> The builder being configured. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="logger" /> is null. </exception>
-        public static T UseLogger<T> (this T builder, ILogger logger)
-        where T : IBuilder
+        public static T UseLogger <T> (this T builder, ILogger logger)
+            where T : IBuilder
         {
             if (builder == null)
             {
@@ -51,7 +51,7 @@ namespace RI.Abstractions.Builder
         /// <param name="loggerFactory"> The logger factory to use. </param>
         /// <returns> The builder being configured. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="loggerFactory" /> is null. </exception>
-        public static T UseLoggerFactory<T> (this T builder, ILoggerFactory loggerFactory)
+        public static T UseLoggerFactory <T> (this T builder, ILoggerFactory loggerFactory)
             where T : IBuilder
         {
             if (builder == null)

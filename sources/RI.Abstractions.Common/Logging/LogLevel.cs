@@ -6,33 +6,33 @@
 namespace RI.Abstractions.Logging
 {
     /// <summary>
-    /// Indicates the level of a log message.
+    ///     Indicates the level of a log message.
     /// </summary>
-    [Serializable]
+    [Serializable,]
     public enum LogLevel
     {
         /// <summary>
-        /// Debug.
+        ///     Debug.
         /// </summary>
         Debug = 0,
 
         /// <summary>
-        /// Information.
+        ///     Information.
         /// </summary>
         Information = 1,
 
         /// <summary>
-        /// Warning.
+        ///     Warning.
         /// </summary>
         Warning = 2,
 
         /// <summary>
-        /// Recoverable error.
+        ///     Recoverable error.
         /// </summary>
         Error = 3,
 
         /// <summary>
-        /// Unrecoverable error.
+        ///     Unrecoverable error.
         /// </summary>
         Fatal = 4,
     }
