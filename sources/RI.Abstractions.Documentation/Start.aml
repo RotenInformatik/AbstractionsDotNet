@@ -12,8 +12,8 @@
       </para>
       <para>
         <markup>
-          <a href='https://www.nuget.org/packages/RI.Abstractions/'>
-            <img src="https://img.shields.io/nuget/v/RI.Abstractions" referrerpolicy="no-referrer" alt="Nuget"/>
+          <a href='https://www.nuget.org/packages/RI.Abstractions.Common/'>
+            <img src="https://img.shields.io/nuget/v/RI.Abstractions.Common" referrerpolicy="no-referrer" alt="Nuget"/>
           </a>
         </markup>
       </para>
