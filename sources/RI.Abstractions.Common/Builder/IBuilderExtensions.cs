@@ -910,6 +910,7 @@ namespace RI.Abstractions.Builder
         /// <summary>
         ///     Checks whether the specified builder has already been built and throws a <see cref="InvalidOperationException" /> if so.
         /// </summary>
+        /// <param name="builder"> The builder. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built. </exception>
         public static void ThrowIfAlreadyBuilt (this IBuilder builder)
@@ -929,7 +930,7 @@ namespace RI.Abstractions.Builder
         /// <summary>
         ///     Checks whether the specified builder has an exact amount of a specified contract registered or throws a <see cref="BuilderException" /> if not.
         /// </summary>
-        /// <param name="builder"> The builder </param>
+        /// <param name="builder"> The builder. </param>
         /// <param name="contract"> The contract type. </param>
         /// <param name="exactCount"> The exact amount of registered contracts required. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
@@ -1102,6 +1103,7 @@ namespace RI.Abstractions.Builder
         /// <summary>
         ///     Adds registrations for using a simple callback logger.
         /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
         /// <param name="builder"> The builder being configured. </param>
         /// <param name="callback"> The callback delegate to call for each log message to write. </param>
         /// <returns> The builder being configured. </returns>
@@ -1127,6 +1129,7 @@ namespace RI.Abstractions.Builder
         /// <summary>
         ///     Adds registrations for using a simple composition container.
         /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
         /// <param name="builder"> The builder being configured. </param>
         /// <param name="container"> The simple container to use. </param>
         /// <returns> The builder being configured. </returns>

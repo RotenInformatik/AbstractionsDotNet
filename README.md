@@ -19,3 +19,8 @@ Currently, the following abstractions are implemented:
 * **Builder** (boilerplate for implementing the builder pattern)
 * **Composition container** (registration abstraction for dependency injection)
 * **Logging** (simple logging abstraction)
+
+Currently, the following is being abstracted:
+
+* **Microsoft.Extensions.Logging**
+* **Microsoft.Extensions.DependencyInjection**

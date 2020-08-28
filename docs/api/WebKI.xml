@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
+  <HelpKINode Title="AddDefaultSingleton method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddDefaultSingleton.htm" />
+  <HelpKINode Title="AddDefaultTemporary method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddDefaultTemporary.htm" />
+  <HelpKINode Title="AddDefaultTransient method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddDefaultTransient.htm" />
   <HelpKINode Title="AddSingleton method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddSingleton.htm" />
   <HelpKINode Title="AddTemporary method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddTemporary.htm" />
   <HelpKINode Title="AddTransient method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddTransient.htm" />
@@ -32,6 +35,15 @@
     <HelpKINode Title="properties" Url="html/Properties_T_RI_Abstractions_Builder_BuilderException.htm" />
   </HelpKINode>
   <HelpKINode Title="BuilderException.BuilderException constructor" Url="html/Overload_RI_Abstractions_Builder_BuilderException__ctor.htm" />
+  <HelpKINode Title="BuildStandalone method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_BuildStandalone.htm" />
+  <HelpKINode Title="CallbackLogger class">
+    <HelpKINode Title="CallbackLogger Class" Url="html/T_RI_Abstractions_Logging_CallbackLogger.htm" />
+    <HelpKINode Title="constructor" Url="html/M_RI_Abstractions_Logging_CallbackLogger__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_RI_Abstractions_Logging_CallbackLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallbackLogger.CallbackLogger constructor" Url="html/M_RI_Abstractions_Logging_CallbackLogger__ctor.htm" />
+  <HelpKINode Title="CallbackLogger.Log method" Url="html/M_RI_Abstractions_Logging_CallbackLogger_Log.htm" />
+  <HelpKINode Title="CallbackLoggerDelegate delegate" Url="html/T_RI_Abstractions_Logging_CallbackLoggerDelegate.htm" />
   <HelpKINode Title="CompositionRegistration class">
     <HelpKINode Title="CompositionRegistration Class" Url="html/T_RI_Abstractions_Composition_CompositionRegistration.htm" />
     <HelpKINode Title="constructor" Url="html/M_RI_Abstractions_Composition_CompositionRegistration__ctor.htm" />
@@ -57,10 +69,14 @@
   <HelpKINode Title="Error enumeration member" Url="html/T_RI_Abstractions_Logging_LogLevel.htm" />
   <HelpKINode Title="Factory property" Url="html/P_RI_Abstractions_Composition_CompositionRegistration_Factory.htm" />
   <HelpKINode Title="Fatal enumeration member" Url="html/T_RI_Abstractions_Logging_LogLevel.htm" />
+  <HelpKINode Title="GetContract method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetContract.htm" />
+  <HelpKINode Title="GetContracts method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetContracts.htm" />
   <HelpKINode Title="GetInstance method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_GetInstance.htm" />
   <HelpKINode Title="GetInstances method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_GetInstances.htm" />
   <HelpKINode Title="GetOrCreateInstance method" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_GetOrCreateInstance.htm" />
+  <HelpKINode Title="GetService method" Url="html/M_RI_Abstractions_Composition_SimpleContainer_GetService.htm" />
   <HelpKINode Title="GetServiceProvider method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetServiceProvider.htm" />
+  <HelpKINode Title="GetServices method" Url="html/M_RI_Abstractions_Composition_SimpleContainer_GetServices.htm" />
   <HelpKINode Title="IBuilder interface">
     <HelpKINode Title="IBuilder Interface" Url="html/T_RI_Abstractions_Builder_IBuilder.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_RI_Abstractions_Builder_IBuilder.htm" />
@@ -73,10 +89,16 @@
     <HelpKINode Title="IBuilderExtensions Class" Url="html/T_RI_Abstractions_Builder_IBuilderExtensions.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_RI_Abstractions_Builder_IBuilderExtensions.htm" />
   </HelpKINode>
+  <HelpKINode Title="IBuilderExtensions.AddDefaultSingleton method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddDefaultSingleton.htm" />
+  <HelpKINode Title="IBuilderExtensions.AddDefaultTemporary method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddDefaultTemporary.htm" />
+  <HelpKINode Title="IBuilderExtensions.AddDefaultTransient method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddDefaultTransient.htm" />
   <HelpKINode Title="IBuilderExtensions.AddSingleton method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddSingleton.htm" />
   <HelpKINode Title="IBuilderExtensions.AddTemporary method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddTemporary.htm" />
   <HelpKINode Title="IBuilderExtensions.AddTransient method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_AddTransient.htm" />
+  <HelpKINode Title="IBuilderExtensions.BuildStandalone method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_BuildStandalone.htm" />
   <HelpKINode Title="IBuilderExtensions.CountContracts method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_CountContracts.htm" />
+  <HelpKINode Title="IBuilderExtensions.GetContract method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetContract.htm" />
+  <HelpKINode Title="IBuilderExtensions.GetContracts method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetContracts.htm" />
   <HelpKINode Title="IBuilderExtensions.GetInstance method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_GetInstance.htm" />
   <HelpKINode Title="IBuilderExtensions.GetInstances method" Url="html/Overload_RI_Abstractions_Builder_IBuilderExtensions_GetInstances.htm" />
   <HelpKINode Title="IBuilderExtensions.GetServiceProvider method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_GetServiceProvider.htm" />
@@ -86,6 +108,12 @@
   <HelpKINode Title="IBuilderExtensions.ThrowIfNotExactContractCount method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotExactContractCount.htm" />
   <HelpKINode Title="IBuilderExtensions.ThrowIfNotMaxContractCount method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotMaxContractCount.htm" />
   <HelpKINode Title="IBuilderExtensions.ThrowIfNotMinContractCount method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotMinContractCount.htm" />
+  <HelpKINode Title="IBuilderExtensions.ThrowIfNotTemporary method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotTemporary.htm" />
+  <HelpKINode Title="IBuilderExtensions.ThrowIfTemporary method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfTemporary.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseCallbackLogger(Of T) method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseCallbackLogger__1.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseCallbackLogger&lt;T&gt; method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseCallbackLogger__1.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseSimpleContainer(Of T) method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseSimpleContainer__1.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseSimpleContainer&lt;T&gt; method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseSimpleContainer__1.htm" />
   <HelpKINode Title="ICompositionContainer interface">
     <HelpKINode Title="ICompositionContainer Interface" Url="html/T_RI_Abstractions_Composition_ICompositionContainer.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_RI_Abstractions_Composition_ICompositionContainer.htm" />
@@ -110,6 +138,7 @@
   <HelpKINode Title="Information enumeration member" Url="html/T_RI_Abstractions_Logging_LogLevel.htm" />
   <HelpKINode Title="Instance property" Url="html/P_RI_Abstractions_Composition_CompositionRegistration_Instance.htm" />
   <HelpKINode Title="Log method">
+    <HelpKINode Title="CallbackLogger.Log Method " Url="html/M_RI_Abstractions_Logging_CallbackLogger_Log.htm" />
     <HelpKINode Title="ILogger.Log Method " Url="html/M_RI_Abstractions_Logging_ILogger_Log.htm" />
     <HelpKINode Title="ILoggerExtensions.Log Method " Url="html/M_RI_Abstractions_Logging_ILoggerExtensions_Log.htm" />
     <HelpKINode Title="Logger.Log Method " Url="html/M_RI_Abstractions_Logging_Logger_Log.htm" />
@@ -143,6 +172,7 @@
   <HelpKINode Title="Register method">
     <HelpKINode Title="ICompositionContainer.Register Method " Url="html/M_RI_Abstractions_Composition_ICompositionContainer_Register.htm" />
     <HelpKINode Title="ServiceCollectionCompositionContainer.Register Method " Url="html/M_RI_Abstractions_Composition_ServiceCollectionCompositionContainer_Register.htm" />
+    <HelpKINode Title="SimpleContainer.Register Method " Url="html/M_RI_Abstractions_Composition_SimpleContainer_Register.htm" />
   </HelpKINode>
   <HelpKINode Title="Registrations property">
     <HelpKINode Title="BuilderBase.Registrations Property " Url="html/P_RI_Abstractions_Builder_BuilderBase_Registrations.htm" />
@@ -162,7 +192,10 @@
   <HelpKINode Title="RI.Abstractions.Composition.CompositionRegistrationMode enumeration" Url="html/T_RI_Abstractions_Composition_CompositionRegistrationMode.htm" />
   <HelpKINode Title="RI.Abstractions.Composition.ICompositionContainer interface" Url="html/T_RI_Abstractions_Composition_ICompositionContainer.htm" />
   <HelpKINode Title="RI.Abstractions.Composition.ServiceCollectionCompositionContainer class" Url="html/T_RI_Abstractions_Composition_ServiceCollectionCompositionContainer.htm" />
+  <HelpKINode Title="RI.Abstractions.Composition.SimpleContainer class" Url="html/T_RI_Abstractions_Composition_SimpleContainer.htm" />
   <HelpKINode Title="RI.Abstractions.Logging namespace" Url="html/N_RI_Abstractions_Logging.htm" />
+  <HelpKINode Title="RI.Abstractions.Logging.CallbackLogger class" Url="html/T_RI_Abstractions_Logging_CallbackLogger.htm" />
+  <HelpKINode Title="RI.Abstractions.Logging.CallbackLoggerDelegate delegate" Url="html/T_RI_Abstractions_Logging_CallbackLoggerDelegate.htm" />
   <HelpKINode Title="RI.Abstractions.Logging.ILogger interface" Url="html/T_RI_Abstractions_Logging_ILogger.htm" />
   <HelpKINode Title="RI.Abstractions.Logging.ILoggerExtensions class" Url="html/T_RI_Abstractions_Logging_ILoggerExtensions.htm" />
   <HelpKINode Title="RI.Abstractions.Logging.Logger class" Url="html/T_RI_Abstractions_Logging_Logger.htm" />
@@ -182,6 +215,15 @@
   <HelpKINode Title="ServiceCollectionCompositionContainer.Register method" Url="html/M_RI_Abstractions_Composition_ServiceCollectionCompositionContainer_Register.htm" />
   <HelpKINode Title="ServiceCollectionCompositionContainer.ServiceCollectionCompositionContainer constructor" Url="html/M_RI_Abstractions_Composition_ServiceCollectionCompositionContainer__ctor.htm" />
   <HelpKINode Title="ServiceCollectionCompositionContainer.UsedServiceCollection property" Url="html/P_RI_Abstractions_Composition_ServiceCollectionCompositionContainer_UsedServiceCollection.htm" />
+  <HelpKINode Title="SimpleContainer class">
+    <HelpKINode Title="SimpleContainer Class" Url="html/T_RI_Abstractions_Composition_SimpleContainer.htm" />
+    <HelpKINode Title="constructor" Url="html/M_RI_Abstractions_Composition_SimpleContainer__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_RI_Abstractions_Composition_SimpleContainer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SimpleContainer.GetService method" Url="html/M_RI_Abstractions_Composition_SimpleContainer_GetService.htm" />
+  <HelpKINode Title="SimpleContainer.GetServices method" Url="html/M_RI_Abstractions_Composition_SimpleContainer_GetServices.htm" />
+  <HelpKINode Title="SimpleContainer.Register method" Url="html/M_RI_Abstractions_Composition_SimpleContainer_Register.htm" />
+  <HelpKINode Title="SimpleContainer.SimpleContainer constructor" Url="html/M_RI_Abstractions_Composition_SimpleContainer__ctor.htm" />
   <HelpKINode Title="Singleton enumeration member" Url="html/T_RI_Abstractions_Composition_CompositionRegistrationMode.htm" />
   <HelpKINode Title="Singleton method" Url="html/Overload_RI_Abstractions_Composition_CompositionRegistration_Singleton.htm" />
   <HelpKINode Title="Temporary enumeration member" Url="html/T_RI_Abstractions_Composition_CompositionRegistrationMode.htm" />
@@ -190,9 +232,13 @@
   <HelpKINode Title="ThrowIfNotExactContractCount method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotExactContractCount.htm" />
   <HelpKINode Title="ThrowIfNotMaxContractCount method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotMaxContractCount.htm" />
   <HelpKINode Title="ThrowIfNotMinContractCount method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotMinContractCount.htm" />
+  <HelpKINode Title="ThrowIfNotTemporary method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfNotTemporary.htm" />
+  <HelpKINode Title="ThrowIfTemporary method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_ThrowIfTemporary.htm" />
   <HelpKINode Title="ToString method" Url="html/M_RI_Abstractions_Composition_CompositionRegistration_ToString.htm" />
   <HelpKINode Title="Transient enumeration member" Url="html/T_RI_Abstractions_Composition_CompositionRegistrationMode.htm" />
   <HelpKINode Title="Transient method" Url="html/Overload_RI_Abstractions_Composition_CompositionRegistration_Transient.htm" />
+  <HelpKINode Title="UseCallbackLogger(Of T) method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseCallbackLogger__1.htm" />
+  <HelpKINode Title="UseCallbackLogger&lt;T&gt; method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseCallbackLogger__1.htm" />
   <HelpKINode Title="UsedLogger property" Url="html/P_RI_Abstractions_Logging_Logger_UsedLogger.htm" />
   <HelpKINode Title="UsedServiceCollection property" Url="html/P_RI_Abstractions_Composition_ServiceCollectionCompositionContainer_UsedServiceCollection.htm" />
   <HelpKINode Title="UseLogger(Of T) method" Url="html/M_RI_Abstractions_Builder_LoggerBuilderExtensions_UseLogger__1.htm" />
@@ -201,5 +247,7 @@
   <HelpKINode Title="UseLoggerFactory&lt;T&gt; method" Url="html/M_RI_Abstractions_Builder_LoggerBuilderExtensions_UseLoggerFactory__1.htm" />
   <HelpKINode Title="UseServiceCollection(Of T) method" Url="html/M_RI_Abstractions_Builder_ServiceCollectionBuilderExtensions_UseServiceCollection__1.htm" />
   <HelpKINode Title="UseServiceCollection&lt;T&gt; method" Url="html/M_RI_Abstractions_Builder_ServiceCollectionBuilderExtensions_UseServiceCollection__1.htm" />
+  <HelpKINode Title="UseSimpleContainer(Of T) method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseSimpleContainer__1.htm" />
+  <HelpKINode Title="UseSimpleContainer&lt;T&gt; method" Url="html/M_RI_Abstractions_Builder_IBuilderExtensions_UseSimpleContainer__1.htm" />
   <HelpKINode Title="Warning enumeration member" Url="html/T_RI_Abstractions_Logging_LogLevel.htm" />
 </HelpKI>
