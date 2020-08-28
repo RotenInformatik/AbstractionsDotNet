@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using RI.Abstractions.Composition;
+using RI.Abstractions.Logging;
 
 
 
@@ -16,6 +17,294 @@ namespace RI.Abstractions.Builder
     public static class IBuilderExtensions
     {
         #region Static Methods
+
+        /// <summary>
+        ///     Adds a singleton registration specifying an implementation type if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="implementation"> The implementation type. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="implementation" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultSingleton (this IBuilder builder, Type contract, Type implementation)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (implementation == null)
+            {
+                throw new ArgumentNullException(nameof(implementation));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultSingleton(contract, implementation);
+        }
+
+        /// <summary>
+        ///     Adds a registration specifying a factory if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="factory"> The factory. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="factory" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultSingleton (this IBuilder builder, Type contract, Func<IServiceProvider, object> factory)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (factory == null)
+            {
+                throw new ArgumentNullException(nameof(factory));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultSingleton(contract, factory);
+        }
+
+        /// <summary>
+        ///     Adds a singleton registration specifying an implementation instance if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="instance"> The implementation instance. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="instance" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultSingleton (this IBuilder builder, Type contract, object instance)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultSingleton(contract, instance);
+        }
+
+        /// <summary>
+        ///     Adds a temporary registration specifying an implementation type if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="implementation"> The implementation type. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="implementation" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultTemporary (this IBuilder builder, Type contract, Type implementation)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (implementation == null)
+            {
+                throw new ArgumentNullException(nameof(implementation));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultTemporary(contract, implementation);
+        }
+
+        /// <summary>
+        ///     Adds a temporary registration specifying a factory if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="factory"> The factory. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="factory" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultTemporary (this IBuilder builder, Type contract, Func<IServiceProvider, object> factory)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (factory == null)
+            {
+                throw new ArgumentNullException(nameof(factory));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultTemporary(contract, factory);
+        }
+
+        /// <summary>
+        ///     Adds a temporary registration specifying an implementation instance if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="instance"> The implementation instance. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="instance" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultTemporary (this IBuilder builder, Type contract, object instance)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultTemporary(contract, instance);
+        }
+
+        /// <summary>
+        ///     Adds a transient registration specifying an implementation type if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="implementation"> The implementation type. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="implementation" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultTransient (this IBuilder builder, Type contract, Type implementation)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (implementation == null)
+            {
+                throw new ArgumentNullException(nameof(implementation));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultTransient(contract, implementation);
+        }
+
+        /// <summary>
+        ///     Adds a transient registration specifying a factory if the specified contract is not already registered.
+        /// </summary>
+        /// <param name="builder"> The builder being used. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <param name="factory"> The factory. </param>
+        /// <returns> The added registration or null if the specified contract is already registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" />, <paramref name="contract" />, or <paramref name="factory" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration AddDefaultTransient (this IBuilder builder, Type contract, Func<IServiceProvider, object> factory)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            if (factory == null)
+            {
+                throw new ArgumentNullException(nameof(factory));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(contract) != 0)
+            {
+                return null;
+            }
+
+            return builder.AddDefaultTransient(contract, factory);
+        }
 
         /// <summary>
         ///     Adds a singleton registration specifying an implementation type.
@@ -247,7 +536,7 @@ namespace RI.Abstractions.Builder
 
             builder.ThrowIfAlreadyBuilt();
 
-            CompositionRegistration registration = CompositionRegistration.Transient(contract, implementation);
+            CompositionRegistration registration = CompositionRegistration.Transient(contract, implementation, alwaysRegister);
             builder.Registrations.Add(registration);
             return registration;
         }
@@ -281,9 +570,36 @@ namespace RI.Abstractions.Builder
 
             builder.ThrowIfAlreadyBuilt();
 
-            CompositionRegistration registration = CompositionRegistration.Transient(contract, factory);
+            CompositionRegistration registration = CompositionRegistration.Transient(contract, factory, alwaysRegister);
             builder.Registrations.Add(registration);
             return registration;
+        }
+
+        /// <summary>
+        ///     Finishes the configuration and registers all necessary objects/services in an independent and standalone container to construct the intended object/service setup.
+        /// </summary>
+        /// <param name="builder"> The builder. </param>
+        /// <returns> The container which can be used to access the built objects/services. </returns>
+        /// <exception cref="InvalidOperationException"> <see cref="IBuilder.Build" /> or <see cref="BuildStandalone" /> has already been called. </exception>
+        /// <exception cref="BuilderException"> Configuration or registration of objects/services failed. </exception>
+        public static IServiceProvider BuildStandalone (this IBuilder builder)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            if (builder.CountContracts(typeof(ICompositionContainer)) != 0)
+            {
+                throw new BuilderException($"{builder.GetType().Name} cannot have a registered {nameof(ICompositionContainer)} when using {nameof(IBuilderExtensions.BuildStandalone)}.");
+            }
+
+            SimpleContainer container = new SimpleContainer();
+            builder.UseSimpleContainer(container);
+            builder.Build();
+            return container;
         }
 
         /// <summary>
@@ -293,7 +609,8 @@ namespace RI.Abstractions.Builder
         /// <param name="contract"> The contract type. </param>
         /// <returns> The number of registrations for <paramref name="contract" />. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
-        public static int CountContracts (this BuilderBase builder, Type contract)
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static int CountContracts (this IBuilder builder, Type contract)
         {
             if (builder == null)
             {
@@ -305,7 +622,60 @@ namespace RI.Abstractions.Builder
                 throw new ArgumentNullException(nameof(contract));
             }
 
+            builder.ThrowIfAlreadyBuilt();
+
             return builder.Registrations.Count(x => x.Contract == contract);
+        }
+
+        /// <summary>
+        ///     Gets the first registration of a specified contract.
+        /// </summary>
+        /// <param name="builder"> The builder. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <returns> The registration or null if the contract is not registered. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static CompositionRegistration GetContract (this IBuilder builder, Type contract)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            return builder.Registrations.FirstOrDefault(x => x.Contract == contract);
+        }
+
+        /// <summary>
+        ///     Gets all registrations of the specified contract.
+        /// </summary>
+        /// <param name="builder"> The builder. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <returns> The list of all registrations of the contract. If no contracts are registered, an empty list is returned. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        public static IList<CompositionRegistration> GetContracts (this IBuilder builder, Type contract)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            return builder.Registrations.Where(x => x.Contract == contract)
+                          .ToList();
         }
 
         /// <summary>
@@ -481,7 +851,7 @@ namespace RI.Abstractions.Builder
         /// </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and instances should no longer be retrieved from the registrations. </exception>
-        public static IServiceProvider GetServiceProvider (this BuilderBase builder)
+        public static IServiceProvider GetServiceProvider (this IBuilder builder)
         {
             if (builder == null)
             {
@@ -564,8 +934,9 @@ namespace RI.Abstractions.Builder
         /// <param name="exactCount"> The exact amount of registered contracts required. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="exactCount" /> is less than zero. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
         /// <exception cref="BuilderException"> The builder does not contain the exact amount of contracts. </exception>
-        public static void ThrowIfNotExactContractCount (this BuilderBase builder, Type contract, int exactCount)
+        public static void ThrowIfNotExactContractCount (this IBuilder builder, Type contract, int exactCount)
         {
             if (builder == null)
             {
@@ -581,6 +952,8 @@ namespace RI.Abstractions.Builder
             {
                 throw new ArgumentOutOfRangeException(nameof(exactCount));
             }
+
+            builder.ThrowIfAlreadyBuilt();
 
             int actualCount = builder.CountContracts(contract);
 
@@ -598,8 +971,9 @@ namespace RI.Abstractions.Builder
         /// <param name="maxCount"> The maximum amount of registered contracts required. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="maxCount" /> is less than zero. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
         /// <exception cref="BuilderException"> The builder does contain more than the maximum amount of contracts. </exception>
-        public static void ThrowIfNotMaxContractCount (this BuilderBase builder, Type contract, int maxCount)
+        public static void ThrowIfNotMaxContractCount (this IBuilder builder, Type contract, int maxCount)
         {
             if (builder == null)
             {
@@ -615,6 +989,8 @@ namespace RI.Abstractions.Builder
             {
                 throw new ArgumentOutOfRangeException(nameof(maxCount));
             }
+
+            builder.ThrowIfAlreadyBuilt();
 
             int actualCount = builder.CountContracts(contract);
 
@@ -632,8 +1008,9 @@ namespace RI.Abstractions.Builder
         /// <param name="minCount"> The minimum amount of registered contracts required. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="minCount" /> is less than zero. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
         /// <exception cref="BuilderException"> The builder does not contain the minimum amount of contracts. </exception>
-        public static void ThrowIfNotMinContractCount (this BuilderBase builder, Type contract, int minCount)
+        public static void ThrowIfNotMinContractCount (this IBuilder builder, Type contract, int minCount)
         {
             if (builder == null)
             {
@@ -650,12 +1027,126 @@ namespace RI.Abstractions.Builder
                 throw new ArgumentOutOfRangeException(nameof(minCount));
             }
 
+            builder.ThrowIfAlreadyBuilt();
+
             int actualCount = builder.CountContracts(contract);
 
             if (actualCount < minCount)
             {
                 throw new BuilderException($"{builder.GetType().Name} requires at least {minCount} contracts of type {contract.Name} but has {actualCount}.");
             }
+        }
+
+        /// <summary>
+        ///     Checks whether the specified builder has a contract which is not registered as temporary and throws a <see cref="BuilderException" /> if so.
+        /// </summary>
+        /// <param name="builder"> The builder. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        /// <exception cref="BuilderException"> <paramref name="contract" /> is not registered as <see cref="CompositionRegistrationMode.Temporary" />. </exception>
+        public static void ThrowIfNotTemporary (this IBuilder builder, Type contract)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            CompositionRegistration nonTemporaryRegistration = builder.Registrations
+                                                                      .FirstOrDefault(x => x.Mode != CompositionRegistrationMode.Temporary);
+
+            if (nonTemporaryRegistration != null)
+            {
+                throw new BuilderException($"{builder.GetType().Name} has a non-temporary registration of {contract.Name}: {nonTemporaryRegistration}");
+            }
+        }
+
+        /// <summary>
+        ///     Checks whether the specified builder has a contract which is registered as temporary and throws a <see cref="BuilderException" /> if so.
+        /// </summary>
+        /// <param name="builder"> The builder. </param>
+        /// <param name="contract"> The contract type. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="contract" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> <paramref name="builder" /> has already been built and subsequent registrations cannot be used. </exception>
+        /// <exception cref="BuilderException"> <paramref name="contract" /> is registered as <see cref="CompositionRegistrationMode.Temporary" />. </exception>
+        public static void ThrowIfTemporary (this IBuilder builder, Type contract)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (contract == null)
+            {
+                throw new ArgumentNullException(nameof(contract));
+            }
+
+            builder.ThrowIfAlreadyBuilt();
+
+            CompositionRegistration nonTemporaryRegistration = builder.Registrations
+                                                                      .FirstOrDefault(x => x.Mode == CompositionRegistrationMode.Temporary);
+
+            if (nonTemporaryRegistration != null)
+            {
+                throw new BuilderException($"{builder.GetType().Name} has a temporary registration of {contract.Name}: {nonTemporaryRegistration}");
+            }
+        }
+
+        /// <summary>
+        ///     Adds registrations for using a simple callback logger.
+        /// </summary>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <param name="callback"> The callback delegate to call for each log message to write. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="callback" /> is null. </exception>
+        public static T UseCallbackLogger <T> (this T builder, CallbackLoggerDelegate callback)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (callback == null)
+            {
+                throw new ArgumentNullException(nameof(callback));
+            }
+
+            builder.AddSingleton(typeof(ILogger), new CallbackLogger(callback));
+
+            return builder;
+        }
+
+        /// <summary>
+        ///     Adds registrations for using a simple composition container.
+        /// </summary>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <param name="container"> The simple container to use. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="container" /> is null. </exception>
+        public static T UseSimpleContainer <T> (this T builder, SimpleContainer container)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            builder.AddTemporary(typeof(ICompositionContainer), container);
+
+            return builder;
         }
 
         #endregion
