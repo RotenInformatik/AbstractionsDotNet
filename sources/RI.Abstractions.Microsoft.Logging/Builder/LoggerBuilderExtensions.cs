@@ -22,6 +22,7 @@ namespace RI.Abstractions.Builder
         /// <summary>
         ///     Adds registrations for using a logger.
         /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
         /// <param name="builder"> The builder being configured. </param>
         /// <param name="logger"> The logger to use. </param>
         /// <returns> The builder being configured. </returns>
@@ -47,6 +48,7 @@ namespace RI.Abstractions.Builder
         /// <summary>
         ///     Adds registrations for using a logger factory.
         /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
         /// <param name="builder"> The builder being configured. </param>
         /// <param name="loggerFactory"> The logger factory to use. </param>
         /// <returns> The builder being configured. </returns>

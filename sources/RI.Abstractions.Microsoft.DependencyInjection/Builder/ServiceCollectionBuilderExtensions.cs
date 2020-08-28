@@ -20,6 +20,7 @@ namespace RI.Abstractions.Builder
         /// <summary>
         ///     Adds registrations for using a service collection as composition container.
         /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
         /// <param name="builder"> The builder being configured. </param>
         /// <param name="services"> The service collection to use. </param>
         /// <returns> The builder being configured. </returns>

@@ -15,13 +15,13 @@ namespace RI.Abstractions.Builder
     /// </summary>
     /// <remarks>
     ///     <note type="important">
-    ///         When building (calling <see cref="Build" />), <see cref="BuilderBase" /> expects exactly one instance of <see cref="ILogger" />, one instance of <see cref="ICompositionContainer" />, and zero instances of <see cref="IBuilder" /> already registered.
+    ///         When building (calling <see cref="Build" /> or <see cref="IBuilderExtensions.BuildStandalone" />), <see cref="BuilderBase" /> expects exactly one instance of <see cref="ILogger" />, one instance of <see cref="ICompositionContainer" />, and zero instances of <see cref="IBuilder" /> already registered.
     ///     </note>
     ///     <para>
     ///         <see cref="BuilderBase" /> adds itself as a <see cref="CompositionRegistrationMode.Temporary" /> registration with <see cref="IBuilder" /> as the contract.
     ///     </para>
     ///     <para>
-    ///         During <see cref="Build" />, after <see cref="PrepareRegistrations" /> but before <see cref="PerformRegistrations" /> is called, all <see cref="CompositionRegistrationMode.Temporary" />, <see cref="ILogger" />, and <see cref="ICompositionContainer" /> registrations will be removed.
+    ///         During <see cref="Build" /> or <see cref="IBuilderExtensions.BuildStandalone" />, after <see cref="PrepareRegistrations" /> but before <see cref="PerformRegistrations" /> is called, all <see cref="CompositionRegistrationMode.Temporary" />, <see cref="ILogger" />, and <see cref="ICompositionContainer" /> registrations will be removed.
     ///     </para>
     /// </remarks>
     /// <threadsafety static="false" instance="false" />
@@ -95,9 +95,11 @@ namespace RI.Abstractions.Builder
                 this.AddTemporary(typeof(IBuilder), this);
 
                 this.ThrowIfNotExactContractCount(typeof(ILogger), 1);
+                this.ThrowIfTemporary(typeof(ILogger));
                 ILogger logger = this.GetInstance<ILogger>();
 
                 this.ThrowIfNotExactContractCount(typeof(ICompositionContainer), 1);
+                this.ThrowIfNotTemporary(typeof(ILogger));
                 ICompositionContainer compositionContainer = this.GetInstance<ICompositionContainer>();
 
                 this.PrepareRegistrations(logger);

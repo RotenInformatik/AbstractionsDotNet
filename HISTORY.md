@@ -4,6 +4,14 @@
 
 ---
 
+## 1.1.0
+
+* [#7: Add list of implementations to readme](https://github.com/RotenInformatik/AbstractionsDotNet/issues/7)
+* [#8: Add additional extension methods to IBuilderExtensions](https://github.com/RotenInformatik/AbstractionsDotNet/issues/8)
+* [#9: Parameter alwaysRegister is ignored in IBuilderExtensions.AddTransient](https://github.com/RotenInformatik/AbstractionsDotNet/issues/9)
+* [#10: Some IBuilderExtensions methods use BuilderBase instead of IBuilder](https://github.com/RotenInformatik/AbstractionsDotNet/issues/10)
+* [#11: Add possibility to use builder without a composition container (independent/standalone build)](https://github.com/RotenInformatik/AbstractionsDotNet/issues/11)
+
 ## 1.0.0
 
 First version.
