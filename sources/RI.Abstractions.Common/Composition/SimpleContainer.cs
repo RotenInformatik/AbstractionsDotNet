@@ -96,7 +96,7 @@ namespace RI.Abstractions.Composition
 
             foreach (CompositionRegistration registration in registrations)
             {
-                //TODO: Recursive detection
+                //TODO: #13: Recursive detection
                 instances.Add(this.CreateInstance(registration, serviceType));
             }
 
