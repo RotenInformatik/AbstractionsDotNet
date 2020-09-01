@@ -4,6 +4,10 @@
 
 ---
 
+## 1.2.0
+
+
+
 ## 1.1.0
 
 * [#7: Add list of implementations to readme](https://github.com/RotenInformatik/AbstractionsDotNet/issues/7)

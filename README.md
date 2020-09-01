@@ -10,9 +10,9 @@ Based on .NET Standard 2.0, with minimal dependencies.
 
 ---
 
-These abstractions are mainly used by other projects/libraries worked on by [RotenInformatik](https://github.com/RotenInformatik/), both public and private ones.
+These abstractions are mainly used by other projects/libraries worked on by [RotenInformatik](https://github.com/RotenInformatik/), both public and private ones. Therefore, these abstractions are tailored for the needs of those projects/libraries - but anyone can use them.
 
-Therefore, these abstractions are tailored for the needs of those projects/libraries - but anyone can use them.
+The [API documentation](https://roteninformatik.github.io/AbstractionsDotNet/api/) provides a complete list of available functionality.
 
 Currently, the following abstractions are implemented:
 
