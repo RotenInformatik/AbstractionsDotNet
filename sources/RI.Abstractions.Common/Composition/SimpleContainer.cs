@@ -42,9 +42,9 @@ namespace RI.Abstractions.Composition
     {
         #region Instance Properties/Indexer
 
-        private Dictionary<Type, List<object>> Cache { get; } = new Dictionary<Type, List<object>>();
-
         private List<CompositionRegistration> Registrations { get; set; }
+
+        private HashSet<Type> TypesUnderRetrieval { get; } = new HashSet<Type>();
 
         #endregion
 
@@ -58,6 +58,9 @@ namespace RI.Abstractions.Composition
         /// </summary>
         /// <param name="serviceType"> An object that specifies the type of service object to get. </param>
         /// <returns> A list with objects of type <paramref name="serviceType" /> or an empty list if there is no service object of type <paramref name="serviceType" />. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="serviceType" /> is null. </exception>
+        /// <exception cref="NotSupportedException"> At least one registration for the specified service type has a recursive dependency -or- At least one registration for the specified service type is invalid. </exception>
+        /// <exception cref="AmbiguousMatchException"> No suitable constructor could be found to construct an instance (no or too many constructors whose all parameters can be resolved). </exception>
         public IList<object> GetServices (Type serviceType)
         {
             if (serviceType == null)
@@ -67,7 +70,7 @@ namespace RI.Abstractions.Composition
 
             if (this.Registrations == null)
             {
-                throw new InvalidOperationException("No service registrations.");
+                return new List<object>();
             }
 
             if (serviceType.IsGenericType)
@@ -78,15 +81,9 @@ namespace RI.Abstractions.Composition
                 }
             }
 
-            if (this.Cache.ContainsKey(serviceType))
+            if (this.TypesUnderRetrieval.Contains(serviceType))
             {
-                return new List<object>(this.Cache[serviceType]);
-            }
-
-            if (this.Registrations.All(x => x.Contract != serviceType))
-            {
-                this.Cache.Add(serviceType, new List<object>());
-                return new List<object>();
+                throw new NotSupportedException($"{serviceType.Name} has a recursive dependency.");
             }
 
             List<object> instances = new List<object>();
@@ -94,17 +91,26 @@ namespace RI.Abstractions.Composition
             List<CompositionRegistration> registrations = this.Registrations.Where(x => x.Contract == serviceType)
                                                               .ToList();
 
-            foreach (CompositionRegistration registration in registrations)
+            try
             {
-                //TODO: #13: Recursive detection
-                instances.Add(this.CreateInstance(registration, serviceType));
+                this.TypesUnderRetrieval.Add(serviceType);
+
+                foreach (CompositionRegistration registration in registrations)
+                {
+                    instances.Add(this.GetOrCreateInstance(registration));
+                }
+            }
+            finally
+            {
+                this.TypesUnderRetrieval.Remove(serviceType);
             }
 
-            this.Cache.Add(serviceType, new List<object>(instances));
+            instances.RemoveAll(x => x == null);
+
             return instances;
         }
 
-        private object ConstructInstance (Type implementation, Type requestedType)
+        private object ConstructInstance (Type implementation)
         {
             List<ConstructorInfo> constructors = implementation.GetConstructors(BindingFlags.Public)
                                                                .ToList();
@@ -149,12 +155,19 @@ namespace RI.Abstractions.Composition
 
             if (candidates.Count == 0)
             {
-                throw new NotSupportedException($"No best match constructor found for {implementation.Name}");
+                throw new AmbiguousMatchException($"No best match constructor found for {implementation.Name}.");
             }
 
-            if (candidates.Count != 1)
+            if (candidates.Count > 1)
             {
-                throw new NotSupportedException($"Multiple best match constructors found for {implementation.Name}");
+                if (candidates[0]
+                    .GetParameters()
+                    .Length == candidates[1]
+                               .GetParameters()
+                               .Length)
+                {
+                    throw new AmbiguousMatchException($"Multiple best match constructors found for {implementation.Name}.");
+                }
             }
 
             ConstructorInfo ctr = candidates[0];
@@ -165,9 +178,9 @@ namespace RI.Abstractions.Composition
             {
                 ParameterInfo parameterType = parameterTypes[i1];
 
-                if ((parameterType.ParameterType == implementation) || (parameterType.ParameterType == requestedType))
+                if (parameterType.ParameterType == implementation)
                 {
-                    throw new NotSupportedException($"{implementation.Name} cannot have itself as the type of a constructor parameter.");
+                    throw new NotSupportedException($"{implementation.Name} cannot have itself as the type of a constructor parameter (recursive dependency).");
                 }
 
                 parameterInstances[i1] = this.GetService(parameterType.ParameterType);
@@ -176,11 +189,11 @@ namespace RI.Abstractions.Composition
             return ctr.Invoke(parameterInstances);
         }
 
-        private object CreateInstance (CompositionRegistration registration, Type requestedType)
+        private object GetOrCreateInstance (CompositionRegistration registration)
         {
             object instance;
 
-            if ((registration.Instance != null) && (registration.Mode != CompositionRegistrationMode.Transient))
+            if ((registration.Instance != null) && (registration.Mode == CompositionRegistrationMode.Singleton))
             {
                 instance = registration.Instance;
             }
@@ -190,16 +203,16 @@ namespace RI.Abstractions.Composition
             }
             else if (registration.Implementation != null)
             {
-                instance = this.ConstructInstance(registration.Implementation, requestedType);
+                instance = this.ConstructInstance(registration.Implementation);
             }
             else
             {
-                throw new NotSupportedException($"Registration not supported (invalid registration): {registration}");
+                throw new NotSupportedException($"Invalid registration: {registration}");
             }
 
-            if (instance == null)
+            if (registration.Mode == CompositionRegistrationMode.Singleton)
             {
-                throw new NotSupportedException($"Registration not supported (construction returned null): {registration}");
+                registration.Instance = instance;
             }
 
             return instance;
@@ -241,11 +254,6 @@ namespace RI.Abstractions.Composition
             if (serviceType == null)
             {
                 throw new ArgumentNullException(nameof(serviceType));
-            }
-
-            if (this.Registrations == null)
-            {
-                throw new InvalidOperationException("No service registrations.");
             }
 
             if (serviceType.IsGenericType)

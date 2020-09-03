@@ -126,7 +126,7 @@ namespace RI.Abstractions.Logging
                 LogLevel.Warning => Microsoft.Extensions.Logging.LogLevel.Warning,
                 LogLevel.Error => Microsoft.Extensions.Logging.LogLevel.Error,
                 LogLevel.Fatal => Microsoft.Extensions.Logging.LogLevel.Critical,
-                _ => Microsoft.Extensions.Logging.LogLevel.None
+                var _ => Microsoft.Extensions.Logging.LogLevel.None,
             };
         }
 

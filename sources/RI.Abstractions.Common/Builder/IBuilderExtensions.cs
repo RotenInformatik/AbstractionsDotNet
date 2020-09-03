@@ -1127,6 +1127,26 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
+        ///     Adds registrations for using a logger which does nothing.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
+        public static T UseNullLogger <T> (this T builder)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.AddSingleton(typeof(ILogger), new NullLogger());
+
+            return builder;
+        }
+
+        /// <summary>
         ///     Adds registrations for using a simple composition container.
         /// </summary>
         /// <typeparam name="T"> The type of the builder. </typeparam>

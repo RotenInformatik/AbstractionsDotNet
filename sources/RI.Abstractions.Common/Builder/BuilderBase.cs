@@ -94,8 +94,9 @@ namespace RI.Abstractions.Builder
                 this.ThrowIfNotExactContractCount(typeof(IBuilder), 0);
                 this.AddTemporary(typeof(IBuilder), this);
 
-                this.ThrowIfNotExactContractCount(typeof(ILogger), 1);
+                this.ThrowIfNotMaxContractCount(typeof(ILogger), 1);
                 this.ThrowIfTemporary(typeof(ILogger));
+                this.AddDefaultSingleton(typeof(ILogger), new NullLogger());
                 ILogger logger = this.GetInstance<ILogger>();
 
                 this.ThrowIfNotExactContractCount(typeof(ICompositionContainer), 1);
