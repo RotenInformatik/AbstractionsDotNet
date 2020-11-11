@@ -4,6 +4,12 @@
 
 ---
 
+## 1.2.0
+
+* [#13: Add recursion detection when injecting constructor parameters](https://github.com/RotenInformatik/AbstractionsDotNet/issues/13)
+* [#14: Add NullLogger and make ILogger registration optional](https://github.com/RotenInformatik/AbstractionsDotNet/issues/14)
+* [#15: SimpleContainer does not properly adhere Transient registrations](https://github.com/RotenInformatik/AbstractionsDotNet/issues/15)
+
 ## 1.1.0
 
 * [#7: Add list of implementations to readme](https://github.com/RotenInformatik/AbstractionsDotNet/issues/7)
