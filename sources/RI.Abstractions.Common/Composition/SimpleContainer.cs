@@ -241,6 +241,9 @@ namespace RI.Abstractions.Composition
             this.Registrations = new List<CompositionRegistration>(registrations.Where(x => x.Mode != CompositionRegistrationMode.Temporary));
         }
 
+        /// <inheritdoc />
+        public bool Registered => this.Registrations != null;
+
         #endregion
 
 

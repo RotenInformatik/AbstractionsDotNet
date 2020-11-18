@@ -4,6 +4,12 @@
 
 ---
 
+## 1.3.0
+
+* [#5: Create unit tests](https://github.com/RotenInformatik/AbstractionsDotNet/issues/5)
+* [#18: Make ILogger implementations more robust](https://github.com/RotenInformatik/AbstractionsDotNet/issues/18)
+* [#19: Prevent multiple calls to ICompositionContainer.Register by contract](https://github.com/RotenInformatik/AbstractionsDotNet/issues/19)
+
 ## 1.2.0
 
 * [#13: Add recursion detection when injecting constructor parameters](https://github.com/RotenInformatik/AbstractionsDotNet/issues/13)
