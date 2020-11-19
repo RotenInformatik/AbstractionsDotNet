@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using RI.Abstractions.Composition;
+using RI.Abstractions.Tests.Fakes;
 
 using Xunit;
 
@@ -197,6 +198,51 @@ namespace RI.Abstractions.Tests.Composition
             Assert.Equal(value[0], "Factory1");
             Assert.Equal(value[1], "Factory2");
             Assert.Equal(value[2], "Factory4");
+        }
+
+        [Fact]
+        public static void GetServices_Mixed()
+        {
+            // Arrange
+            CompositionRegistration[] regs = new[]
+            {
+                CompositionRegistration.Singleton(typeof(Version), typeof(Version)),
+                CompositionRegistration.Singleton(typeof(Version), _ => new Version(1, 0)),
+                CompositionRegistration.Singleton(typeof(Version), new Version(2, 0)),
+                CompositionRegistration.Transient(typeof(Version), typeof(Version)),
+                CompositionRegistration.Transient(typeof(Version), _ => new Version(3, 0)),
+
+            };
+            SimpleContainer container = new SimpleContainer();
+            container.Register(regs);
+
+            // Act
+            List<Version> value1 = container.GetServices(typeof(Version))?.Cast<Version>().ToList();
+            List<Version> value2 = container.GetServices(typeof(Version))?.Cast<Version>().ToList();
+
+            // Assert
+
+            Assert.NotNull(value1);
+            Assert.True(value1.Count == 5);
+            Assert.Equal(value1[0], new Version());
+            Assert.Equal(value1[1], new Version(1, 0));
+            Assert.Equal(value1[2], new Version(2, 0));
+            Assert.Equal(value1[3], new Version());
+            Assert.Equal(value1[4], new Version(3, 0));
+
+            Assert.NotNull(value2);
+            Assert.True(value2.Count == 5);
+            Assert.Equal(value2[0], new Version());
+            Assert.Equal(value2[1], new Version(1, 0));
+            Assert.Equal(value2[2], new Version(2, 0));
+            Assert.Equal(value2[3], new Version());
+            Assert.Equal(value2[4], new Version(3, 0));
+
+            Assert.Same(value1[0], value2[0]);
+            Assert.Same(value1[1], value2[1]);
+            Assert.Same(value1[2], value2[2]);
+            Assert.NotSame(value1[3], value2[3]);
+            Assert.NotSame(value1[4], value2[4]);
         }
     }
 }

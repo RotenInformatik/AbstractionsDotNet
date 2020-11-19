@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 using RI.Abstractions.Composition;
+using RI.Abstractions.Tests.Fakes;
 
 using Xunit;
 
@@ -317,6 +321,116 @@ namespace RI.Abstractions.Tests.Composition
             // Assert
             Assert.NotNull(value);
             Assert.StrictEqual("Factory1", value);
+        }
+
+        [Fact]
+        public static void GetService_AbstractContract_NoExceptions()
+        {
+            // Arrange
+            CompositionRegistration[] regs = new[]
+            {
+                CompositionRegistration.Singleton(typeof(IFakeServiceA), typeof(FakeServiceA)),
+
+            };
+            SimpleContainer container = new SimpleContainer();
+            container.Register(regs);
+
+            // Act
+            IFakeServiceA service1 = (IFakeServiceA)container.GetService(typeof(IFakeServiceA));
+            FakeServiceA service2 = (FakeServiceA)container.GetService(typeof(FakeServiceA));
+
+            // Assert
+            Assert.NotNull(service1);
+            Assert.Null(service2);
+        }
+
+        [Fact]
+        public static void GetService_ConstructorInjection_NoExceptions()
+        {
+            // Arrange
+            CompositionRegistration[] regs = new[]
+            {
+                CompositionRegistration.Transient(typeof(IFakeServiceA), typeof(FakeServiceA)),
+                CompositionRegistration.Singleton(typeof(IFakeServiceB), typeof(FakeServiceB)),
+                CompositionRegistration.Singleton(typeof(IFakeServiceC), typeof(FakeServiceC)),
+
+            };
+            SimpleContainer container = new SimpleContainer();
+            container.Register(regs);
+
+            // Act
+            IFakeServiceC serviceC = (IFakeServiceC)container.GetService(typeof(IFakeServiceC));
+            IFakeServiceB serviceB = (IFakeServiceB)container.GetService(typeof(IFakeServiceB));
+            IFakeServiceA serviceA = (IFakeServiceA)container.GetService(typeof(IFakeServiceA));
+
+            // Assert
+            Assert.NotNull(serviceA);
+            Assert.NotNull(serviceB);
+            Assert.NotNull(serviceC);
+            Assert.NotNull(serviceB.ServiceA);
+            Assert.NotNull(serviceC.ServiceA);
+            Assert.NotNull(serviceC.ServiceB);
+            Assert.NotSame(serviceA, serviceB.ServiceA);
+            Assert.NotSame(serviceA, serviceC.ServiceA);
+            Assert.Same(serviceB, serviceC.ServiceB);
+        }
+
+        [Fact]
+        public static void GetService_NoSuitableConstructor_AmbiguousMatchException()
+        {
+            // Arrange
+            CompositionRegistration[] regs = new[]
+            {
+                CompositionRegistration.Transient(typeof(IFakeServiceB), typeof(FakeServiceB)),
+                CompositionRegistration.Transient(typeof(IFakeServiceC), typeof(FakeServiceC)),
+
+            };
+            SimpleContainer container = new SimpleContainer();
+            container.Register(regs);
+
+            // Act + Assert
+            Assert.Throws<AmbiguousMatchException>(() => container.GetService(typeof(IFakeServiceB)));
+        }
+
+        [Fact]
+        public static void GetService_TooManySuitableConstructors_AmbiguousMatchException()
+        {
+            // Arrange
+            CompositionRegistration[] regs = new[]
+            {
+                CompositionRegistration.Transient(typeof(IFakeServiceA), typeof(FakeServiceA)),
+                CompositionRegistration.Transient(typeof(IFakeServiceB), typeof(FakeServiceB)),
+                CompositionRegistration.Transient(typeof(IFakeServiceD), typeof(FakeServiceD)),
+            };
+            SimpleContainer container = new SimpleContainer();
+            container.Register(regs);
+
+            // Act + Assert
+            Assert.Throws<AmbiguousMatchException>(() => container.GetService(typeof(IFakeServiceD)));
+        }
+
+        [Fact]
+        public static void GetService_FactoryWithServiceProvider_NoExceptions()
+        {
+            // Arrange
+            CompositionRegistration[] regs = new[]
+            {
+                CompositionRegistration.Transient(typeof(IFakeServiceA), typeof(FakeServiceA)),
+                CompositionRegistration.Singleton(typeof(IFakeServiceB), p => new FakeServiceB((IFakeServiceA)p.GetService(typeof(IFakeServiceA)))),
+
+            };
+            SimpleContainer container = new SimpleContainer();
+            container.Register(regs);
+
+            // Act
+            IFakeServiceA serviceA = (IFakeServiceA)container.GetService(typeof(IFakeServiceA));
+            IFakeServiceB serviceB = (IFakeServiceB)container.GetService(typeof(IFakeServiceB));
+
+            // Assert
+            Assert.NotNull(serviceA);
+            Assert.NotNull(serviceB);
+            Assert.NotNull(serviceB.ServiceA);
+            Assert.NotSame(serviceA, serviceB.ServiceA);
         }
     }
 }
