@@ -11,15 +11,15 @@ using RI.Abstractions.Logging;
 
 namespace RI.Abstractions.Tests.Logging
 {
-    public static class ILoggerTestFactory
+    public static class _LoggingTestFactory
     {
         public static IEnumerable<object[]> GetLoggers () =>
             new List<object[]>
             {
-                ILoggerTestFactory.GetNullLogger(),
-                ILoggerTestFactory.GetCallbackLogger(),
-                ILoggerTestFactory.GetLoggerFactoryLogger(),
-                ILoggerTestFactory.GetLoggerLogger(),
+                _LoggingTestFactory.GetNullLogger(),
+                _LoggingTestFactory.GetCallbackLogger(),
+                _LoggingTestFactory.GetLoggerFactoryLogger(),
+                _LoggingTestFactory.GetLoggerLogger(),
             };
 
         public static object[] GetNullLogger ()

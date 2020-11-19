@@ -9,13 +9,13 @@ using RI.Abstractions.Composition;
 
 namespace RI.Abstractions.Tests.Composition
 {
-    public static class ICompositionContainerTestFactory
+    public static class _CompositionTestFactory
     {
         public static IEnumerable<object[]> GetContainers() =>
             new List<object[]>
             {
-                ICompositionContainerTestFactory.GetSimpleContainer(),
-                ICompositionContainerTestFactory.GetServiceCollectionContainer(),
+                _CompositionTestFactory.GetSimpleContainer(),
+                _CompositionTestFactory.GetServiceCollectionContainer(),
             };
 
         public static object[] GetSimpleContainer()
@@ -38,7 +38,7 @@ namespace RI.Abstractions.Tests.Composition
         {
             List<object[]> data = new List<object[]>();
 
-            foreach (object[] container in ICompositionContainerTestFactory.GetContainers())
+            foreach (object[] container in _CompositionTestFactory.GetContainers())
             {
                 object[] combined = new object[container.Length + 1];
                 int combinedIndex = 0;
@@ -49,7 +49,7 @@ namespace RI.Abstractions.Tests.Composition
                     combinedIndex++;
                 }
 
-                combined[combinedIndex] = ICompositionContainerTestFactory.GetValidRegistrations();
+                combined[combinedIndex] = _CompositionTestFactory.GetValidRegistrations();
                 combinedIndex++;
 
                 data.Add(combined);

@@ -16,6 +16,7 @@ namespace RI.Abstractions.Tests.Logging
         [MemberData(nameof(ILoggerExtensions_Log.GetLoggers))]
         public void Log_WithNothing_NoException(ILogger instance)
         {
+            // Act
             instance.Log(LogLevel.Debug, null);
         }
 
@@ -23,6 +24,7 @@ namespace RI.Abstractions.Tests.Logging
         [MemberData(nameof(ILoggerExtensions_Log.GetLoggers))]
         public void Log_WithSource_NoException(ILogger instance)
         {
+            // Act
             instance.Log(LogLevel.Debug, "Source");
         }
 
@@ -30,6 +32,7 @@ namespace RI.Abstractions.Tests.Logging
         [MemberData(nameof(ILoggerExtensions_Log.GetLoggers))]
         public void Log_WithException_NoException(ILogger instance)
         {
+            // Act
             instance.Log(LogLevel.Debug, null, exception:new Exception("Exception"));
         }
 
@@ -37,6 +40,7 @@ namespace RI.Abstractions.Tests.Logging
         [MemberData(nameof(ILoggerExtensions_Log.GetLoggers))]
         public void Log_WithMessage_NoException(ILogger instance)
         {
+            // Act
             instance.Log(LogLevel.Debug, null, format:"Message");
         }
 
@@ -44,6 +48,7 @@ namespace RI.Abstractions.Tests.Logging
         [MemberData(nameof(ILoggerExtensions_Log.GetLoggers))]
         public void Log_WithMessageAndArgs_NoException(ILogger instance)
         {
+            // Act
             instance.Log(LogLevel.Debug, null, format:"Message: {0}", args:123);
         }
 
@@ -51,10 +56,11 @@ namespace RI.Abstractions.Tests.Logging
         [MemberData(nameof(ILoggerExtensions_Log.GetLoggers))]
         public void Log_WithEverything_NoException(ILogger instance)
         {
+            // Act
             instance.Log(LogLevel.Debug, "Source", new Exception("Exception"), "Message: {0} {1}", 123, 789);
         }
 
         public static IEnumerable<object[]> GetLoggers() =>
-            ILoggerTestFactory.GetLoggers();
+            _LoggingTestFactory.GetLoggers();
     }
 }

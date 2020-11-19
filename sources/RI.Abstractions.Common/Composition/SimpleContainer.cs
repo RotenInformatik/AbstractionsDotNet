@@ -112,7 +112,7 @@ namespace RI.Abstractions.Composition
 
         private object ConstructInstance (Type implementation)
         {
-            List<ConstructorInfo> constructors = implementation.GetConstructors(BindingFlags.Public)
+            List<ConstructorInfo> constructors = implementation.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
                                                                .ToList();
 
             constructors.Sort((x, y) => x.GetParameters()
@@ -238,7 +238,15 @@ namespace RI.Abstractions.Composition
                 throw new InvalidOperationException("Services already registered.");
             }
 
-            this.Registrations = new List<CompositionRegistration>(registrations.Where(x => x.Mode != CompositionRegistrationMode.Temporary));
+            this.Registrations = new List<CompositionRegistration>();
+
+            foreach (CompositionRegistration registration in registrations.Where(x => x.Mode != CompositionRegistrationMode.Temporary))
+            {
+                if (registration.AlwaysRegister || (this.Registrations.All(x => x.Contract != registration.Contract)))
+                {
+                    this.Registrations.Add(registration);
+                }
+            }
         }
 
         /// <inheritdoc />
