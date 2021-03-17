@@ -32,6 +32,15 @@ namespace RI.Abstractions.Composition
         /// </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="registrations" /> is null. </exception>
         /// <exception cref="NotSupportedException"> <paramref name="registrations" /> contains unsupported registrations not supported by this composition container. </exception>
+        /// <exception cref="InvalidOperationException"> <see cref="Register"/> has already been called. </exception>
         void Register (IEnumerable<CompositionRegistration> registrations);
+
+        /// <summary>
+        /// Gets whether <see cref="Register"/> has already been called.
+        /// </summary>
+        /// <value>
+        /// true if <see cref="Register"/> has already been called, false otherwise.
+        /// </value>
+        bool Registered { get; }
     }
 }

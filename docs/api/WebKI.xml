@@ -119,8 +119,10 @@
   <HelpKINode Title="ICompositionContainer interface">
     <HelpKINode Title="ICompositionContainer Interface" Url="html/EE81BBD4.htm" />
     <HelpKINode Title="methods" Url="html/ACEF27C8.htm" />
+    <HelpKINode Title="properties" Url="html/D4293726.htm" />
   </HelpKINode>
   <HelpKINode Title="ICompositionContainer.Register method" Url="html/18FD7510.htm" />
+  <HelpKINode Title="ICompositionContainer.Registered property" Url="html/5CA36DD6.htm" />
   <HelpKINode Title="ILogger interface">
     <HelpKINode Title="ILogger Interface" Url="html/6C5680A6.htm" />
     <HelpKINode Title="methods" Url="html/CECF3318.htm" />
@@ -184,6 +186,11 @@
     <HelpKINode Title="ServiceCollectionCompositionContainer.Register Method " Url="html/BE26F9B.htm" />
     <HelpKINode Title="SimpleContainer.Register Method " Url="html/4D19DEAC.htm" />
   </HelpKINode>
+  <HelpKINode Title="Registered property">
+    <HelpKINode Title="ICompositionContainer.Registered Property " Url="html/5CA36DD6.htm" />
+    <HelpKINode Title="ServiceCollectionCompositionContainer.Registered Property " Url="html/6C3C01EA.htm" />
+    <HelpKINode Title="SimpleContainer.Registered Property " Url="html/6548460.htm" />
+  </HelpKINode>
   <HelpKINode Title="Registrations property">
     <HelpKINode Title="BuilderBase.Registrations Property " Url="html/A16FC358.htm" />
     <HelpKINode Title="IBuilder.Registrations Property " Url="html/62C7896C.htm" />
@@ -224,16 +231,19 @@
     <HelpKINode Title="properties" Url="html/E5F827E.htm" />
   </HelpKINode>
   <HelpKINode Title="ServiceCollectionCompositionContainer.Register method" Url="html/BE26F9B.htm" />
+  <HelpKINode Title="ServiceCollectionCompositionContainer.Registered property" Url="html/6C3C01EA.htm" />
   <HelpKINode Title="ServiceCollectionCompositionContainer.ServiceCollectionCompositionContainer constructor" Url="html/8FE2B195.htm" />
   <HelpKINode Title="ServiceCollectionCompositionContainer.UsedServiceCollection property" Url="html/3511C431.htm" />
   <HelpKINode Title="SimpleContainer class">
     <HelpKINode Title="SimpleContainer Class" Url="html/C20E6224.htm" />
     <HelpKINode Title="constructor" Url="html/FC149130.htm" />
     <HelpKINode Title="methods" Url="html/3D46419F.htm" />
+    <HelpKINode Title="properties" Url="html/228B43AF.htm" />
   </HelpKINode>
   <HelpKINode Title="SimpleContainer.GetService method" Url="html/88E4101A.htm" />
   <HelpKINode Title="SimpleContainer.GetServices method" Url="html/CDB610E7.htm" />
   <HelpKINode Title="SimpleContainer.Register method" Url="html/4D19DEAC.htm" />
+  <HelpKINode Title="SimpleContainer.Registered property" Url="html/6548460.htm" />
   <HelpKINode Title="SimpleContainer.SimpleContainer constructor" Url="html/FC149130.htm" />
   <HelpKINode Title="Singleton enumeration member" Url="html/3DDC023E.htm" />
   <HelpKINode Title="Singleton method" Url="html/29D7A5FC.htm" />

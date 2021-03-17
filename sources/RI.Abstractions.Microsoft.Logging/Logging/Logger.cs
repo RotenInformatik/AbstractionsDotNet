@@ -140,13 +140,24 @@ namespace RI.Abstractions.Logging
         /// <inheritdoc />
         public void Log (DateTime timestampUtc, int threadId, LogLevel level, string source, Exception exception, string format, params object[] args)
         {
+            string message;
+
+            try
+            {
+                message = string.Format(format ?? string.Empty, args ?? new object[0]);
+            }
+            catch (FormatException)
+            {
+                message = format ?? string.Empty;
+            }
+
             if (exception != null)
             {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{string.Format(format, args)}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{this.FormatException(exception)}");
+                this.UsedLogger.Log(this.TranslateLogLevel(level), exception, $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source ?? "NULL"}]{Environment.NewLine}[MESSAGE]{Environment.NewLine}{message}{Environment.NewLine}[EXCEPTION]{Environment.NewLine}{this.FormatException(exception)}");
             }
             else
             {
-                this.UsedLogger.Log(this.TranslateLogLevel(level), $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source}] {string.Format(format, args)}");
+                this.UsedLogger.Log(this.TranslateLogLevel(level), $"[{this.FormatTimestamp(timestampUtc)}] [{threadId}] [{level}] [{source ?? "NULL"}] {message}");
             }
         }
 

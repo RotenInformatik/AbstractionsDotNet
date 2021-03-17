@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 
@@ -11,13 +12,15 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyProduct("RotenInformatik/AbstractionsDotNet"),]
 [assembly: AssemblyCompany("Roten Informatik"),]
-[assembly: AssemblyCopyright("Copyright (c) 2017-2020 Roten Informatik"),]
+[assembly: AssemblyCopyright("Copyright (c) 2017-2021 Roten Informatik"),]
 [assembly: AssemblyTrademark(""),]
 [assembly: AssemblyCulture(""),]
 [assembly: CLSCompliant(false),]
-[assembly: AssemblyVersion("1.2.0.0"),]
-[assembly: AssemblyFileVersion("1.2.0.0"),]
-[assembly: AssemblyInformationalVersion("1.2.0.0"),]
+[assembly: AssemblyVersion("1.3.0.0"),]
+[assembly: AssemblyFileVersion("1.3.0.0"),]
+[assembly: AssemblyInformationalVersion("1.3.0.0"),]
+
+[assembly: InternalsVisibleTo("RI.Abstractions.Tests")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("DEBUG"),]

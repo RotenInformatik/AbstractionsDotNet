@@ -4,6 +4,14 @@
 
 ---
 
+## 1.3.0
+
+* [#5: Create unit tests](https://github.com/RotenInformatik/AbstractionsDotNet/issues/5)
+* [#18: Make ILogger implementations more robust](https://github.com/RotenInformatik/AbstractionsDotNet/issues/18)
+* [#19: Prevent multiple calls to ICompositionContainer.Register by contract](https://github.com/RotenInformatik/AbstractionsDotNet/issues/19)
+* [#20: SimpleContainer cannot create instances from type constructors](https://github.com/RotenInformatik/AbstractionsDotNet/issues/20)
+* [#21: SimpleContainer does not adhere to AlwaysRegister flag](https://github.com/RotenInformatik/AbstractionsDotNet/issues/21)
+
 ## 1.2.0
 
 * [#13: Add recursion detection when injecting constructor parameters](https://github.com/RotenInformatik/AbstractionsDotNet/issues/13)

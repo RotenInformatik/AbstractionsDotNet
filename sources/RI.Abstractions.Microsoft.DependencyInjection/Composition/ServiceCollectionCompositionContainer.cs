@@ -30,6 +30,8 @@ namespace RI.Abstractions.Composition
             }
 
             this.UsedServiceCollection = services;
+
+            this.Registered = false;
         }
 
         #endregion
@@ -61,6 +63,13 @@ namespace RI.Abstractions.Composition
             {
                 throw new ArgumentNullException(nameof(registrations));
             }
+
+            if (this.Registered)
+            {
+                throw new InvalidOperationException("Services already registered.");
+            }
+
+            this.Registered = true;
 
             foreach (CompositionRegistration registration in registrations)
             {
@@ -134,6 +143,9 @@ namespace RI.Abstractions.Composition
                 }
             }
         }
+
+        /// <inheritdoc />
+        public bool Registered { get; private set; }
 
         #endregion
     }

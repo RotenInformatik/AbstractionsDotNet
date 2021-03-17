@@ -279,7 +279,7 @@ namespace RI.Abstractions.Composition
         /// <value>
         ///     The contract type.
         /// </value>
-        public Type Contract { get; private set; }
+        public Type Contract { get; internal set; }
 
         /// <summary>
         ///     Gets the factory.
