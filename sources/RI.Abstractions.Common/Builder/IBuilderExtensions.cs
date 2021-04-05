@@ -51,7 +51,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultSingleton(contract, implementation);
+            return builder.AddSingleton(contract, implementation);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultSingleton(contract, factory);
+            return builder.AddSingleton(contract, factory);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultSingleton(contract, instance);
+            return builder.AddSingleton(contract, instance);
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultTemporary(contract, implementation);
+            return builder.AddTemporary(contract, implementation);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultTemporary(contract, factory);
+            return builder.AddTemporary(contract, factory);
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultTemporary(contract, instance);
+            return builder.AddTemporary(contract, instance);
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultTransient(contract, implementation);
+            return builder.AddTransient(contract, implementation);
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace RI.Abstractions.Builder
                 return null;
             }
 
-            return builder.AddDefaultTransient(contract, factory);
+            return builder.AddTransient(contract, factory);
         }
 
         /// <summary>
@@ -1061,7 +1061,7 @@ namespace RI.Abstractions.Builder
             builder.ThrowIfAlreadyBuilt();
 
             CompositionRegistration nonTemporaryRegistration = builder.Registrations
-                                                                      .FirstOrDefault(x => x.Mode != CompositionRegistrationMode.Temporary);
+                                                                      .FirstOrDefault(x => (x.Mode != CompositionRegistrationMode.Temporary) && (x.Contract == contract));
 
             if (nonTemporaryRegistration != null)
             {
@@ -1092,7 +1092,7 @@ namespace RI.Abstractions.Builder
             builder.ThrowIfAlreadyBuilt();
 
             CompositionRegistration nonTemporaryRegistration = builder.Registrations
-                                                                      .FirstOrDefault(x => x.Mode == CompositionRegistrationMode.Temporary);
+                                                                      .FirstOrDefault(x => (x.Mode == CompositionRegistrationMode.Temporary) && (x.Contract == contract));
 
             if (nonTemporaryRegistration != null)
             {
