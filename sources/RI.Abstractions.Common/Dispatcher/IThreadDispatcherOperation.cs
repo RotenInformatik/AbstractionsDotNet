@@ -10,21 +10,8 @@ namespace RI.Abstractions.Dispatcher
     /// <summary>
     /// An operation (delegate) scheduled to be executed by a thread dispatcher.
     /// </summary>
-    public interface IThreadDispatcherOperation
+    public interface IThreadDispatcherOperation : IThreadDispatcherRunnable
     {
-        /// <summary>
-        ///     Gets the delegate executed by this thread dispatcher operation.
-        /// </summary>
-        /// <value>
-        ///     The delegate executed by this thread dispatcher operation.
-        /// </value>
-        /// <remarks>
-        /// <note type="implement">
-        /// This property must never be null.
-        /// </note>
-        /// </remarks>
-        Delegate Action { get; }
-
         /// <summary>
         ///     Gets the exception which occurred during execution of the delegate associated with this thread dispatcher operation.
         /// </summary>
@@ -83,19 +70,6 @@ namespace RI.Abstractions.Dispatcher
         /// </value>
         /// 
         int WatchdogTimeMilliseconds { get; }
-
-        /// <summary>
-        ///     Gets the object which can be used for thread synchronization when accessing <see cref="IThreadDispatcherOperation"/>.
-        /// </summary>
-        /// <value>
-        ///     The object which can be used for thread synchronization.
-        /// </value>
-        /// <remarks>
-        /// <note type="implement">
-        /// This property must never be null.
-        /// </note>
-        /// </remarks>
-        object SyncRoot { get; }
 
         /// <summary>
         ///     Cancels the processing of the thread dispatcher operation.

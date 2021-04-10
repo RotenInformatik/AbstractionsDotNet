@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -12,23 +14,20 @@ namespace RI.Abstractions.Dispatcher
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         A <see cref="ThreadDispatcher" /> provides a queue for delegates, filled through <c>Send</c> and <c>Post</c> methods, which is processed on the thread where <see cref="Run" /> is called (<see cref="Run" /> blocks while executing the queue until <see cref="Shutdown" />, <see cref="ShutdownAsync"/>, or <see cref="BeginShutdown"/> is called).
+    ///         A thread dispatcher provides a prioritized queue for delegates which is processed on a single specified thread.
     ///     </para>
     ///     <para>
-    ///         The delegates are executed in the order they are added to the queue.
-    ///         When all delegates are executed, or the queue is empty respectively, <see cref="ThreadDispatcher" /> waits for new delegates to process.
+    ///         The delegates are executed in the order of their priority and then in the order they were added to the queue.
+    ///         When all delegates are executed, or the queue is empty respectively, the thread dispatcher waits for new delegates to process.
     ///     </para>
     ///     <para>
-    ///         During <see cref="Run" />, the current <see cref="SynchronizationContext" /> is replaced by an instance of <see cref="ThreadDispatcherSynchronizationContext" /> and restored afterwards.
-    ///     </para>
-    ///     <para>
-    ///         A watchdog can be used to ensure that the execution of a delegate does not block the dispatcher undetected.
+    ///         A watchdog can be used to ensure that the execution of a delegate does not block the dispatcher indefinitely.
     ///         The watchdog is active whenever <see cref="WatchdogTimeout" /> is not null.
     ///         The watchdog runs in a separate thread and raises the <see cref="Watchdog" /> event if the execution of a delegate takes longer than the specified timeout.
     ///     </para>
-    ///     <note type="important">
-    ///         Whether <see cref="ExecutionContext" />, <see cref="SynchronizationContext"/>, and/or <see cref="CultureInfo" /> is captured and used for executing a delegate, depends on the used <see cref="ThreadDispatcherOptions" />.
-    ///     </note>
+    ///     <para>
+    ///         Whether <see cref="ExecutionContext" />, <see cref="SynchronizationContext"/>, and/or <see cref="CultureInfo" /> is captured from the dispatching thread onto the delegate execution thread (and used for executing a delegate), depends on the used <see cref="ThreadDispatcherOptions" />.
+    ///     </para>
     /// </remarks>
     public interface IThreadDispatcher : ISynchronizeInvoke, IDisposable
     {
@@ -288,7 +287,7 @@ namespace RI.Abstractions.Dispatcher
         /// <param name="action"> The delegate. </param>
         /// <param name="parameters"> Optional parameters of the delegate. </param>
         /// <returns>
-        ///     The dispatcher operation object which can be used to track the execution of the enqueued delegate.
+        ///     The dispatcher operation object which can be used to track and control the execution of the enqueued delegate.
         /// </returns>
         /// <remarks>
         ///     <para>
@@ -297,8 +296,11 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         A delegate must be enqueuable before the dispatcher is run.
         ///     </note>
+        ///     <note type="implement">
+        ///         Must be callable from the dispatcher thread.
+        ///     </note>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than minus one. </exception>
+        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is being shut down. </exception>
         IThreadDispatcherOperation Post(ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
@@ -310,7 +312,7 @@ namespace RI.Abstractions.Dispatcher
         /// <param name="priority"> The priority. Can be -1 to use the default priority. </param>
         /// <param name="options"> The used execution options. Can be <see cref="ThreadDispatcherOptions.Default"/> to use the default options.</param>
         /// <param name="action"> The delegate. </param>
-        /// <param name="parameters"> Optional parameters of the delagate. </param>
+        /// <param name="parameters"> Optional parameters of the delegate. </param>
         /// <returns>
         ///     The return value of the executed delegate or null if the delegate has no return value.
         /// </returns>
@@ -318,18 +320,14 @@ namespace RI.Abstractions.Dispatcher
         ///     <para>
         ///         The higher the priority, the earlier the operation is executed (highest priority, first executed).
         ///     </para>
+        ///     <para>
+        ///         Blocks until the scheduled delegate and all previously enqueued delegates of higher or same priority were processed.
+        ///     </para>
         ///     <note type="implement">
-        ///         A delegate must be enqueuable before the dispatcher is run.
+        ///         Must be callable from the dispatcher thread and can be therefore be cascaded.
         ///     </note>
-        ///     <para>
-        ///         <see cref="Send" /> blocks until the scheduled delegate and all previously enqueued delegates of higher or same priority were processed.
-        ///     </para>
-        ///     <para>
-        ///         <see cref="Send" /> can be called from the dispatchers thread.
-        ///         Therefore, <see cref="Send" /> calls can be cascaded.
-        ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than minus one. </exception>
+        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
         /// <exception cref="ThreadDispatcherException"> An exception occurred during execution of the delegate. </exception>
@@ -343,9 +341,40 @@ namespace RI.Abstractions.Dispatcher
         /// <param name="priority"> The priority. Can be -1 to use the default priority. </param>
         /// <param name="options"> The used execution options. Can be <see cref="ThreadDispatcherOptions.Default"/> to use the default options.</param>
         /// <param name="action"> The delegate. </param>
-        /// <param name="parameters"> Optional parameters of the delagate. </param>
+        /// <param name="parameters"> Optional parameters of the delegate. </param>
         /// <returns>
         ///     The return value of the executed delegate or null if the delegate has no return value.
+        /// </returns>
+        /// <remarks>
+        ///     <para>
+        ///         The higher the priority, the earlier the operation is executed (highest priority, first executed).
+        ///     </para>
+        ///     <para>
+        ///         Blocks until the scheduled delegate and all previously enqueued delegates of higher or same priority were processed.
+        ///     </para>
+        ///     <note type="implement">
+        ///         Must be callable from the dispatcher thread and can be therefore be cascaded.
+        ///     </note>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
+        /// <exception cref="ThreadDispatcherException"> An exception occurred during execution of the delegate. </exception>
+        /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled. </exception>
+        Task<object> SendAsync (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
+
+        /// <summary>
+        ///     Creates a new thread dispatcher timer.
+        /// </summary>
+        /// <param name="mode"> The mode under which the created timer operates. </param>
+        /// <param name="milliseconds"> The delay of the execution in milliseconds until the first execution. </param>
+        /// <param name="executionContext"> The context under which the delegate is executed. Can be null to use the calling threads context. </param>
+        /// <param name="priority"> The priority. Can be -1 to use the default priority. </param>
+        /// <param name="options"> The used execution options. Can be <see cref="ThreadDispatcherOptions.Default"/> to use the default options.</param>
+        /// <param name="action"> The delegate. </param>
+        /// <param name="parameters"> Optional parameters of the delegate. </param>
+        /// <returns>
+        ///     The dispatcher timer object which can be used to track and control the execution of the enqueued delegate.
         /// </returns>
         /// <remarks>
         ///     <para>
@@ -354,19 +383,13 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         A delegate must be enqueuable before the dispatcher is run.
         ///     </note>
-        ///     <para>
-        ///         <see cref="SendAsync" /> blocks until the scheduled delegate and all previously enqueued delegates of higher or same priority were processed.
-        ///     </para>
-        ///     <para>
-        ///         <see cref="SendAsync" /> can be called from the dispatchers thread.
-        ///         Therefore, <see cref="SendAsync" /> calls can be cascaded.
-        ///     </para>
+        ///     <note type="implement">
+        ///         Must be callable from the dispatcher thread.
+        ///     </note>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than minus one. </exception>
+        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="milliseconds" /> is zero or negative or <paramref name="priority" />  is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
-        /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
-        /// <exception cref="ThreadDispatcherException"> An exception occurred during execution of the delegate. </exception>
-        /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled. </exception>
-        Task<object> SendAsync (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
+        /// <exception cref="InvalidOperationException"> The dispatcher is being shut down. </exception>
+        IThreadDispatcherTimer PostDelayed (ThreadDispatcherTimerMode mode, int milliseconds, ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
     }
 }

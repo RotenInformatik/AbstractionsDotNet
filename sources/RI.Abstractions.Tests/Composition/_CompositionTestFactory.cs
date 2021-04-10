@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +10,7 @@ using RI.Abstractions.Composition;
 
 namespace RI.Abstractions.Tests.Composition
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static class _CompositionTestFactory
     {
         public static IEnumerable<object[]> GetContainers() =>
@@ -50,14 +52,14 @@ namespace RI.Abstractions.Tests.Composition
                 }
 
                 combined[combinedIndex] = _CompositionTestFactory.GetValidRegistrations();
-                combinedIndex++;
-
+                
                 data.Add(combined);
             }
 
             return data;
         }
 
+        [SuppressMessage("ReSharper", "RedundantArgumentDefaultValue")]
         public static CompositionRegistration[] GetValidRegistrations () =>
             new[]
             {
