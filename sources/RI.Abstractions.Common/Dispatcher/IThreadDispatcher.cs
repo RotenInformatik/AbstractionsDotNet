@@ -218,28 +218,13 @@ namespace RI.Abstractions.Dispatcher
         Task ShutdownAsync(bool finishPendingDelegates);
 
         /// <summary>
-        ///     Waits until all queued operations have been processed.
-        /// </summary>
-        /// <exception cref="InvalidOperationException"> The dispatcher is not running. </exception>
-        void DoProcessing ();
-
-        /// <summary>
         ///     Waits until all queued operations of a specified priority have been processed.
         /// </summary>
         /// <param name="priority"> The priority. </param>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running. </exception>
         void DoProcessing (int priority);
-
-        /// <summary>
-        ///     Waits until all queued operations have been processed.
-        /// </summary>
-        /// <returns>
-        ///     The task which can be used to await the completion of the processing.
-        /// </returns>
-        /// <exception cref="InvalidOperationException"> The dispatcher is not running. </exception>
-        Task DoProcessingAsync ();
-
+        
         /// <summary>
         ///     Waits until all queued operations of a specified priority have been processed.
         /// </summary>
@@ -330,8 +315,9 @@ namespace RI.Abstractions.Dispatcher
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
+        /// <exception cref="TimeoutException">The execution of the delegate was cancelled by timeout or a cancellation token.</exception>
         /// <exception cref="ThreadDispatcherException"> An exception occurred during execution of the delegate. </exception>
-        /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled. </exception>
+        /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled or aborted. </exception>
         object Send (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
 
         /// <summary>
@@ -359,8 +345,9 @@ namespace RI.Abstractions.Dispatcher
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
+        /// <exception cref="TimeoutException">The execution of the delegate was cancelled by timeout or a cancellation token.</exception>
         /// <exception cref="ThreadDispatcherException"> An exception occurred during execution of the delegate. </exception>
-        /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled. </exception>
+        /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled or aborted. </exception>
         Task<object> SendAsync (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
 
         /// <summary>
@@ -386,10 +373,14 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         Must be callable from the dispatcher thread.
         ///     </note>
+        ///     <note type="implement">
+        ///         The returned timer must not be started.
+        /// <see cref="IThreadDispatcherTimer.Start"/> has to be called in order to start the timer.
+        ///     </note>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="milliseconds" /> is zero or negative or <paramref name="priority" />  is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
-        /// <exception cref="InvalidOperationException"> The dispatcher is being shut down. </exception>
+        /// <exception cref="InvalidOperationException"> The dispatcher is not running or being shut down. </exception>
         IThreadDispatcherTimer PostDelayed (ThreadDispatcherTimerMode mode, int milliseconds, ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
     }
 }

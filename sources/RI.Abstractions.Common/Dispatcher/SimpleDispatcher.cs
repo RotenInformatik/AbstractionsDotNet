@@ -100,7 +100,7 @@ namespace RI.Abstractions.Dispatcher
             /*R -> (D) + (R)*/ this.KeepAlives = null;
             /*R -> R*/ this.WatchdogLoop = null;
 
-            /*C -> (CH & D) + (CH & R)*/ this.PreRunQueue = new PriorityQueue<ThreadDispatcherOperation>();
+            /*C -> (CH & D) + (CH & R)*/ this.PreRunQueue = new PriorityQueue<SimpleDispatcherOperation>();
 
             /*C -> (F) + (R) */ this.FinishedEvent = new ManualResetEvent(false);
             /*C -> (F) + (R) */ this.FinishedSignals = new List<TaskCompletionSource<object>>();
@@ -161,13 +161,17 @@ namespace RI.Abstractions.Dispatcher
 
         private ManualResetEvent Posted { get; set; }
 
-        private PriorityQueue<ThreadDispatcherOperation> PreRunQueue { get; set; }
+        private PriorityQueue<IThreadDispatcherOperation> PreRunQueue { get; set; }
 
-        private PriorityQueue<ThreadDispatcherOperation> Queue { get; set; }
+        private PriorityQueue<IThreadDispatcherOperation> Queue { get; set; }
 
         private Thread Thread { get; set; }
 
         private WatchdogThread WatchdogLoop { get; set; }
+
+        private ThreadDispatcherTaskScheduler TaskScheduler { get; set; }
+
+        private ThreadDispatcherSynchronizationContext SynchronizationContext { get; set; }
 
         #endregion
 
@@ -183,7 +187,7 @@ namespace RI.Abstractions.Dispatcher
         /// <exception cref="ThreadDispatcherException"> The execution of a delegate has thrown an exception and <see cref="CatchExceptions" /> is false. </exception>
         public void Run ()
         {
-            SynchronizationContext synchronizationContextBackup = SynchronizationContext.Current;
+            SynchronizationContext synchronizationContextBackup = System.Threading.SynchronizationContext.Current;
 
             try
             {
@@ -191,27 +195,27 @@ namespace RI.Abstractions.Dispatcher
                 {
                     this.VerifyNotRunning();
 
-                    synchronizationContextBackup = SynchronizationContext.Current;
+                    synchronizationContextBackup = System.Threading.SynchronizationContext.Current;
 
                     this.Thread = Thread.CurrentThread;
-                    this.Queue = new PriorityQueue<ThreadDispatcherOperation>();
+                    this.Queue = new PriorityQueue<IThreadDispatcherOperation>();
                     this.Posted = new ManualResetEvent(this.PreRunQueue.Count > 0);
                     this.IdleSignals = new List<TaskCompletionSource<object>>();
                     this.CurrentPriority = new Stack<int>();
                     this.CurrentOptions = new Stack<ThreadDispatcherOptions>();
-                    this.CurrentOperation = new Stack<ThreadDispatcherOperation>();
+                    this.CurrentOperation = new Stack<IThreadDispatcherOperation>();
                     this.KeepAlives = new HashSet<object>();
 
                     this.ShutdownMode = ThreadDispatcherShutdownMode.None;
                     this.PreRunQueue.MoveTo(this.Queue);
 
-                    SynchronizationContext.SetSynchronizationContext(this.Context);
+                    System.Threading.SynchronizationContext.SetSynchronizationContext(this.SynchronizationContext);
 
                     this.FinishedEvent.Reset();
                     this.FinishedSignals.Clear();
 
                     this.WatchdogLoop = new WatchdogThread(this);
-                    this.WatchdogLoop.Timeout = ThreadDispatcher.WatchdogThreadTimeoutMilliseconds;
+                    this.WatchdogLoop.Timeout = SimpleDispatcher.WatchdogThreadTimeoutMilliseconds;
                     this.WatchdogLoop.Start();
                 }
 
@@ -228,7 +232,7 @@ namespace RI.Abstractions.Dispatcher
 
                     this.IdleSignals?.ForEach(x => x.TrySetResult(null));
 
-                    SynchronizationContext.SetSynchronizationContext(synchronizationContextBackup);
+                    System.Threading.SynchronizationContext.SetSynchronizationContext(this.SynchronizationContext);
 
                     this.PreRunQueue?.Clear();
                     this.ShutdownMode = ThreadDispatcherShutdownMode.None;
@@ -288,7 +292,7 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        private void ExecuteFrame (ThreadDispatcherOperation returnTrigger)
+        private void ExecuteFrame (IThreadDispatcherOperation returnTrigger)
         {
             while (true)
             {
@@ -301,13 +305,13 @@ namespace RI.Abstractions.Dispatcher
 
                 while (true)
                 {
-                    ThreadDispatcherOperation operation = null;
+                    SimpleDispatcherOperation operation = null;
 
                     lock (this.SyncRoot)
                     {
                         if (this.ShutdownMode == ThreadDispatcherShutdownMode.DiscardPending)
                         {
-                            foreach (ThreadDispatcherOperation operationToCancel in this.Queue)
+                            foreach (IThreadDispatcherOperation operationToCancel in this.Queue)
                             {
                                 operationToCancel.Cancel();
                             }
@@ -343,14 +347,22 @@ namespace RI.Abstractions.Dispatcher
 
                     //TODO: We should measure the runtime here
                     //TODO: Also measure active time
-                    this.WatchdogLoop.StartSurveillance(operation);
+
+                    lock (this.SyncRoot)
+                    {
+                        this.WatchdogLoop.StartSurveillance(operation);
+                    }
+
                     try
                     {
                         operation.Execute();
                     }
                     finally
                     {
-                        this.WatchdogLoop.StopSurveillance(operation);
+                        lock (this.SyncRoot)
+                        {
+                            this.WatchdogLoop.StopSurveillance(operation);
+                        }
                     }
 
                     bool catchExceptions;
@@ -371,6 +383,7 @@ namespace RI.Abstractions.Dispatcher
 
                         if (!catchExceptions)
                         {
+                            //TODO: Add operation to event args
                             throw new ThreadDispatcherException(operation.Exception);
                         }
                     }
@@ -661,46 +674,6 @@ namespace RI.Abstractions.Dispatcher
         }
 
         /// <inheritdoc />
-        /// TODO: Move to extensions and remove from interface
-        public void DoProcessing ()
-        {
-            bool isInThread;
-            ThreadDispatcherOperation operation = null;
-
-            while (true)
-            {
-                lock (this.SyncRoot)
-                {
-                    if (operation == null)
-                    {
-                        this.VerifyRunning();
-                    }
-                    else if (!this.IsRunning)
-                    {
-                        return;
-                    }
-
-                    if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
-                    {
-                        return;
-                    }
-
-                    isInThread = this.IsInThread();
-                    operation = this.Post(0, ThreadDispatcherOptions.None, new Action(() => { }));
-                }
-
-                if (isInThread)
-                {
-                    this.ExecuteFrame(operation);
-                }
-                else
-                {
-                    operation.Wait();
-                }
-            }
-        }
-
-        /// <inheritdoc />
         public void DoProcessing (int priority)
         {
             if (priority < 0)
@@ -709,7 +682,7 @@ namespace RI.Abstractions.Dispatcher
             }
 
             bool isInThread;
-            ThreadDispatcherOperation operation = null;
+            IThreadDispatcherOperation operation = null;
 
             while (true)
             {
@@ -735,7 +708,7 @@ namespace RI.Abstractions.Dispatcher
                     }
 
                     isInThread = this.IsInThread();
-                    operation = this.Post(priority, ThreadDispatcherOptions.None, new Action(() => { }));
+                    operation = this.Post(null, priority, ThreadDispatcherOptions.None, new Action(() => { }));
                 }
 
                 if (isInThread)
@@ -750,13 +723,6 @@ namespace RI.Abstractions.Dispatcher
         }
 
         /// <inheritdoc />
-        /// TODO: Move to extensions and remove from interface
-        public Task DoProcessingAsync ()
-        {
-            return this.DoProcessingAsync(0);
-        }
-
-        /// <inheritdoc />
         public Task DoProcessingAsync (int priority)
         {
             if (priority < 0)
@@ -764,39 +730,42 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentOutOfRangeException(nameof(priority));
             }
 
-            this.VerifyRunning();
-
-            Task waitTask = this.SendAsync(priority, ThreadDispatcherOptions.None, async () =>
+            lock (this.SyncRoot)
             {
-                while (true)
+                this.VerifyRunning();
+
+                Task waitTask = this.SendAsync(null, priority, ThreadDispatcherOptions.None, new Func<Task>(async () =>
                 {
-                    ThreadDispatcherOperation operation;
-
-                    lock (this.SyncRoot)
+                    while (true)
                     {
-                        if (!this.IsRunning)
+                        IThreadDispatcherOperation operation;
+
+                        lock (this.SyncRoot)
                         {
-                            return;
+                            if (!this.IsRunning)
+                            {
+                                return;
+                            }
+
+                            if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
+                            {
+                                return;
+                            }
+
+                            if (this.Queue.HighestPriority < priority)
+                            {
+                                return;
+                            }
+
+                            operation = this.Post(priority, ThreadDispatcherOptions.None, new Action(() => { }));
                         }
 
-                        if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
-                        {
-                            return;
-                        }
-
-                        if (this.Queue.HighestPriority < priority)
-                        {
-                            return;
-                        }
-
-                        operation = this.Post(priority, ThreadDispatcherOptions.None, new Action(() => { }));
+                        await operation.WaitAsync();
                     }
+                }));
 
-                    await operation.WaitAsync();
-                }
-            });
-
-            return waitTask;
+                return waitTask;
+            }
         }
 
         /// <inheritdoc />
@@ -892,7 +861,7 @@ namespace RI.Abstractions.Dispatcher
         }
 
         /// <inheritdoc />
-        public ThreadDispatcherOperation Post (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters)
+        public IThreadDispatcherOperation Post (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters)
         {
             if (priority < -1)
             {
@@ -904,8 +873,6 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            parameters = parameters ?? new object[0];
-
             lock (this.SyncRoot)
             {
                 //TODO: We should allow it, with a separate shutdown mode
@@ -913,8 +880,9 @@ namespace RI.Abstractions.Dispatcher
 
                 priority = (priority == -1) ? this.DefaultPriority : priority;
                 options = (options == ThreadDispatcherOptions.Default) ? this.DefaultOptions : options;
+                parameters ??= new object[0];
 
-                ThreadDispatcherOperation operation = new ThreadDispatcherOperation(this, executionContext, priority, options, action, parameters);
+                SimpleDispatcherOperation operation = new SimpleDispatcherOperation(this, executionContext, priority, options, action, parameters);
 
                 if (this.IsRunning)
                 {
@@ -961,27 +929,36 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            parameters = parameters ?? new object[0];
-
+            bool result;
             bool isInThread;
-            ThreadDispatcherOperation operation;
+            IThreadDispatcherOperation operation;
 
             lock (this.SyncRoot)
             {
+                //TODO: We should allow it, with a separate shutdown mode
                 this.VerifyRunning();
                 this.VerifyNotShuttingDown();
 
+                parameters ??= new object[0];
                 isInThread = this.IsInThread();
-                operation = this.Post(priority, options, action, parameters);
+                operation = this.Post(executionContext, priority, options, action, parameters);
             }
 
             if (isInThread)
             {
+                //TODO: Use passed cancellation token and timeout (add to interface)
                 this.ExecuteFrame(operation);
+                result = true;
             }
             else
             {
-                operation.Wait();
+                //TODO: Use passed cancellation token and timeout (add to interface)
+                result = operation.Wait(Timeout.Infinite, CancellationToken.None);
+            }
+
+            if ((!result) && ((operation.State != ThreadDispatcherOperationState.Canceled) && (operation.State != ThreadDispatcherOperationState.Aborted)))
+            {
+                throw new TimeoutException();
             }
 
             if (operation.Exception != null)
@@ -989,7 +966,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ThreadDispatcherException(operation.Exception);
             }
 
-            if (operation.State == ThreadDispatcherOperationState.Canceled)
+            if ((operation.State == ThreadDispatcherOperationState.Canceled) || (operation.State == ThreadDispatcherOperationState.Aborted))
             {
                 throw new OperationCanceledException();
             }
@@ -1010,27 +987,33 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            parameters = parameters ?? new object[0];
-
-            ThreadDispatcherOperation operation;
+            IThreadDispatcherOperation operation;
 
             lock (this.SyncRoot)
             {
+                //TODO: We should allow it, with a separate shutdown mode
                 this.VerifyRunning();
                 this.VerifyNotShuttingDown();
 
-                operation = this.Post(priority, options, action, parameters);
+                parameters ??= new object[0];
+                operation = this.Post(executionContext, priority, options, action, parameters);
             }
 
+            //TODO: Use passed cancellation token and timeout (add to interface)
             Task<bool> waitTask = operation.WaitAsync(Timeout.Infinite, CancellationToken.None);
-            Task<object> resultTask = waitTask.ContinueWith(_ =>
+            Task<object> resultTask = waitTask.ContinueWith(x =>
             {
+                if((!x.Result) && ((operation.State != ThreadDispatcherOperationState.Canceled) && (operation.State != ThreadDispatcherOperationState.Aborted)))
+                {
+                    throw new TimeoutException();
+                }
+
                 if (operation.Exception != null)
                 {
                     throw new ThreadDispatcherException(operation.Exception);
                 }
 
-                if (operation.State == ThreadDispatcherOperationState.Canceled)
+                if ((operation.State == ThreadDispatcherOperationState.Canceled) || (operation.State == ThreadDispatcherOperationState.Aborted))
                 {
                     throw new OperationCanceledException();
                 }
@@ -1039,6 +1022,39 @@ namespace RI.Abstractions.Dispatcher
             }, CancellationToken.None, TaskContinuationOptions.DenyChildAttach | TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.RunContinuationsAsynchronously, this.Scheduler);
 
             return resultTask;
+        }
+
+        /// <inheritdoc />
+        public IThreadDispatcherTimer PostDelayed (ThreadDispatcherTimerMode mode, int milliseconds, ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters)
+        {
+            if (milliseconds < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(milliseconds));
+            }
+
+            if (priority < -1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(priority));
+            }
+
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            lock (this.SyncRoot)
+            {
+                this.VerifyRunning();
+                this.VerifyNotShuttingDown();
+
+                priority = (priority == -1) ? this.DefaultPriority : priority;
+                options = (options == ThreadDispatcherOptions.Default) ? this.DefaultOptions : options;
+                parameters ??= new object[0];
+
+                SimpleDispatcherTimer timer = new SimpleDispatcherTimer(this, mode, milliseconds, executionContext, priority, options, action, parameters);
+
+                return timer;
+            }
         }
 
         /// <inheritdoc />
@@ -1092,7 +1108,7 @@ namespace RI.Abstractions.Dispatcher
         {
             #region Instance Constructor/Destructor
 
-            public WatchdogThread (ThreadDispatcher dispatcher)
+            public WatchdogThread (SimpleDispatcher dispatcher)
             {
                 if (dispatcher == null)
                 {
@@ -1122,7 +1138,7 @@ namespace RI.Abstractions.Dispatcher
 
             #region Instance Methods
 
-            public void StartSurveillance (ThreadDispatcherOperation operation)
+            public void StartSurveillance (SimpleDispatcherOperation operation)
             {
                 if (operation == null)
                 {
@@ -1135,7 +1151,7 @@ namespace RI.Abstractions.Dispatcher
                 }
             }
 
-            public void StopSurveillance (ThreadDispatcherOperation operation)
+            public void StopSurveillance (SimpleDispatcherOperation operation)
             {
                 if (operation == null)
                 {
@@ -1180,7 +1196,7 @@ namespace RI.Abstractions.Dispatcher
 
                 while (!this.StopRequested)
                 {
-                    Thread.Sleep(ThreadDispatcher.WatchdogCheckInterval);
+                    Thread.Sleep(SimpleDispatcher.WatchdogCheckInterval);
 
                     WatchdogThreadItem item;
                     TimeSpan timeout;
@@ -1200,7 +1216,7 @@ namespace RI.Abstractions.Dispatcher
                     TimeSpan runTimeThisLoop = now.Subtract(item.LastCheck);
                     item.LastCheck = now;
 
-                    ThreadDispatcherOperation operation = item.Operation;
+                    SimpleDispatcherOperation operation = item.Operation;
                     bool hasTimeout = false;
 
                     lock (operation.SyncRoot)
@@ -1251,7 +1267,7 @@ namespace RI.Abstractions.Dispatcher
         {
             #region Instance Constructor/Destructor
 
-            public WatchdogThreadItem (ThreadDispatcherOperation operation)
+            public WatchdogThreadItem (SimpleDispatcherOperation operation)
             {
                 if (operation == null)
                 {
@@ -1272,7 +1288,7 @@ namespace RI.Abstractions.Dispatcher
 
             public DateTime LastCheck { get; set; }
 
-            public ThreadDispatcherOperation Operation { get; }
+            public SimpleDispatcherOperation Operation { get; }
 
             #endregion
         }
