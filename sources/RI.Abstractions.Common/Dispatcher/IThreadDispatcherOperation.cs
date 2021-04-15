@@ -81,6 +81,9 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         A thread dispatcher operation can only be canceled if its is still pending (<see cref="State" /> is <see cref="ThreadDispatcherOperationState.Waiting" />).
         ///     </note>
+        ///     <note type="implement">
+        ///         This method must be callable from the dispatcher thread.
+        ///     </note>
         /// </remarks>
         bool Cancel ();
 
@@ -92,8 +95,14 @@ namespace RI.Abstractions.Dispatcher
         /// <returns>
         ///     true if the thread dispatcher operation finished processing within the specified timeout, false otherwise or if the wait was cancelled.
         /// </returns>
+        /// <remarks>
+        ///     <note type="implement">
+        ///         This method must not be callable from the dispatcher thread.
+        ///     </note>
+        /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="timeout" /> is negative. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"><see cref="Wait"/> was called from the dispatcher thread. </exception>
         bool Wait (TimeSpan timeout, CancellationToken cancellationToken);
 
         /// <summary>
@@ -104,8 +113,14 @@ namespace RI.Abstractions.Dispatcher
         /// <returns>
         ///     true if the thread dispatcher operation finished processing within the specified timeout, false otherwise or if the wait was cancelled.
         /// </returns>
+        /// <remarks>
+        ///     <note type="implement">
+        ///         This method must be callable from the dispatcher thread.
+        ///     </note>
+        /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="timeout" /> is negative. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
+        /// <exception cref="InvalidOperationException"><see cref="Wait"/> was called from the dispatcher thread. </exception>
         Task<bool> WaitAsync (TimeSpan timeout, CancellationToken cancellationToken);
     }
 }

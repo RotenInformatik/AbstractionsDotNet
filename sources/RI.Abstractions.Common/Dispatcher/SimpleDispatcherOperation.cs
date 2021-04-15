@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,16 +10,7 @@ using System.Threading.Tasks;
 
 namespace RI.Abstractions.Dispatcher
 {
-    /// <summary>
-    ///     Used to track <see cref="IThreadDispatcher" /> operations or the processing of enqueued delegates respectively.
-    /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///         See <see cref="IThreadDispatcher" /> for more information.
-    ///     </para>
-    /// </remarks>
-    /// <threadsafety static="true" instance="true" />
-    public sealed class SimpleDispatcherOperation : IThreadDispatcherOperation
+    internal sealed class SimpleDispatcherOperation : IThreadDispatcherOperation
     {
         #region Instance Constructor/Destructor
 
@@ -28,6 +21,11 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(dispatcher));
             }
 
+            if (priority < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(priority));
+            }
+
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
@@ -35,7 +33,7 @@ namespace RI.Abstractions.Dispatcher
 
             this.SyncRoot = new object();
 
-            this.ExecutionContext = executionContext?.Clone();
+            this.ExecutionContext = executionContext?.Clone() ?? ThreadDispatcherExecutionContext.Capture(this.Options);
 
             this.Dispatcher = dispatcher;
             this.Priority = priority;
@@ -50,10 +48,9 @@ namespace RI.Abstractions.Dispatcher
             this.Result = null;
             this.Exception = null;
 
-            this.OperationDone = new ManualResetEvent(false);
+            this.OperationDoneEvent = new ManualResetEvent(false);
             this.OperationDoneTask = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
 
-            //TODO: Will this work if part of the pre-run queue?
             this.Dispatcher.AddKeepAlive(this);
 
             this.RunTimeMillisecondsInternal = 0.0;
@@ -61,21 +58,38 @@ namespace RI.Abstractions.Dispatcher
             this.WatchdogEventsInternal = 0;
         }
 
-        /// <summary>
-        ///     Garbage collects this instance of <see cref="ThreadDispatcherOperation" />.
-        /// </summary>
         ~SimpleDispatcherOperation()
         {
             this.Dispatcher?.RemoveKeepAlive(this);
 
-            this.OperationDone?.Close();
-            this.OperationDone = null;
+            this.OperationDoneEvent?.Close();
 
             this.ExecutionContext?.Dispose();
-            this.ExecutionContext = null;
         }
 
         #endregion
+
+
+
+        private static object GlobalSyncRoot { get; } = new object();
+
+        private static Dictionary<Type, MethodInfo> ResultGetterMethods { get; } = new Dictionary<Type, MethodInfo>();
+
+        private static MethodInfo GetResultGetterMethod (Type type)
+        {
+            lock (SimpleDispatcherOperation.GlobalSyncRoot)
+            {
+                if (SimpleDispatcherOperation.ResultGetterMethods.ContainsKey(type))
+                {
+                    return SimpleDispatcherOperation.ResultGetterMethods[type];
+                }
+
+                PropertyInfo resultProperty = type.GetProperty(nameof(Task<object>.Result), BindingFlags.Instance | BindingFlags.Public);
+                MethodInfo resultGetter = resultProperty?.GetGetMethod(false);
+                SimpleDispatcherOperation.ResultGetterMethods.Add(type, resultGetter);
+                return resultGetter;
+            }
+        }
 
 
 
@@ -93,20 +107,8 @@ namespace RI.Abstractions.Dispatcher
 
         #region Instance Properties/Indexer
 
-        /// <summary>
-        ///     Gets the delegate executed by this operation.
-        /// </summary>
-        /// <value>
-        ///     The delegate executed by this operation.
-        /// </value>
         public Delegate Action { get; }
 
-        /// <summary>
-        ///     Gets the exception which occurred during execution of the delegate associated with this dispatcher operation.
-        /// </summary>
-        /// <value>
-        ///     The exception which occurred during execution or null if no exception was thrown or the operation was not yet processed.
-        /// </value>
         public Exception Exception
         {
             get
@@ -125,12 +127,6 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets whether the dispatcher operation has finished processing.
-        /// </summary>
-        /// <value>
-        ///     true if <see cref="State" /> is anything else than <see cref="ThreadDispatcherOperationState.Waiting" /> or <see cref="ThreadDispatcherOperationState.Executing" />, false if <see cref="State" /> is <see cref="ThreadDispatcherOperationState.Waiting" /> or <see cref="ThreadDispatcherOperationState.Executing" />.
-        /// </value>
         public bool IsDone
         {
             get
@@ -142,12 +138,6 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets the value returned by the delegate associated with this dispatcher operation.
-        /// </summary>
-        /// <value>
-        ///     The value returned by the delegate associated with this dispatcher operation or null if the delegate has no return value or the operation was not yet processed.
-        /// </value>
         public object Result
         {
             get
@@ -166,17 +156,6 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets the total time in milliseconds this dispatcher operation was executing within the dispatcher.
-        /// </summary>
-        /// <value>
-        ///     The total time in milliseconds this dispatcher operation was executing within the dispatcher.
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///         The executing time does only include the time the operation was using dispatcher resources, but does not include time which was spent in another thread (e.g. when the operation is a task which uses other threads).
-        ///     </para>
-        /// </remarks>
         public int RunTimeMilliseconds
         {
             get
@@ -188,12 +167,6 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets the current state of the dispatcher operation.
-        /// </summary>
-        /// <value>
-        ///     The current state of the dispatcher operation.
-        /// </value>
         public ThreadDispatcherOperationState State
         {
             get
@@ -212,17 +185,6 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets the number of watchdog events for this operation.
-        /// </summary>
-        /// <value>
-        ///     The number of watchdog events for this operation.
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///         When a watchdog event occurs, this counter is already incremented, for example the first watchdog events has thsi property set to 1.
-        ///     </para>
-        /// </remarks>
         public int WatchdogEvents
         {
             get
@@ -234,17 +196,6 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets the time in milliseconds this dispatcher operation was executing within the dispatcher since its last watchdog event.
-        /// </summary>
-        /// <value>
-        ///     The time in milliseconds this dispatcher operation was executing within the dispatcher since its last watchdog event.
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///         The executing time does only include the time the operation was using dispatcher resources, but does not include time which was spent in another thread (e.g. when the operation is a task which uses other threads).
-        ///     </para>
-        /// </remarks>
         public int WatchdogTimeMilliseconds
         {
             get
@@ -256,17 +207,32 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        internal SimpleDispatcher Dispatcher { get; }
-        internal ThreadDispatcherExecutionContext ExecutionContext { get; set; }
-        internal ThreadDispatcherOptions Options { get; }
-        internal object[] Parameters { get; }
-        internal int Priority { get; }
+        public SimpleDispatcher Dispatcher { get; }
+
+        IThreadDispatcher IThreadDispatcherRunnable.Dispatcher => this.Dispatcher;
+
+        public ThreadDispatcherExecutionContext ExecutionContext { get; }
+
+        public ThreadDispatcherOptions Options { get; }
+
+        private object[] Parameters { get; }
+
+        public object[] GetParameters () => this.Parameters.ToArray();
+
+        public int Priority { get; }
+
         internal double RunTimeMillisecondsInternal { get; set; }
+
         internal int WatchdogEventsInternal { get; set; }
+
         internal double WatchdogTimeMillisecondsInternal { get; set; }
-        private ManualResetEvent OperationDone { get; set; }
-        private TaskCompletionSource<object> OperationDoneTask { get; set; }
+
+        private ManualResetEvent OperationDoneEvent { get;}
+
+        private TaskCompletionSource<object> OperationDoneTask { get; }
+
         private int Stage { get; set; }
+
         private Task Task { get; set; }
 
         #endregion
@@ -276,100 +242,16 @@ namespace RI.Abstractions.Dispatcher
 
         #region Instance Methods
 
-        /// <summary>
-        ///     Cancels the processing of the dispatcher operation.
-        /// </summary>
-        /// <returns>
-        ///     true if the operation could be canceled, false otherwise.
-        /// </returns>
-        /// <remarks>
-        ///     <para>
-        ///         A dispatcher operation can only be canceled if its is still pending (<see cref="State" /> is <see cref="ThreadDispatcherOperationState.Waiting" />).
-        ///     </para>
-        /// </remarks>
         public bool Cancel ()
         {
             return this.CancelInternal(false);
         }
 
-        /// <summary>
-        ///     Waits indefinitely for the dispatcher operation to finish processing.
-        /// </summary>
-        public void Wait ()
-        {
-            this.Wait(Timeout.Infinite, CancellationToken.None);
-        }
-
-        /// <summary>
-        ///     Waits indefinitely for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="cancellationToken"> The cancellation token which can be used to cancel the wait. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing, false if the wait was cancelled.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
-        public bool Wait (CancellationToken cancellationToken)
-        {
-            return this.Wait(Timeout.Infinite, cancellationToken);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="timeout"> The maximum time to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="timeout" /> is negative. </exception>
-        public bool Wait (TimeSpan timeout)
-        {
-            return this.Wait((int)timeout.TotalMilliseconds, CancellationToken.None);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="timeout"> The maximum time to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <param name="cancellationToken"> The cancellation token which can be used to cancel the wait. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise or if the wait was cancelled.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="timeout" /> is negative. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
         public bool Wait (TimeSpan timeout, CancellationToken cancellationToken)
         {
-            return this.Wait((int)timeout.TotalMilliseconds, cancellationToken);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="milliseconds"> The maximum time in milliseconds to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="milliseconds" /> is negative. </exception>
-        public bool Wait (int milliseconds)
-        {
-            return this.Wait(milliseconds, CancellationToken.None);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="milliseconds"> The maximum time in milliseconds to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <param name="cancellationToken"> The cancellation token which can be used to cancel the wait. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise or if the wait was cancelled.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="milliseconds" /> is negative. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
-        /// TODO: This is not safe to use on the dispatcher thread...it blocks the dispatcher indefinitely...!
-        public bool Wait (int milliseconds, CancellationToken cancellationToken)
-        {
-            if ((milliseconds < 0) && (milliseconds != Timeout.Infinite))
+            if ((timeout.Ticks < 0) && (timeout != Timeout.InfiniteTimeSpan))
             {
-                throw new ArgumentOutOfRangeException(nameof(milliseconds));
+                throw new ArgumentOutOfRangeException(nameof(timeout));
             }
 
             if (cancellationToken == null)
@@ -377,97 +259,25 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(cancellationToken));
             }
 
-            //TODO: We should not allow this from the dispatcher thread
-
-            if (this.IsDone)
+            lock (this.SyncRoot)
             {
-                return true;
+                this.Dispatcher.VerifyNotFromDispatcher(nameof(this.Wait));
+
+                if (this.IsDone)
+                {
+                    return true;
+                }
             }
 
-            bool result = WaitHandle.WaitAny(new[] {cancellationToken.WaitHandle, this.OperationDone}, milliseconds) == 1;
+            bool result = WaitHandle.WaitAny(new[] {cancellationToken.WaitHandle, this.OperationDoneEvent}, timeout) == 1;
             return result;
         }
 
-        /// <summary>
-        ///     Waits indefinitely for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <returns>
-        ///     The task which can be used to await the finish of the processing.
-        /// </returns>
-        public Task WaitAsync ()
-        {
-            return this.WaitAsync(Timeout.Infinite, CancellationToken.None);
-        }
-
-        /// <summary>
-        ///     Waits indefinitely for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="cancellationToken"> The cancellation token which can be used to cancel the wait. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing, false if the wait was cancelled.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
-        public Task<bool> WaitAsync (CancellationToken cancellationToken)
-        {
-            return this.WaitAsync(Timeout.Infinite, cancellationToken);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="timeout"> The maximum time to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="timeout" /> is negative. </exception>
-        public Task<bool> WaitAsync (TimeSpan timeout)
-        {
-            return this.WaitAsync((int)timeout.TotalMilliseconds, CancellationToken.None);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="timeout"> The maximum time to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <param name="cancellationToken"> The cancellation token which can be used to cancel the wait. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise or if the wait was cancelled.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="timeout" /> is negative. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
         public Task<bool> WaitAsync (TimeSpan timeout, CancellationToken cancellationToken)
         {
-            return this.WaitAsync((int)timeout.TotalMilliseconds, cancellationToken);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="milliseconds"> The maximum time in milliseconds to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="milliseconds" /> is negative. </exception>
-        public Task<bool> WaitAsync (int milliseconds)
-        {
-            return this.WaitAsync(milliseconds, CancellationToken.None);
-        }
-
-        /// <summary>
-        ///     Waits a specified amount of time for the dispatcher operation to finish processing.
-        /// </summary>
-        /// <param name="milliseconds"> The maximum time in milliseconds to wait for the dispatcher operation to finish processing before the method returns. </param>
-        /// <param name="cancellationToken"> The cancellation token which can be used to cancel the wait. </param>
-        /// <returns>
-        ///     true if the dispatcher operation finished processing within the specified timeout, false otherwise or if the wait was cancelled.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="milliseconds" /> is negative. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
-        public Task<bool> WaitAsync (int milliseconds, CancellationToken cancellationToken)
-        {
-            if ((milliseconds < 0) && (milliseconds != Timeout.Infinite))
+            if ((timeout.Ticks < 0) && (timeout != Timeout.InfiniteTimeSpan))
             {
-                throw new ArgumentOutOfRangeException(nameof(milliseconds));
+                throw new ArgumentOutOfRangeException(nameof(timeout));
             }
 
             if (cancellationToken == null)
@@ -475,16 +285,23 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(cancellationToken));
             }
 
-            if (this.IsDone)
+
+
+            lock (this.SyncRoot)
             {
-                return Task.FromResult(true);
+                this.Dispatcher.VerifyNotFromDispatcher(nameof(this.WaitAsync));
+
+                if (this.IsDone)
+                {
+                    return Task.FromResult(true);
+                }
             }
 
             Task operationTask = this.OperationDoneTask.Task;
-            Task timeoutTask = Task.Delay(milliseconds, cancellationToken);
+            Task timeoutTask = Task.Delay(timeout, cancellationToken);
 
             Task<Task> completed = Task.WhenAny(operationTask, timeoutTask);
-            Task<bool> final = completed.ContinueWith(_ => object.ReferenceEquals(completed, operationTask), CancellationToken.None, TaskContinuationOptions.DenyChildAttach | TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.RunContinuationsAsynchronously, this.Dispatcher.Scheduler);
+            Task<bool> final = completed.ContinueWith(_ => object.ReferenceEquals(completed, operationTask), CancellationToken.None, TaskContinuationOptions.DenyChildAttach | TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.RunContinuationsAsynchronously, this.Dispatcher.TaskScheduler);
             return final;
         }
 
@@ -538,7 +355,7 @@ namespace RI.Abstractions.Dispatcher
 
                     this.Dispatcher.RemoveKeepAlive(this);
 
-                    this.OperationDone.Set();
+                    this.OperationDoneEvent.Set();
                     this.OperationDoneTask.TrySetCanceled();
                 }
                 else if (exception != null)
@@ -549,7 +366,7 @@ namespace RI.Abstractions.Dispatcher
 
                     this.Dispatcher.RemoveKeepAlive(this);
 
-                    this.OperationDone.Set();
+                    this.OperationDoneEvent.Set();
                     this.OperationDoneTask.TrySetException(this.Exception);
                 }
                 else if (finished)
@@ -560,7 +377,7 @@ namespace RI.Abstractions.Dispatcher
 
                     this.Dispatcher.RemoveKeepAlive(this);
 
-                    this.OperationDone.Set();
+                    this.OperationDoneEvent.Set();
                     this.OperationDoneTask.TrySetResult(this.Result);
                 }
             }
@@ -591,7 +408,7 @@ namespace RI.Abstractions.Dispatcher
 
                 this.Dispatcher.RemoveKeepAlive(this);
 
-                this.OperationDone.Set();
+                this.OperationDoneEvent.Set();
                 this.OperationDoneTask.TrySetCanceled();
 
                 return true;
@@ -606,10 +423,8 @@ namespace RI.Abstractions.Dispatcher
 
             if (this.Task.Status == TaskStatus.RanToCompletion)
             {
-                //TODO: Cache this to improve performance
                 Type taskType = this.Task.GetType();
-                PropertyInfo resultProperty = taskType.GetProperty(nameof(Task<object>.Result), BindingFlags.Instance | BindingFlags.Public);
-                MethodInfo resultGetter = resultProperty?.GetGetMethod(false);
+                MethodInfo resultGetter = GetResultGetterMethod(taskType);
                 result = resultGetter?.Invoke(this.Task, null);
             }
         }
@@ -634,7 +449,7 @@ namespace RI.Abstractions.Dispatcher
                     {
                         this.Stage = 1;
 
-                        this.Task.ContinueWith(_ => { this.Dispatcher.EnqueueOperation(this); }, CancellationToken.None, TaskContinuationOptions.DenyChildAttach | TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.RunContinuationsAsynchronously, this.Dispatcher.Scheduler);
+                        this.Task.ContinueWith(_ => { this.Dispatcher.EnqueueOperation(this); }, CancellationToken.None, TaskContinuationOptions.DenyChildAttach | TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.RunContinuationsAsynchronously, this.Dispatcher.TaskScheduler);
 
                         result = null;
                         exception = null;

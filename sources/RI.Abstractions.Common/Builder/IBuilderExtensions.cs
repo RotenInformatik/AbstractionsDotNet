@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using RI.Abstractions.Composition;
+using RI.Abstractions.Dispatcher;
 using RI.Abstractions.Logging;
 
 
@@ -1127,6 +1128,32 @@ namespace RI.Abstractions.Builder
         }
 
         /// <summary>
+        ///     Adds registrations for using a simple callback logger.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <param name="logger"> The callback logger. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="logger" /> is null. </exception>
+        public static T UseCallbackLogger<T>(this T builder, CallbackLogger logger)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (logger == null)
+            {
+                throw new ArgumentNullException(nameof(logger));
+            }
+
+            builder.AddSingleton(typeof(ILogger), logger);
+
+            return builder;
+        }
+
+        /// <summary>
         ///     Adds registrations for using a logger which does nothing.
         /// </summary>
         /// <typeparam name="T"> The type of the builder. </typeparam>
@@ -1172,7 +1199,149 @@ namespace RI.Abstractions.Builder
             return builder;
         }
 
-        //TODO: UseSimpleDispatcher
+        /// <summary>
+        ///     Adds registrations for using a simple composition container.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
+        public static T UseSimpleContainer<T>(this T builder)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.AddTemporary(typeof(ICompositionContainer), new SimpleContainer());
+
+            return builder;
+        }
+
+        /// <summary>
+        ///     Adds registrations for using a simple thread dispatcher.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <param name="dispatcher"> The simple dispatcher to use. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="dispatcher" /> is null. </exception>
+        public static T UseSimpleDispatcher<T>(this T builder, SimpleDispatcher dispatcher)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (dispatcher == null)
+            {
+                throw new ArgumentNullException(nameof(dispatcher));
+            }
+
+            builder.AddSingleton(typeof(IThreadDispatcher), dispatcher);
+
+            return builder;
+        }
+
+        /// <summary>
+        ///     Adds registrations for using a simple thread dispatcher.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> is null. </exception>
+        public static T UseSimpleDispatcher<T>(this T builder)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.AddSingleton(typeof(IThreadDispatcher), new SimpleDispatcher());
+
+            return builder;
+        }
+
+        /// <summary>
+        ///     Adds registrations for using a logger.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <param name="logger"> The logger. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="logger" /> is null. </exception>
+        public static T UseLogger<T>(this T builder, ILogger logger)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (logger == null)
+            {
+                throw new ArgumentNullException(nameof(logger));
+            }
+
+            builder.AddSingleton(typeof(ILogger), logger);
+
+            return builder;
+        }
+
+        /// <summary>
+        ///     Adds registrations for using a composition container.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <param name="container"> The composition container. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="container" /> is null. </exception>
+        public static T UseCompositionContainer<T>(this T builder, ICompositionContainer container)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            builder.AddTemporary(typeof(ICompositionContainer), container);
+
+            return builder;
+        }
+
+        /// <summary>
+        ///     Adds registrations for using a thread dispatcher.
+        /// </summary>
+        /// <typeparam name="T"> The type of the builder. </typeparam>
+        /// <param name="builder"> The builder being configured. </param>
+        /// <param name="dispatcher"> The thread dispatcher. </param>
+        /// <returns> The builder being configured. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="builder" /> or <paramref name="dispatcher" /> is null. </exception>
+        public static T UseThreadDispatcher<T>(this T builder, IThreadDispatcher dispatcher)
+            where T : IBuilder
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (dispatcher == null)
+            {
+                throw new ArgumentNullException(nameof(dispatcher));
+            }
+
+            builder.AddSingleton(typeof(IThreadDispatcher), dispatcher);
+
+            return builder;
+        }
 
         #endregion
 

@@ -25,6 +25,15 @@ namespace RI.Abstractions.Dispatcher
 
         #region Instance Constructor/Destructor
 
+        /// ///
+        /// <summary>
+        ///     Gets the current operation which threw the exception.
+        /// </summary>
+        /// <value>
+        ///     The current operation which threw the exception.
+        /// </value>
+        public IThreadDispatcherOperation Operation { get; }
+
         /// <summary>
         ///     Creates a new instance of <see cref="ThreadDispatcherException" />.
         /// </summary>
@@ -49,6 +58,17 @@ namespace RI.Abstractions.Dispatcher
         public ThreadDispatcherException (Exception innerException)
             : base(string.Format(ThreadDispatcherException.ExceptionMessageWithException, innerException.GetType().Name, innerException.Message), innerException)
         {
+        }
+
+        /// <summary>
+        ///     Creates a new instance of <see cref="ThreadDispatcherException" />.
+        /// </summary>
+        /// <param name="innerException"> The exception which triggered this exception. </param>
+        /// <param name="operation"> The current operation which threw the exception. </param>
+        public ThreadDispatcherException(Exception innerException, IThreadDispatcherOperation operation)
+            : base(string.Format(ThreadDispatcherException.ExceptionMessageWithException, innerException.GetType().Name, innerException.Message), innerException)
+        {
+            this.Operation = operation;
         }
 
         /// <summary>

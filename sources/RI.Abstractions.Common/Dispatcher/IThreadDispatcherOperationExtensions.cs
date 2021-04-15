@@ -115,7 +115,6 @@ namespace RI.Abstractions.Dispatcher
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="milliseconds" /> is negative. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken" /> is null. </exception>
-        /// TODO: This is not safe to use on the dispatcher thread...it blocks the dispatcher indefinitely...!
         public static bool Wait(this IThreadDispatcherOperation op, int milliseconds, CancellationToken cancellationToken)
         {
             if (op == null)

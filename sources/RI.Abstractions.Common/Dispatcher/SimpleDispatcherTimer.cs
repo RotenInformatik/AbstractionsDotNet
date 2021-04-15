@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 
 
@@ -7,49 +8,20 @@ using System.Threading;
 
 namespace RI.Abstractions.Dispatcher
 {
-    /// <summary>
-    ///     Implements a timer which can be used with <see cref="IThreadDispatcher" />.
-    /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///         <see cref="ThreadDispatcherTimer" /> enqueues a delegate to the specified dispatchers queue (using <see cref="IThreadDispatcher.Post(int,ThreadDispatcherOptions,Delegate,object[])" />) in a specified interval.
-    ///     </para>
-    ///     <para>
-    ///         The interval is awaited before the timer is executed for the first time. Afterwards, the delegate is posted to the dispatcher in the specified interval.
-    ///     </para>
-    ///     <para>
-    ///         If a previous interval has not yet finished executing the delegate, it is not dispatched for execution until the next interval.
-    ///     </para>
-    ///     <para>
-    ///         The timer is initially stopped and needs to be started explicitly using <see cref="Start" />.
-    ///     </para>
-    ///     <para>
-    ///         The associated dispatcher does not need to be started.
-    ///         However, the timer is stopped on an interval if the dispatcher is not running.
-    ///     </para>
-    /// </remarks>
-    /// <threadsafety static="true" instance="true" />
-    public sealed class SimpleDispatcherTimer : IThreadDispatcherTimer, IDisposable
+    internal sealed class SimpleDispatcherTimer : IThreadDispatcherTimer, IDisposable
     {
         #region Instance Constructor/Destructor
 
-        /// <summary>
-        ///     Creates a new instance of <see cref="ThreadDispatcherTimer" />.
-        /// </summary>
-        /// <param name="dispatcher"> The used dispatcher. </param>
-        /// <param name="mode"> The timer mode. </param>
-        /// <param name="priority"> The priority. </param>
-        /// <param name="options"> The used execution options. </param>
-        /// <param name="interval"> The interval between executions. </param>
-        /// <param name="action"> The delegate. </param>
-        /// <param name="parameters"> Optional parameters of the delagate. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="dispatcher" /> or <paramref name="action" /> is null. </exception>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
-        public SimpleDispatcherTimer(IThreadDispatcher dispatcher, ThreadDispatcherTimerMode mode, int milliseconds, ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, object[] parameters)
+        public SimpleDispatcherTimer(SimpleDispatcher dispatcher, ThreadDispatcherTimerMode mode, TimeSpan interval, ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, object[] parameters)
         {
             if (dispatcher == null)
             {
                 throw new ArgumentNullException(nameof(dispatcher));
+            }
+
+            if (interval.Ticks < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(priority));
             }
 
             if (priority < 0)
@@ -72,7 +44,7 @@ namespace RI.Abstractions.Dispatcher
             this.Action = action;
             this.Parameters = parameters;
 
-            this.ExecutionContext = ThreadDispatcherExecutionContext.Capture(this.Options);
+            this.ExecutionContext = executionContext?.Clone() ?? ThreadDispatcherExecutionContext.Capture(this.Options);
 
             this.Timer = null;
             this.PreviousOperation = null;
@@ -80,9 +52,6 @@ namespace RI.Abstractions.Dispatcher
             this.Dispatcher.AddKeepAlive(this);
         }
 
-        /// <summary>
-        ///     Garbage collects this instance of <see cref="ThreadDispatcherTimer" />.
-        /// </summary>
         ~SimpleDispatcherTimer()
         {
             this.Dispose(false);
@@ -99,6 +68,8 @@ namespace RI.Abstractions.Dispatcher
 
         private long _missCount;
 
+        private TimeSpan _interval;
+
         #endregion
 
 
@@ -106,33 +77,10 @@ namespace RI.Abstractions.Dispatcher
 
         #region Instance Properties/Indexer
 
-        /// <summary>
-        ///     Gets the used delegate.
-        /// </summary>
-        /// <value>
-        ///     The used delegate.
-        /// </value>
         public Delegate Action { get; }
 
-        /// <summary>
-        ///     Gets the used dispatcher.
-        /// </summary>
-        /// <value>
-        ///     The used dispatcher.
-        /// </value>
         public IThreadDispatcher Dispatcher { get; }
 
-        /// <summary>
-        ///     Gets the number of times the delegate was executed.
-        /// </summary>
-        /// <value>
-        ///     The number of times the delegate was executed.
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///         <see cref="ExecutionCount" /> is reset to zero whenever the timer is started after it was stopped.
-        ///     </para>
-        /// </remarks>
         public long ExecutionCount
         {
             get
@@ -151,20 +99,24 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets the used interval.
-        /// </summary>
-        /// <value>
-        ///     The used interval.
-        /// </value>
-        public TimeSpan Interval { get; }
+        public TimeSpan Interval
+        {
+            get
+            {
+                lock (this.SyncRoot)
+                {
+                    return this._interval;
+                }
+            }
+            private set
+            {
+                lock (this.SyncRoot)
+                {
+                    this._interval = value;
+                }
+            }
+        }
 
-        /// <summary>
-        ///     Gets whether the timer is currently running.
-        /// </summary>
-        /// <value>
-        ///     true if the timer is running, false otherwise.
-        /// </value>
         public bool IsRunning
         {
             get
@@ -175,19 +127,7 @@ namespace RI.Abstractions.Dispatcher
                 }
             }
         }
-
-
-        /// <summary>
-        ///     Gets the number of times the delegate was not executed because the previous execution was not yet finished.
-        /// </summary>
-        /// <value>
-        ///     The number of times the delegate was not executed because the previous execution was not yet finished
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///         <see cref="MissCount" /> is reset to zero whenever the timer is started after it was stopped.
-        ///     </para>
-        /// </remarks>
+        
         public long MissCount
         {
             get
@@ -206,41 +146,19 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        /// <summary>
-        ///     Gets the timer mode.
-        /// </summary>
-        /// <value>
-        ///     The timer mode.
-        /// </value>
         public ThreadDispatcherTimerMode Mode { get; }
 
-        /// <summary>
-        ///     Gets the used execution options.
-        /// </summary>
-        /// <value>
-        ///     The used execution options.
-        /// </value>
         public ThreadDispatcherOptions Options { get; }
 
-        /// <summary>
-        ///     Gets the optional parameters of the delagate.
-        /// </summary>
-        /// <value>
-        ///     The optional parameters of the delagate.
-        /// </value>
-        public object[] Parameters { get; }
+        private object[] Parameters { get; }
 
-        /// <summary>
-        ///     Gets the priority.
-        /// </summary>
-        /// <value>
-        ///     The priority.
-        /// </value>
+        public object[] GetParameters () => this.Parameters.ToArray();
+
         public int Priority { get; }
 
-        private ThreadDispatcherExecutionContext ExecutionContext { get; set; }
+        public ThreadDispatcherExecutionContext ExecutionContext { get; }
 
-        private SimpleDispatcherOperation PreviousOperation { get; set; }
+        private IThreadDispatcherOperation PreviousOperation { get; set; }
 
         private Timer Timer { get; set; }
 
@@ -251,28 +169,27 @@ namespace RI.Abstractions.Dispatcher
 
         #region Instance Methods
 
-        /// <summary>
-        ///     Starts the timer.
-        /// </summary>
-        public void Start ()
+        public bool Start (TimeSpan interval)
         {
             lock (this.SyncRoot)
             {
                 if (this.Timer != null)
                 {
-                    return;
+                    return false;
                 }
 
                 GC.ReRegisterForFinalize(this);
 
                 this.ExecutionCount = 0;
                 this.MissCount = 0;
+                this.Interval = interval;
 
+                this.Dispatcher.RemoveKeepAlive(this);
                 this.Dispatcher.AddKeepAlive(this);
 
                 this.Timer = new Timer(x =>
                 {
-                    ThreadDispatcherTimer self = (ThreadDispatcherTimer)x;
+                    SimpleDispatcherTimer self = (SimpleDispatcherTimer)x;
                     lock (self.SyncRoot)
                     {
                         if (self.Timer == null)
@@ -282,7 +199,7 @@ namespace RI.Abstractions.Dispatcher
 
                         if (self.PreviousOperation != null)
                         {
-                            if (!self.PreviousOperation.IsDone)
+                            if (!self.PreviousOperation.IsDone())
                             {
                                 self.MissCount++;
                                 return;
@@ -290,9 +207,11 @@ namespace RI.Abstractions.Dispatcher
                         }
 
                         bool isRunning;
+
                         lock (self.Dispatcher.SyncRoot)
                         {
                             isRunning = self.Dispatcher.IsRunning;
+                            
                             if (isRunning)
                             {
                                 self.PreviousOperation = self.Dispatcher.Post(self.ExecutionContext, self.Priority, self.Options, self.Action, self.Parameters);
@@ -305,17 +224,21 @@ namespace RI.Abstractions.Dispatcher
                             self.Stop();
                         }
                     }
-                }, this, (int)this.Interval.TotalMilliseconds, this.Mode == ThreadDispatcherTimerMode.OneShot ? -1 : (int)this.Interval.TotalMilliseconds);
+                }, this, (int)this.Interval.TotalMilliseconds, (int)(this.Mode == ThreadDispatcherTimerMode.OneShot ? -1 : this.Interval.TotalMilliseconds));
+
+                return true;
             }
         }
 
-        /// <summary>
-        ///     Stops the timer.
-        /// </summary>
-        public void Stop ()
+        public bool Stop ()
         {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+            lock (this.SyncRoot)
+            {
+                bool isRunning = this.IsRunning;
+                this.Dispose(true);
+                GC.SuppressFinalize(this);
+                return isRunning;
+            }
         }
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
@@ -330,7 +253,6 @@ namespace RI.Abstractions.Dispatcher
                 this.Timer = null;
 
                 this.ExecutionContext?.Dispose();
-                this.ExecutionContext = null;
             }
         }
 
@@ -341,7 +263,6 @@ namespace RI.Abstractions.Dispatcher
 
         #region Interface: IDisposable
 
-        /// <inheritdoc />
         void IDisposable.Dispose ()
         {
             this.Stop();
@@ -354,7 +275,6 @@ namespace RI.Abstractions.Dispatcher
 
         #region Interface: ISynchronizable
 
-        /// <inheritdoc />
         public object SyncRoot { get; }
 
         #endregion

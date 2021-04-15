@@ -14,7 +14,6 @@ namespace RI.Abstractions.Dispatcher
     ///     A <see cref="TaskScheduler" /> which uses a <see cref="IThreadDispatcher" /> for execution.
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    /// TODO: Option to specify priority and options?
     public sealed class ThreadDispatcherTaskScheduler : TaskScheduler
     {
         #region Instance Constructor/Destructor

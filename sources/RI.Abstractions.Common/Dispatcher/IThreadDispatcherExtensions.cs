@@ -211,7 +211,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.Send(null, -1, ThreadDispatcherOptions.Default, action, parameters);
+            return dispatcher.Send(null, -1, ThreadDispatcherOptions.Default, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.Send(null, priority, ThreadDispatcherOptions.Default, action, parameters);
+            return dispatcher.Send(null, priority, ThreadDispatcherOptions.Default, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>
@@ -284,7 +284,6 @@ namespace RI.Abstractions.Dispatcher
         ///         Callable from the dispatcher thread and can be therefore be cascaded.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
         /// <exception cref="TimeoutException">The execution of the delegate was cancelled by timeout or a cancellation token.</exception>
@@ -302,7 +301,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.Send(null, -1, options, action, parameters);
+            return dispatcher.Send(null, -1, options, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>
@@ -347,7 +346,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.Send(null, priority, options, action, parameters);
+            return dispatcher.Send(null, priority, options, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>
@@ -370,7 +369,6 @@ namespace RI.Abstractions.Dispatcher
         ///         Callable from the dispatcher thread and can be therefore be cascaded.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
         /// <exception cref="TimeoutException">The execution of the delegate was cancelled by timeout or a cancellation token.</exception>
@@ -388,7 +386,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.SendAsync(null, -1, ThreadDispatcherOptions.Default, action, parameters);
+            return dispatcher.SendAsync(null, -1, ThreadDispatcherOptions.Default, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>
@@ -433,7 +431,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.SendAsync(null, priority, ThreadDispatcherOptions.Default, action, parameters);
+            return dispatcher.SendAsync(null, priority, ThreadDispatcherOptions.Default, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>
@@ -457,7 +455,6 @@ namespace RI.Abstractions.Dispatcher
         ///         Callable from the dispatcher thread and can be therefore be cascaded.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
         /// <exception cref="TimeoutException">The execution of the delegate was cancelled by timeout or a cancellation token.</exception>
@@ -475,7 +472,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.SendAsync(null, -1, options, action, parameters);
+            return dispatcher.SendAsync(null, -1, options, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>
@@ -518,7 +515,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(action));
             }
 
-            return dispatcher.SendAsync(null, priority, options, action, parameters);
+            return dispatcher.SendAsync(null, priority, options, Timeout.InfiniteTimeSpan, CancellationToken.None, action, parameters);
         }
 
         /// <summary>

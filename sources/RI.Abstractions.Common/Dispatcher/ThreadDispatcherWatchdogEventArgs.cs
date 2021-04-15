@@ -33,7 +33,7 @@ namespace RI.Abstractions.Dispatcher
 
         /// ///
         /// <summary>
-        ///     Gets the current operation which was in progress at the time of the timeout or null if no operation was in progress
+        ///     Gets the current operation which was in progress at the time of the timeout or null if no operation was in progress.
         /// </summary>
         /// <value>
         ///     The current operation which was in progress at the time of the timeout or null if no operation was in progress.

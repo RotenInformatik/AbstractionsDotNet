@@ -11,7 +11,6 @@ namespace RI.Abstractions.Dispatcher
     ///     Implements an awaiter which moves execution to a specified <see cref="IThreadDispatcher" />.
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    /// TODO: Option to specify priority and options?
     public sealed class ThreadDispatcherAwaiter : ICriticalNotifyCompletion
     {
         #region Instance Constructor/Destructor

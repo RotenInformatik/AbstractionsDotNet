@@ -147,6 +147,16 @@ namespace RI.Abstractions.Dispatcher
         event EventHandler<ThreadDispatcherWatchdogEventArgs> Watchdog;
 
         /// <summary>
+        ///     Raised when the dispatcher becomes idle (the delegate queue is empty).
+        /// </summary>
+        /// <remarks>
+        ///     <note type="implement">
+        ///         The <see cref="Idle" /> event must raised from the thread <see cref="IThreadDispatcher" /> runs in.
+        ///     </note>
+        /// </remarks>
+        event EventHandler<ThreadDispatcherIdleEventArgs> Idle;
+
+        /// <summary>
         ///     Adds an object to the list of objects which are kept alive at least as long as this thread dispatcher is running.
         /// </summary>
         /// <param name="obj"> The object to add to the keep-alive list. </param>
@@ -184,27 +194,29 @@ namespace RI.Abstractions.Dispatcher
         /// <summary>
         ///     Stops processing the delegate queue but does not wait for its shutdown.
         /// </summary>
-        /// <param name="finishPendingDelegates"> Specifies whether pending delegates should be processed before the dispatcher is shut down. </param>
+        /// <param name="shutdownMode"> Specifies the used shutdown mode. </param>
+        /// <exception cref="ArgumentException"><paramref name="shutdownMode"/> is <see cref="ThreadDispatcherShutdownMode.None"/>.</exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or it is already being shut down. </exception>
-        void BeginShutdown (bool finishPendingDelegates);
+        void BeginShutdown (ThreadDispatcherShutdownMode shutdownMode);
 
         /// <summary>
         ///     Stops processing the delegate queue and waits for its shutdown.
         /// </summary>
-        /// <param name="finishPendingDelegates"> Specifies whether pending delegates should be processed before the dispatcher is shut down. </param>
+        /// <param name="shutdownMode"> Specifies the used shutdown mode. </param>
         /// <remarks>
         ///     <note type="implement">
         ///         <see cref="Shutdown" /> cannot be called from inside the dispatcher thread.
         ///         Use <see cref="BeginShutdown" /> from inside the dispatcher thread instead.
         ///     </note>
         /// </remarks>
+        /// <exception cref="ArgumentException"><paramref name="shutdownMode"/> is <see cref="ThreadDispatcherShutdownMode.None"/>.</exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running, is already being shut down, or the method was called from the dispatcher thread itself. </exception>
-        void Shutdown(bool finishPendingDelegates);
+        void Shutdown(ThreadDispatcherShutdownMode shutdownMode);
 
         /// <summary>
         ///     Stops processing the delegate queue and waits for its shutdown
         /// </summary>
-        /// <param name="finishPendingDelegates"> Specifies whether pending delegates should be processed before the dispatcher is shut down. </param>
+        /// <param name="shutdownMode"> Specifies the used shutdown mode. </param>
         /// <returns>
         ///     The task which can be used to await the completion of the shutdown.
         /// </returns>
@@ -214,8 +226,9 @@ namespace RI.Abstractions.Dispatcher
         ///         Use <see cref="BeginShutdown" /> from inside the dispatcher thread instead.
         ///     </note>
         /// </remarks>
+        /// <exception cref="ArgumentException"><paramref name="shutdownMode"/> is <see cref="ThreadDispatcherShutdownMode.None"/>.</exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running, is already being shut down, or the method was called from the dispatcher thread itself. </exception>
-        Task ShutdownAsync(bool finishPendingDelegates);
+        Task ShutdownAsync(ThreadDispatcherShutdownMode shutdownMode);
 
         /// <summary>
         ///     Waits until all queued operations of a specified priority have been processed.
@@ -296,6 +309,8 @@ namespace RI.Abstractions.Dispatcher
         /// <param name="executionContext"> The context under which the delegate is executed. Can be null to use the calling threads context. </param>
         /// <param name="priority"> The priority. Can be -1 to use the default priority. </param>
         /// <param name="options"> The used execution options. Can be <see cref="ThreadDispatcherOptions.Default"/> to use the default options.</param>
+        /// <param name="timeout">The timeout used to wait for the delegate to finish execution. Can be <see cref="Timeout.InfiniteTimeSpan"/> to wait indefinitely.</param>
+        /// <param name="ct">The cancellation token used to cancel the wait for the delegate to finish execution. Can be <see cref="CancellationToken.None"/> if cancellation is not used.</param>
         /// <param name="action"> The delegate. </param>
         /// <param name="parameters"> Optional parameters of the delegate. </param>
         /// <returns>
@@ -311,14 +326,20 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         Must be callable from the dispatcher thread and can be therefore be cascaded.
         ///     </note>
+        ///     <note type="implement">
+        ///         <paramref name="timeout"/> and <paramref name="ct"/> are not used to cancel the execution of the delegate.
+        ///         They are solely used to wait for its execution to finish.
+        ///         The processing of the operation continues unchanged.
+        ///         Use <see cref="IThreadDispatcherOperation.Cancel"/> to cancel the processing of an operation.
+        ///     </note>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
+        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero or timeout is negative. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
         /// <exception cref="TimeoutException">The execution of the delegate was cancelled by timeout or a cancellation token.</exception>
         /// <exception cref="ThreadDispatcherException"> An exception occurred during execution of the delegate. </exception>
         /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled or aborted. </exception>
-        object Send (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
+        object Send (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, TimeSpan timeout, CancellationToken ct, Delegate action, params object[] parameters);
 
         /// <summary>
         ///     Enqueues a delegate to the thread dispatchers queue and waits for its execution to be completed.
@@ -326,6 +347,8 @@ namespace RI.Abstractions.Dispatcher
         /// <param name="executionContext"> The context under which the delegate is executed. Can be null to use the calling threads context. </param>
         /// <param name="priority"> The priority. Can be -1 to use the default priority. </param>
         /// <param name="options"> The used execution options. Can be <see cref="ThreadDispatcherOptions.Default"/> to use the default options.</param>
+        /// <param name="timeout">The timeout used to wait for the delegate to finish execution. Can be <see cref="Timeout.InfiniteTimeSpan"/> to wait indefinitely.</param>
+        /// <param name="ct">The cancellation token used to cancel the wait for the delegate to finish execution. Can be <see cref="CancellationToken.None"/> if cancellation is not used.</param>
         /// <param name="action"> The delegate. </param>
         /// <param name="parameters"> Optional parameters of the delegate. </param>
         /// <returns>
@@ -341,14 +364,20 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         Must be callable from the dispatcher thread and can be therefore be cascaded.
         ///     </note>
+        ///     <note type="implement">
+        ///         <paramref name="timeout"/> and <paramref name="ct"/> are not used to cancel the execution of the delegate.
+        ///         They are solely used to wait for its execution to finish.
+        ///         The processing of the operation continues unchanged.
+        ///         Use <see cref="IThreadDispatcherOperation.Cancel"/> to cancel the processing of an operation.
+        ///     </note>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
+        /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero or timeout is negative. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="action" /> is null. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or is being shut down. </exception>
         /// <exception cref="TimeoutException">The execution of the delegate was cancelled by timeout or a cancellation token.</exception>
         /// <exception cref="ThreadDispatcherException"> An exception occurred during execution of the delegate. </exception>
         /// <exception cref="OperationCanceledException"> The execution of the delegate was canceled or aborted. </exception>
-        Task<object> SendAsync (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, Delegate action, params object[] parameters);
+        Task<object> SendAsync (ThreadDispatcherExecutionContext executionContext, int priority, ThreadDispatcherOptions options, TimeSpan timeout, CancellationToken ct, Delegate action, params object[] parameters);
 
         /// <summary>
         ///     Creates a new thread dispatcher timer.

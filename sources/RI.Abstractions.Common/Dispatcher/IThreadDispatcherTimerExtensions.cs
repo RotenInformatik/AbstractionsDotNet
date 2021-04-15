@@ -94,7 +94,7 @@ namespace RI.Abstractions.Dispatcher
                 throw new ArgumentNullException(nameof(timer));
             }
 
-            if (interval.Ticks <= 0)
+            if (interval.Ticks < 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(interval));
             }

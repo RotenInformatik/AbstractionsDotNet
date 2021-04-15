@@ -11,7 +11,6 @@ namespace RI.Abstractions.Dispatcher
     ///     A <see cref="SynchronizationContext" /> which uses an <see cref="IThreadDispatcher" /> for execution.
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    /// TODO: Option to specify priority and options?
     public sealed class ThreadDispatcherSynchronizationContext : SynchronizationContext
     {
         #region Instance Constructor/Destructor

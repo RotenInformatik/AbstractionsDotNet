@@ -18,10 +18,12 @@ namespace RI.Abstractions.Dispatcher
         /// </summary>
         /// <param name="exception"> The exception. </param>
         /// <param name="canContinue"> Indicates whether the thread is able to continue or not after the exception was handled. </param>
-        public ThreadDispatcherExceptionEventArgs (Exception exception, bool canContinue)
+        /// <param name="currentOperation"> The current operation which threw the exception. </param>
+        public ThreadDispatcherExceptionEventArgs (Exception exception, bool canContinue, IThreadDispatcherOperation currentOperation)
         {
             this.Exception = exception;
             this.CanContinue = canContinue;
+            this.CurrentOperation = currentOperation;
         }
 
         #endregion
@@ -46,6 +48,15 @@ namespace RI.Abstractions.Dispatcher
         ///     The exception.
         /// </value>
         public Exception Exception { get; }
+
+        /// ///
+        /// <summary>
+        ///     Gets the current operation which threw the exception.
+        /// </summary>
+        /// <value>
+        ///     The current operation which threw the exception.
+        /// </value>
+        public IThreadDispatcherOperation CurrentOperation { get; }
 
         #endregion
     }
