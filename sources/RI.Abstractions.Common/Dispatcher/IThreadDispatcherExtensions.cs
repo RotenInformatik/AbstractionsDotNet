@@ -879,9 +879,7 @@ namespace RI.Abstractions.Dispatcher
 
             dispatcher.DoProcessing(0);
         }
-
-
-
+        
         /// <summary>
         ///     Waits until all queued operations have been processed.
         /// </summary>

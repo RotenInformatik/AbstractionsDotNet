@@ -53,9 +53,11 @@ namespace RI.Abstractions.Dispatcher
 
             this.Dispatcher.AddKeepAlive(this);
 
-            this.RunTimeMillisecondsInternal = 0.0;
-            this.WatchdogTimeMillisecondsInternal = 0.0;
-            this.WatchdogEventsInternal = 0;
+            this.WatchdogEvents = 0;
+            this.WatchdogTime = null;
+            this.Dispatched = DateTime.UtcNow;
+            this.FirstExecution = null;
+            this.LastExecution = null;
         }
 
         ~SimpleDispatcherOperation()
@@ -99,6 +101,16 @@ namespace RI.Abstractions.Dispatcher
         private Exception _exception;
         private object _result;
         private ThreadDispatcherOperationState _state;
+
+        private int _watchdogEvents;
+
+        private TimeSpan? _watchdogTime;
+
+        private DateTime _dispatched;
+
+        private DateTime? _firstExecution;
+
+        private DateTime? _lastExecution;
 
         #endregion
 
@@ -156,17 +168,6 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
-        public int RunTimeMilliseconds
-        {
-            get
-            {
-                lock (this.SyncRoot)
-                {
-                    return (int)this.RunTimeMillisecondsInternal;
-                }
-            }
-        }
-
         public ThreadDispatcherOperationState State
         {
             get
@@ -191,18 +192,86 @@ namespace RI.Abstractions.Dispatcher
             {
                 lock (this.SyncRoot)
                 {
-                    return this.WatchdogEventsInternal;
+                    return this._watchdogEvents;
+                }
+            }
+            internal set
+            {
+                lock (this.SyncRoot)
+                {
+                    this._watchdogEvents = value;
                 }
             }
         }
 
-        public int WatchdogTimeMilliseconds
+        public TimeSpan? WatchdogTime
         {
             get
             {
                 lock (this.SyncRoot)
                 {
-                    return (int)this.WatchdogTimeMillisecondsInternal;
+                    return this._watchdogTime;
+                }
+            }
+            internal set
+            {
+                lock (this.SyncRoot)
+                {
+                    this._watchdogTime = value;
+                }
+            }
+        }
+
+        public DateTime Dispatched
+        {
+            get
+            {
+                lock (this.SyncRoot)
+                {
+                    return this._dispatched;
+                }
+            }
+            internal set
+            {
+                lock (this.SyncRoot)
+                {
+                    this._dispatched = value;
+                }
+            }
+        }
+
+        public DateTime? FirstExecution
+        {
+            get
+            {
+                lock (this.SyncRoot)
+                {
+                    return this._firstExecution;
+                }
+            }
+            internal set
+            {
+                lock (this.SyncRoot)
+                {
+                    this._firstExecution = value;
+                }
+            }
+        }
+
+        public DateTime? LastExecution
+        {
+            get
+            {
+                lock (this.SyncRoot)
+                {
+                    return this._lastExecution;
+                }
+            }
+            internal set
+            {
+                lock (this.SyncRoot)
+                {
+                    this._lastExecution = value;
                 }
             }
         }
@@ -220,12 +289,6 @@ namespace RI.Abstractions.Dispatcher
         public object[] GetParameters () => this.Parameters.ToArray();
 
         public int Priority { get; }
-
-        internal double RunTimeMillisecondsInternal { get; set; }
-
-        internal int WatchdogEventsInternal { get; set; }
-
-        internal double WatchdogTimeMillisecondsInternal { get; set; }
 
         private ManualResetEvent OperationDoneEvent { get;}
 
@@ -477,6 +540,14 @@ namespace RI.Abstractions.Dispatcher
 
         private object ExecuteCoreAction ()
         {
+            DateTime now = DateTime.UtcNow;
+            this.LastExecution = now;
+
+            if (!this.FirstExecution.HasValue)
+            {
+                this.FirstExecution = now;
+            }
+
             if ((this.ExecutionContext != null) && (this.Options != ThreadDispatcherOptions.None))
             {
                 return this.ExecutionContext.Run(this.Options, this.Action, this.Parameters);

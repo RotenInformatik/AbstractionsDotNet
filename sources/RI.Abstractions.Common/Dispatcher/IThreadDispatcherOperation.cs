@@ -29,19 +29,6 @@ namespace RI.Abstractions.Dispatcher
         object Result { get; }
 
         /// <summary>
-        ///     Gets the total time in milliseconds this thread dispatcher operation was executing within the thread dispatcher.
-        /// </summary>
-        /// <value>
-        ///     The total time in milliseconds this thread dispatcher operation was executing within the thread dispatcher.
-        /// </value>
-        /// <remarks>
-        ///     <para>
-        ///         The executing time does only include the time the operation was using thread dispatcher resources, but does not include time which was spent in another thread (e.g. when the operation is a task which uses other threads).
-        ///     </para>
-        /// </remarks>
-        int RunTimeMilliseconds { get; }
-
-        /// <summary>
         ///     Gets the current state of the thread dispatcher operation.
         /// </summary>
         /// <value>
@@ -63,13 +50,52 @@ namespace RI.Abstractions.Dispatcher
         int WatchdogEvents { get; }
 
         /// <summary>
-        ///     Gets the time in milliseconds this thread dispatcher operation was executing within the thread dispatcher since its last watchdog event.
+        ///     Gets the time this thread dispatcher operation was executing within the thread dispatcher since its last watchdog event.
         /// </summary>
         /// <value>
-        ///     The time in milliseconds this thread dispatcher operation was executing within the thread dispatcher since its last watchdog event or -1 if no watchdog event has yet occurred.
+        ///     The time this thread dispatcher operation was executing within the thread dispatcher since its last watchdog event or null if no watchdog event has yet occurred.
         /// </value>
         /// 
-        int WatchdogTimeMilliseconds { get; }
+        TimeSpan? WatchdogTime { get; }
+
+        /// <summary>
+        ///     Gets the timestamp when this thread dispatcher operation was dispatched (added to the delegate queue).
+        /// </summary>
+        /// <value>
+        ///     The timestamp when this thread dispatcher operation was dispatched (added to the delegate queue).
+        /// </value>
+        /// <remarks>
+        /// <note type="implement">
+        /// This timestamp must be in UTC.
+        /// </note>
+        /// </remarks>
+        DateTime Dispatched { get; }
+
+        /// <summary>
+        ///     Gets the timestamp when this thread dispatcher operation was processed for the first time.
+        /// </summary>
+        /// <value>
+        ///     The timestamp when this thread dispatcher operation was processed for the first time or null if it has not been processed yet.
+        /// </value>
+        /// <remarks>
+        /// <note type="implement">
+        /// This timestamp must be in UTC.
+        /// </note>
+        /// </remarks>
+        DateTime? FirstExecution { get; }
+
+        /// <summary>
+        ///     Gets the timestamp when this thread dispatcher operation was processed for the last time so far (e.g. running an async continuation).
+        /// </summary>
+        /// <value>
+        ///     The timestamp when this thread dispatcher operation was processed for the last time so far or null if it has not been processed yet.
+        /// </value>
+        /// <remarks>
+        /// <note type="implement">
+        /// This timestamp must be in UTC.
+        /// </note>
+        /// </remarks>
+        DateTime? LastExecution { get; }
 
         /// <summary>
         ///     Cancels the processing of the thread dispatcher operation.

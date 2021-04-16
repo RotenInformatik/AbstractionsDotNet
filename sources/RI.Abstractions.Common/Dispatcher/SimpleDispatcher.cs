@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -99,7 +98,7 @@ namespace RI.Abstractions.Dispatcher
             this.CurrentPriority = null;
             this.CurrentOptions = null;
             this.CurrentOperation = null;
-            this.KeepAlives = new HashSet<object>(); ;
+            this.KeepAlives = new HashSet<object>();
             this.WatchdogLoop = null;
 
             this.PreRunQueue = new PriorityQueue<SimpleDispatcherOperation>();
@@ -389,6 +388,7 @@ namespace RI.Abstractions.Dispatcher
 
                     if (signalIdle)
                     {
+                        signalIdle = false;
                         this.SignalIdle();
                     }
 
@@ -401,9 +401,6 @@ namespace RI.Abstractions.Dispatcher
                     {
                         break;
                     }
-
-                    //TODO: We should measure the runtime here
-                    //TODO: Also measure active time
 
                     lock (this.SyncRoot)
                     {
@@ -447,8 +444,6 @@ namespace RI.Abstractions.Dispatcher
                     {
                         lock (this.SyncRoot)
                         {
-                            signalIdle = false;
-
                             if (this.Queue.Count == 0)
                             {
                                 signalIdle = true;
@@ -1286,26 +1281,24 @@ namespace RI.Abstractions.Dispatcher
                             }
 
                             DateTime now = DateTime.UtcNow;
-                            TimeSpan runTimeThisLoop = now.Subtract(item.LastCheck);
-                            item.LastCheck = now;
+                            TimeSpan watchdogTime = now.Subtract(item.WatchdogStart);
 
                             SimpleDispatcherOperation operation = item.Operation;
                             bool hasTimeout = false;
 
                             lock (operation.SyncRoot)
                             {
-                                //TODO: I don't think that the runtime is measured correctly...
-                                double runTime = operation.RunTimeMillisecondsInternal + runTimeThisLoop.TotalMilliseconds;
-                                double watchdogTime = operation.WatchdogTimeMillisecondsInternal + runTimeThisLoop.TotalMilliseconds;
+                                if (operation.WatchdogEvents > 0)
+                                {
+                                    operation.WatchdogTime = watchdogTime;
+                                }
 
-                                operation.RunTimeMillisecondsInternal = runTime;
-                                operation.WatchdogTimeMillisecondsInternal = watchdogTime;
-
-                                if (watchdogTime > timeout.TotalMilliseconds)
+                                if (watchdogTime > timeout)
                                 {
                                     hasTimeout = true;
-                                    operation.WatchdogTimeMillisecondsInternal = 0.0;
-                                    operation.WatchdogEventsInternal += 1;
+                                    operation.WatchdogEvents += 1;
+                                    operation.WatchdogTime = TimeSpan.Zero;
+                                    item.WatchdogStart = now;
                                 }
                             }
 
@@ -1393,7 +1386,9 @@ namespace RI.Abstractions.Dispatcher
 
                 this.Operation = operation;
 
-                this.LastCheck = DateTime.UtcNow;
+                DateTime now = DateTime.UtcNow;
+                this.OperationStart = now;
+                this.WatchdogStart = now;
             }
 
             #endregion
@@ -1403,7 +1398,9 @@ namespace RI.Abstractions.Dispatcher
 
             #region Instance Properties/Indexer
 
-            public DateTime LastCheck { get; set; }
+            public DateTime OperationStart { get; }
+
+            public DateTime WatchdogStart { get; set; }
 
             public SimpleDispatcherOperation Operation { get; }
 
