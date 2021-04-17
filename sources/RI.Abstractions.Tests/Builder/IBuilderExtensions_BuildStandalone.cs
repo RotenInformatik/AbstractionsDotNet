@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,35 +15,31 @@ using Xunit;
 
 namespace RI.Abstractions.Tests.Builder
 {
-    public sealed class IBuilder_BuildStandalone
+    public sealed class IBuilderExtensions_BuildStandalone
     {
-        [Fact]
-        public static void Build_Empty_Success()
+        [Theory]
+        [MemberData(nameof(IBuilderExtensions_BuildStandalone.GetBuilders))]
+        public static void BuildStandalone_Empty_Success(IBuilder builder)
         {
-            //Arrange
-            FakeBuilder builder = new FakeBuilder();
-
             //Act + Assert
             builder.BuildStandalone();
         }
 
-        [Fact]
-        public static void Build_SimpleContainer_FailTooManyContainers()
+        [Theory]
+        [MemberData(nameof(IBuilderExtensions_BuildStandalone.GetBuilders))]
+        public static void BuildStandalone_SimpleContainer_FailTooManyContainers(IBuilder builder)
         {
             //Arrange
-            FakeBuilder builder = new FakeBuilder();
             builder.UseSimpleContainer(new SimpleContainer());
 
             //Act + Assert
             Assert.Throws<BuilderException>(() => builder.BuildStandalone());
         }
 
-        [Fact]
-        public static void Build_Empty_Logger()
+        [Theory]
+        [MemberData(nameof(IBuilderExtensions_BuildStandalone.GetBuilders))]
+        public static void BuildStandalone_Empty_Logger(IBuilder builder)
         {
-            //Arrange
-            FakeBuilder builder = new FakeBuilder();
-
             //Act
             IServiceProvider serviceProvider = builder.BuildStandalone();
 
@@ -51,12 +48,10 @@ namespace RI.Abstractions.Tests.Builder
             Assert.Single(serviceProvider.GetServices(typeof(ILogger)));
         }
 
-        [Fact]
-        public static void Build_Empty_Container()
+        [Theory]
+        [MemberData(nameof(IBuilderExtensions_BuildStandalone.GetBuilders))]
+        public static void BuildStandalone_Empty_Container(IBuilder builder)
         {
-            //Arrange
-            FakeBuilder builder = new FakeBuilder();
-
             //Act
             IServiceProvider serviceProvider = builder.BuildStandalone();
 
@@ -64,5 +59,8 @@ namespace RI.Abstractions.Tests.Builder
             Assert.Empty(serviceProvider.GetServices(typeof(SimpleContainer)));
             Assert.Empty(serviceProvider.GetServices(typeof(ICompositionContainer)));
         }
+
+        public static IEnumerable<object[]> GetBuilders() =>
+            _BuilderTestFactory.GetBuilders();
     }
 }

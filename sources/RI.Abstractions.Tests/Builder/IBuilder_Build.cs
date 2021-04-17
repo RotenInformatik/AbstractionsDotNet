@@ -1,6 +1,9 @@
-﻿using RI.Abstractions.Builder;
+﻿using System.Collections.Generic;
+
+using RI.Abstractions.Builder;
 using RI.Abstractions.Composition;
 using RI.Abstractions.Logging;
+using RI.Abstractions.Tests.Composition;
 using RI.Abstractions.Tests.Fakes;
 
 using Xunit;
@@ -12,32 +15,30 @@ namespace RI.Abstractions.Tests.Builder
 {
     public sealed class IBuilder_Build
     {
-        [Fact]
-        public static void Build_Empty_FailNoContainer ()
+        [Theory]
+        [MemberData(nameof(IBuilder_Build.GetBuilders))]
+        public static void Build_Empty_FailNoContainer (IBuilder builder)
         {
-            //Arrange
-            FakeBuilder builder = new FakeBuilder();
-
-            //Act + Assert
+           //Act + Assert
             Assert.Throws<BuilderException>(() => builder.Build());
         }
 
-        [Fact]
-        public static void Build_SimpleContainer_Success()
+        [Theory]
+        [MemberData(nameof(IBuilder_Build.GetBuilders))]
+        public static void Build_SimpleContainer_Success(IBuilder builder)
         {
             //Arrange
-            FakeBuilder builder = new FakeBuilder();
             builder.UseSimpleContainer(new SimpleContainer());
 
             //Act + Assert
             builder.Build();
         }
 
-        [Fact]
-        public static void Build_SimpleContainer_Logger()
+        [Theory]
+        [MemberData(nameof(IBuilder_Build.GetBuilders))]
+        public static void Build_SimpleContainer_Logger(IBuilder builder)
         {
             //Arrange
-            FakeBuilder builder = new FakeBuilder();
             SimpleContainer container = new SimpleContainer();
             builder.UseSimpleContainer(container);
 
@@ -49,11 +50,11 @@ namespace RI.Abstractions.Tests.Builder
             Assert.Single(container.GetServices(typeof(ILogger)));
         }
 
-        [Fact]
-        public static void Build_SimpleContainer_Container()
+        [Theory]
+        [MemberData(nameof(IBuilder_Build.GetBuilders))]
+        public static void Build_SimpleContainer_Container(IBuilder builder)
         {
             //Arrange
-            FakeBuilder builder = new FakeBuilder();
             SimpleContainer container = new SimpleContainer();
             builder.UseSimpleContainer(container);
 
@@ -64,5 +65,8 @@ namespace RI.Abstractions.Tests.Builder
             Assert.Empty(container.GetServices(typeof(SimpleContainer)));
             Assert.Empty(container.GetServices(typeof(ICompositionContainer)));
         }
+
+        public static IEnumerable<object[]> GetBuilders() =>
+            _BuilderTestFactory.GetBuilders();
     }
 }
