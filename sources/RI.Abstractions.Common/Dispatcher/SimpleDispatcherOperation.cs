@@ -33,13 +33,13 @@ namespace RI.Abstractions.Dispatcher
 
             this.SyncRoot = new object();
 
-            this.ExecutionContext = executionContext?.Clone() ?? ThreadDispatcherExecutionContext.Capture(this.Options);
-
             this.Dispatcher = dispatcher;
             this.Priority = priority;
             this.Options = options;
             this.Action = action;
             this.Parameters = parameters;
+
+            this.ExecutionContext = executionContext?.Clone() ?? ThreadDispatcherExecutionContext.Capture(this.Options);
 
             this.Stage = 0;
             this.Task = null;
@@ -347,24 +347,17 @@ namespace RI.Abstractions.Dispatcher
             {
                 throw new ArgumentNullException(nameof(cancellationToken));
             }
-
-
-
-            lock (this.SyncRoot)
+            
+            if (this.IsDone)
             {
-                this.Dispatcher.VerifyNotFromDispatcher(nameof(this.WaitAsync));
-
-                if (this.IsDone)
-                {
-                    return Task.FromResult(true);
-                }
+                return Task.FromResult(true);
             }
 
             Task operationTask = this.OperationDoneTask.Task;
             Task timeoutTask = Task.Delay(timeout, cancellationToken);
 
             Task<Task> completed = Task.WhenAny(operationTask, timeoutTask);
-            Task<bool> final = completed.ContinueWith(_ => object.ReferenceEquals(completed, operationTask), CancellationToken.None, TaskContinuationOptions.DenyChildAttach | TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.RunContinuationsAsynchronously, this.Dispatcher.TaskScheduler);
+            Task<bool> final = completed.ContinueWith((x) => object.ReferenceEquals(x.Result, operationTask), CancellationToken.None, TaskContinuationOptions.DenyChildAttach | TaskContinuationOptions.LazyCancellation | TaskContinuationOptions.RunContinuationsAsynchronously, this.Dispatcher.TaskScheduler);
             return final;
         }
 

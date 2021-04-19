@@ -14,8 +14,7 @@ namespace RI.Abstractions.Tests.Dispatcher
         public static IEnumerable<object[]> GetDispatchers() =>
             new List<object[]>
             {
-                _CompositionTestFactory.GetSimpleContainer(),
-                _CompositionTestFactory.GetServiceCollectionContainer(),
+                _DispatcherTestFactory.GetSimpleDispatcher(),
             };
 
         public static object[] GetSimpleDispatcher()

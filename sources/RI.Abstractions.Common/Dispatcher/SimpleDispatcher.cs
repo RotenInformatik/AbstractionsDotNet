@@ -55,10 +55,10 @@ namespace RI.Abstractions.Dispatcher
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         The default value is <c> int.MaxValue / 2 </c>.
+        ///         The default value is zero (lowest priority).
         ///     </para>
         /// </remarks>
-        public const int DefaultPriorityValue = int.MaxValue / 2;
+        public const int DefaultPriorityValue = 0;
 
         private const int WatchdogCheckInterval = 20;
 
@@ -191,11 +191,7 @@ namespace RI.Abstractions.Dispatcher
 
         #region Instance Methods
 
-        /// <summary>
-        ///     Processes the delegate queue and waits for new delegates until <see cref="Shutdown" /> is called.
-        /// </summary>
-        /// <exception cref="InvalidOperationException"> The dispatcher is already running. </exception>
-        /// <exception cref="ThreadDispatcherException"> The execution of a delegate has thrown an exception and <see cref="CatchExceptions" /> is false. </exception>
+        /// <inheritdoc />
         public void Run ()
         {
             SynchronizationContext synchronizationContextBackup = System.Threading.SynchronizationContext.Current;
@@ -531,6 +527,14 @@ namespace RI.Abstractions.Dispatcher
             }
         }
 
+        internal void VerifyShuttingDown()
+        {
+            if (this.ShutdownMode == ThreadDispatcherShutdownMode.None)
+            {
+                throw new InvalidOperationException(nameof(SimpleDispatcher) + " is not shutting down.");
+            }
+        }
+
         internal void VerifyRunning ()
         {
             if (!this.IsRunning)
@@ -820,48 +824,51 @@ namespace RI.Abstractions.Dispatcher
         }
 
         /// <inheritdoc />
-        public Task DoProcessingAsync (int priority)
+        public async Task DoProcessingAsync (int priority)
         {
             if (priority < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(priority));
             }
 
-            lock (this.SyncRoot)
+            bool isInThread;
+            IThreadDispatcherOperation operation = null;
+
+            while (true)
             {
-                this.VerifyRunning();
-
-                Task waitTask = this.SendAsync(null, priority, ThreadDispatcherOptions.None, new Func<Task>(async () =>
+                lock (this.SyncRoot)
                 {
-                    while (true)
+                    if (operation == null)
                     {
-                        IThreadDispatcherOperation operation;
-
-                        lock (this.SyncRoot)
-                        {
-                            if (!this.IsRunning)
-                            {
-                                return;
-                            }
-
-                            if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
-                            {
-                                return;
-                            }
-
-                            if (this.Queue.HighestPriority < priority)
-                            {
-                                return;
-                            }
-
-                            operation = this.Post(priority, ThreadDispatcherOptions.None, new Action(() => { }));
-                        }
-
-                        await operation.WaitAsync();
+                        this.VerifyRunning();
                     }
-                }));
+                    else if (!this.IsRunning)
+                    {
+                        return;
+                    }
 
-                return waitTask;
+                    if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
+                    {
+                        return;
+                    }
+
+                    if (this.Queue.HighestPriority < priority)
+                    {
+                        return;
+                    }
+
+                    isInThread = this.IsInThread();
+                    operation = this.Post(null, priority, ThreadDispatcherOptions.None, new Action(() => { }));
+                }
+
+                if (isInThread)
+                {
+                    this.ExecuteFrame(operation);
+                }
+                else
+                {
+                   await operation.WaitAsync();
+                }
             }
         }
 
@@ -947,6 +954,37 @@ namespace RI.Abstractions.Dispatcher
 
                 return this.Thread.ManagedThreadId == Thread.CurrentThread.ManagedThreadId;
             }
+        }
+
+        /// <inheritdoc />
+        public void WaitForShutdown ()
+        {
+            Task task = this.WaitForShutdownAsync();
+            task.Wait();
+        }
+
+        /// <inheritdoc />
+        public Task WaitForShutdownAsync ()
+        {
+            TaskCompletionSource<object> tcs = null;
+
+            lock (this.SyncRoot)
+            {
+                if (!this.IsRunning)
+                {
+                    return Task.CompletedTask;
+                }
+
+                if (!this.IsShuttingDown)
+                {
+                    this.VerifyShuttingDown();
+                }
+
+                tcs = new TaskCompletionSource<object>();
+                this.FinishedSignals.Add(tcs);
+            }
+
+            return tcs.Task;
         }
 
         /// <inheritdoc />
@@ -1267,17 +1305,16 @@ namespace RI.Abstractions.Dispatcher
                             Thread.Sleep(SimpleDispatcher.WatchdogCheckInterval);
 
                             WatchdogThreadItem item;
-                            TimeSpan timeout;
+                            TimeSpan? timeout = this.Dispatcher.WatchdogTimeout;
 
                             lock (this.SyncRoot)
                             {
-                                if ((this.Operations.Count == 0) || (!this.Dispatcher.WatchdogTimeout.HasValue))
+                                if ((this.Operations.Count == 0) || (!timeout.HasValue))
                                 {
                                     continue;
                                 }
 
                                 item = this.Operations.Peek();
-                                timeout = this.Dispatcher.WatchdogTimeout.Value;
                             }
 
                             DateTime now = DateTime.UtcNow;
@@ -1293,7 +1330,7 @@ namespace RI.Abstractions.Dispatcher
                                     operation.WatchdogTime = watchdogTime;
                                 }
 
-                                if (watchdogTime > timeout)
+                                if (watchdogTime > timeout.Value)
                                 {
                                     hasTimeout = true;
                                     operation.WatchdogEvents += 1;
@@ -1304,7 +1341,7 @@ namespace RI.Abstractions.Dispatcher
 
                             if (hasTimeout)
                             {
-                                this.Dispatcher.OnWatchdog(timeout, operation);
+                                this.Dispatcher.OnWatchdog(timeout.Value, operation);
                             }
                         }
                     });

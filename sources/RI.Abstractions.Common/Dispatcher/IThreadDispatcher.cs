@@ -157,6 +157,13 @@ namespace RI.Abstractions.Dispatcher
         event EventHandler<ThreadDispatcherIdleEventArgs> Idle;
 
         /// <summary>
+        ///     Processes the delegate queue and waits for new delegates until <see cref="Shutdown" /> is called.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"> The dispatcher is already running. </exception>
+        /// <exception cref="ThreadDispatcherException"> The execution of a delegate has thrown an exception and <see cref="CatchExceptions" /> is false. </exception>
+        void Run();
+
+        /// <summary>
         ///     Adds an object to the list of objects which are kept alive at least as long as this thread dispatcher is running.
         /// </summary>
         /// <param name="obj"> The object to add to the keep-alive list. </param>
@@ -275,6 +282,28 @@ namespace RI.Abstractions.Dispatcher
         ///     false is returned if the dispatcher is not running.
         /// </returns>
         bool IsInThread ();
+
+        /// <summary>
+        ///     Waits until the thread dispatcher is shut down.
+        /// </summary>
+        /// <remarks>
+        /// <note type="implement">
+        /// This method blocks indefinitely until the thread dispatcher has been shut down.
+        /// </note>
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">The dispatcher is not being shut down.</exception>
+        void WaitForShutdown();
+
+        /// <summary>
+        ///     Waits until the thread dispatcher is shut down.
+        /// </summary>
+        /// <remarks>
+        /// <note type="implement">
+        /// This method waits indefinitely until the thread dispatcher has been shut down.
+        /// </note>
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">The dispatcher is not being shut down.</exception>
+        Task WaitForShutdownAsync();
 
         /// <summary>
         ///     Enqueues a delegate to the thread dispatchers queue and does not wait for its execution.

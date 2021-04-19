@@ -296,7 +296,7 @@ namespace RI.Abstractions.Dispatcher
                 clone.CaptureCurrentUICulture = this.CaptureCurrentUICulture;
 
                 clone.ExecutionContext = this.ExecutionContext?.CreateCopy();
-                clone.SynchronizationContext = this.SynchronizationContext?.CreateCopy() ?? this.SynchronizationContext;
+                clone.SynchronizationContext = this.SynchronizationContext;
                 clone.CurrentCulture = (CultureInfo)this.CurrentCulture?.Clone() ?? this.CurrentCulture;
                 clone.CurrentUICulture = (CultureInfo)this.CurrentUICulture?.Clone() ?? this.CurrentUICulture;
 
