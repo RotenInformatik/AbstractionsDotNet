@@ -23,10 +23,11 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task DoProcessingAsync_SpecificSameThread_InvalidOperationException(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
-            // Act
+            // Act + Assert
 
             for (int i1 = 0; i1 < 5; i1++)
             {
@@ -44,6 +45,7 @@ namespace RI.Abstractions.Tests.Dispatcher
             instance.DoProcessing();
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -52,10 +54,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task DoProcessingAsync_SpecificOtherThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             int count = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
@@ -70,9 +74,11 @@ namespace RI.Abstractions.Tests.Dispatcher
             await instance.DoProcessingAsync(2);
 
             // Assert
+
             Assert.Equal(3, count);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -81,10 +87,11 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task DoProcessingAsync_AllSameThread_InvalidOperationException(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
-            // Act
+            // Act + Assert
 
             for (int i1 = 0; i1 < 5; i1++)
             {
@@ -103,6 +110,7 @@ namespace RI.Abstractions.Tests.Dispatcher
 
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.FinishPending);
         }
 
@@ -111,10 +119,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task DoProcessingAsync_AllOtherThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             int count = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
@@ -129,9 +139,11 @@ namespace RI.Abstractions.Tests.Dispatcher
             await instance.DoProcessingAsync();
 
             // Assert
+
             Assert.Equal(5, count);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.FinishPending);
         }
     }

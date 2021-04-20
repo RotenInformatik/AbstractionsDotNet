@@ -23,23 +23,29 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task PostDelayed_OneShotOtherThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             ManualResetEvent mre = new ManualResetEvent(false);
+
             IThreadDispatcherTimer timer = instance.PostDelayed(ThreadDispatcherTimerMode.OneShot, 100, new Action(() =>
             {
                 mre.Set();
             }));
+
             timer.Start();
             mre.WaitOne();
 
             // Assert
+
             Assert.Equal(1, timer.ExecutionCount);
             Assert.False(timer.IsRunning);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -48,10 +54,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task PostDelayed_OneShotSameThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             ManualResetEvent mre = new ManualResetEvent(false);
             IThreadDispatcherTimer timer2 = null;
             IThreadDispatcherTimer timer1 = instance.PostDelayed(ThreadDispatcherTimerMode.OneShot, 100, new Action(() =>
@@ -68,12 +76,14 @@ namespace RI.Abstractions.Tests.Dispatcher
             mre.WaitOne();
 
             // Assert
+
             Assert.Equal(1, timer1.ExecutionCount);
             Assert.False(timer1.IsRunning);
             Assert.Equal(1, timer2.ExecutionCount);
             Assert.False(timer2.IsRunning);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -82,10 +92,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task PostDelayed_ContinuousOtherThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             ManualResetEvent mre = new ManualResetEvent(false);
             IThreadDispatcherTimer timer = null;
             timer = instance.PostDelayed(ThreadDispatcherTimerMode.Continuous, 100, new Action(() =>
@@ -96,14 +108,17 @@ namespace RI.Abstractions.Tests.Dispatcher
                     timer.Stop();
                 }
             }));
+
             timer.Start();
             mre.WaitOne();
 
             // Assert
+
             Assert.Equal(3, timer.ExecutionCount);
             Assert.False(timer.IsRunning);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -112,12 +127,15 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task PostDelayed_ContinuousShotSameThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             ManualResetEvent mre = new ManualResetEvent(false);
             IThreadDispatcherTimer timer2 = null;
+
             IThreadDispatcherTimer timer1 = instance.PostDelayed(ThreadDispatcherTimerMode.OneShot, 100, new Action(() =>
             {
                 timer2 = instance.PostDelayed(ThreadDispatcherTimerMode.Continuous, 100, new Action(() =>
@@ -136,12 +154,14 @@ namespace RI.Abstractions.Tests.Dispatcher
             mre.WaitOne();
 
             // Assert
+
             Assert.Equal(1, timer1.ExecutionCount);
             Assert.False(timer1.IsRunning);
             Assert.Equal(3, timer2.ExecutionCount);
             Assert.False(timer2.IsRunning);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
     }

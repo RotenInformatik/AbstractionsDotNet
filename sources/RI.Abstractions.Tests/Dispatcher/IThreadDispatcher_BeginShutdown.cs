@@ -24,10 +24,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task BeginShutdown_DiscardOtherThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             int count = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
@@ -44,9 +46,11 @@ namespace RI.Abstractions.Tests.Dispatcher
             instance.WaitForShutdown();
 
             // Assert
+
             Assert.True(count < 5);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -55,10 +59,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task BeginShutdown_DiscardSameThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             int count = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
@@ -83,9 +89,11 @@ namespace RI.Abstractions.Tests.Dispatcher
             instance.WaitForShutdown();
 
             // Assert
+
             Assert.True(count < 5);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -94,10 +102,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task BeginShutdown_FinishOtherThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             int count = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
@@ -114,9 +124,11 @@ namespace RI.Abstractions.Tests.Dispatcher
             await instance.WaitForShutdownAsync();
 
             // Assert
+
             Assert.True(count == 5);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
 
@@ -125,10 +137,12 @@ namespace RI.Abstractions.Tests.Dispatcher
         public async Task BeginShutdown_FinishSameThread_Success(IThreadDispatcher instance)
         {
             // Arrange
+
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
+
             int count = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
@@ -153,9 +167,11 @@ namespace RI.Abstractions.Tests.Dispatcher
             await instance.WaitForShutdownAsync();
 
             // Assert
+
             Assert.True(count == 5);
 
             // Cleanup
+
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
     }
