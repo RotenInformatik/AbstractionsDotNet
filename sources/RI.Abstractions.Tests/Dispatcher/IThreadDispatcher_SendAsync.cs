@@ -59,7 +59,7 @@ namespace RI.Abstractions.Tests.Dispatcher
 
         [Theory]
         [MemberData(nameof(IThreadDispatcher_Post.GetDispatchers))]
-        public async Task SendAsync_AsyncSameThread_Success(IThreadDispatcher instance)
+        public async Task SendAsync_AsyncSameThread_InvalidOperationException(IThreadDispatcher instance)
         {
             // Arrange
             DispatcherThread thread = new DispatcherThread(instance);
@@ -68,7 +68,7 @@ namespace RI.Abstractions.Tests.Dispatcher
             // Act
             int result = (int)await instance.SendAsync(new Func<Task<int>>(async () =>
             {
-                await instance.SendAsync(new Action(() => { }));
+                Assert.ThrowsAsync<InvalidOperationException>(async () => await instance.SendAsync(new Action(() => { })));
                 return 42;
             }));
 

@@ -181,7 +181,7 @@ namespace RI.Abstractions.Tests.Dispatcher
 
         [Theory]
         [MemberData(nameof(IThreadDispatcher_Post.GetDispatchers))]
-        public async Task Post_CultureSynchronizationContext_SuccessfulCapture(IThreadDispatcher instance)
+        public async Task Post_CaptureSynchronizationContext_SuccessfulCapture(IThreadDispatcher instance)
         {
             // Arrange
             DispatcherThread thread = new DispatcherThread(instance);

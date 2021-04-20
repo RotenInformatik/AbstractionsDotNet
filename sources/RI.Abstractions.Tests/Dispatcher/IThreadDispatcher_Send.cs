@@ -46,11 +46,11 @@ namespace RI.Abstractions.Tests.Dispatcher
             // Act
             int result = (int)instance.Send(new Func<int>(() =>
             {
-                return (int)instance.Send(new Func<int, int>((a) => a), 42);
+                return (int)instance.Send(new Func<int, int>((a) => a), 42) * 2;
             }));
 
             // Assert
-            Assert.Equal(42, result);
+            Assert.Equal(84, result);
 
             // Cleanup
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);

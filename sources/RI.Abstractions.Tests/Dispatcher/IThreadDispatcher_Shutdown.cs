@@ -92,5 +92,23 @@ namespace RI.Abstractions.Tests.Dispatcher
             // Cleanup
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
         }
+
+        [Theory]
+        [MemberData(nameof(IThreadDispatcher_Post.GetDispatchers))]
+        public async Task Shutdown_FinishSameThread_InvalidOperationException(IThreadDispatcher instance)
+        {
+            // Arrange
+            DispatcherThread thread = new DispatcherThread(instance);
+            await thread.StartAsync();
+
+            // Act + Assert
+            instance.Send(new Action(() =>
+            {
+                Assert.Throws<InvalidOperationException>(() => instance.Shutdown(ThreadDispatcherShutdownMode.FinishPending));
+            }));
+
+            // Cleanup
+            await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
+        }
     }
 }

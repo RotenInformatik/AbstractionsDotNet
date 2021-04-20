@@ -785,91 +785,66 @@ namespace RI.Abstractions.Dispatcher
             bool isInThread;
             IThreadDispatcherOperation operation = null;
 
-            while (true)
+            lock (this.SyncRoot)
             {
-                lock (this.SyncRoot)
+                this.VerifyRunning();
+
+                if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
                 {
-                    if (operation == null)
-                    {
-                        this.VerifyRunning();
-                    }
-                    else if (!this.IsRunning)
-                    {
-                        return;
-                    }
-
-                    if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
-                    {
-                        return;
-                    }
-
-                    if (this.Queue.HighestPriority < priority)
-                    {
-                        return;
-                    }
-
-                    isInThread = this.IsInThread();
-                    operation = this.Post(null, priority, ThreadDispatcherOptions.None, new Action(() => { }));
+                    return;
                 }
 
-                if (isInThread)
+                if (this.Queue.HighestPriority < priority)
                 {
-                    this.ExecuteFrame(operation);
+                    return;
                 }
-                else
-                {
-                    operation.Wait();
-                }
+
+                isInThread = this.IsInThread();
+                operation = this.Post(null, priority, ThreadDispatcherOptions.None, new Action(() => { }));
+            }
+
+            if (isInThread)
+            {
+                this.ExecuteFrame(operation);
+            }
+            else
+            {
+                operation.Wait();
             }
         }
 
         /// <inheritdoc />
-        public async Task DoProcessingAsync (int priority)
+        public Task DoProcessingAsync (int priority)
         {
             if (priority < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(priority));
             }
 
-            bool isInThread;
-            IThreadDispatcherOperation operation = null;
+            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
 
-            while (true)
+            lock (this.SyncRoot)
             {
-                lock (this.SyncRoot)
+                this.VerifyRunning();
+                this.VerifyNotFromDispatcher(nameof(this.ShutdownAsync));
+
+                if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
                 {
-                    if (operation == null)
-                    {
-                        this.VerifyRunning();
-                    }
-                    else if (!this.IsRunning)
-                    {
-                        return;
-                    }
-
-                    if ((this.Queue.Count == 0) && (this.CurrentOperation.Count == 0))
-                    {
-                        return;
-                    }
-
-                    if (this.Queue.HighestPriority < priority)
-                    {
-                        return;
-                    }
-
-                    isInThread = this.IsInThread();
-                    operation = this.Post(null, priority, ThreadDispatcherOptions.None, new Action(() => { }));
+                    return Task.CompletedTask;
                 }
 
-                if (isInThread)
+                if (this.Queue.HighestPriority < priority)
                 {
-                    this.ExecuteFrame(operation);
+                    return Task.CompletedTask;
                 }
-                else
+
+                this.Post(null, priority, ThreadDispatcherOptions.None, new Action(() =>
                 {
-                   await operation.WaitAsync();
-                }
+                    tcs.SetResult(null);
+                }));
             }
+
+            return tcs.Task;
         }
 
         /// <inheritdoc />
@@ -959,7 +934,13 @@ namespace RI.Abstractions.Dispatcher
         /// <inheritdoc />
         public void WaitForShutdown ()
         {
-            Task task = this.WaitForShutdownAsync();
+            Task task;
+            lock (this.SyncRoot)
+            {
+                this.VerifyNotFromDispatcher(nameof(WaitForShutdown));
+                task = this.WaitForShutdownAsync();
+            }
+            
             task.Wait();
         }
 
@@ -970,6 +951,8 @@ namespace RI.Abstractions.Dispatcher
 
             lock (this.SyncRoot)
             {
+                this.VerifyNotFromDispatcher(nameof(WaitForShutdownAsync));
+
                 if (!this.IsRunning)
                 {
                     return Task.CompletedTask;
@@ -1126,6 +1109,7 @@ namespace RI.Abstractions.Dispatcher
             {
                 this.VerifyRunning();
                 this.VerifyNotShuttingDown(this.ShutdownMode);
+                this.VerifyNotFromDispatcher(nameof(this.SendAsync));
 
                 parameters ??= new object[0];
                 operation = this.Post(executionContext, priority, options, action, parameters);

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using RI.Abstractions.Dispatcher;
 
+using Xunit;
+
 
 
 
@@ -17,6 +19,7 @@ namespace RI.Abstractions.Tests.Utilities
             this.Dispatcher = dispatcher;
             this.Culture = culture ?? CultureInfo.InvariantCulture;
 
+            this.Exception = null;
             this.StartCommitted = new TaskCompletionSource<object>();
             this.StopCommitted = new TaskCompletionSource<object>();
 
@@ -40,16 +43,26 @@ namespace RI.Abstractions.Tests.Utilities
 
         private Thread Thread { get; }
 
+        private Exception Exception { get; set; }
+
         public IThreadDispatcher Dispatcher { get; }
 
         public async Task StartAsync ()
         {
+            this.Dispatcher.Exception += (sender, args) =>
+            {
+                if (this.Exception == null)
+                {
+                    this.Exception = args.Exception;
+                }
+            };
             this.Thread.Start();
             await this.StartCommitted.Task;
         }
 
         public async Task StopAsync (ThreadDispatcherShutdownMode shutdownMode)
         {
+            Assert.Null(this.Exception);
             lock (this.Dispatcher.SyncRoot)
             {
                 if ((!this.Dispatcher.IsShuttingDown) && this.Dispatcher.IsRunning)

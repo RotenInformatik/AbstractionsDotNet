@@ -106,6 +106,7 @@ namespace RI.Abstractions.Tests.Dispatcher
             instance.Post(5, new Action(() =>
             {
                 instance.DoProcessing();
+                Assert.Equal(5, count);
             }));
 
             instance.DoProcessing();

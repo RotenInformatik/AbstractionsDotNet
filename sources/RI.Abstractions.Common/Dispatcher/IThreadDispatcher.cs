@@ -179,6 +179,9 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         After the thread dispatcher is shut down, the keep-alive list must be cleared.
         ///     </note>
+        ///     <note type="implement">
+        ///         Must be callable from the dispatcher thread.
+        ///     </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="obj" /> is null. </exception>
         bool AddKeepAlive (object obj);
@@ -194,6 +197,9 @@ namespace RI.Abstractions.Dispatcher
         ///     <para>
         ///         <see cref="AddKeepAlive" /> for more details.
         ///     </para>
+        ///     <note type="implement">
+        ///         Must be callable from the dispatcher thread.
+        ///     </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="obj" /> is null. </exception>
         bool RemoveKeepAlive (object obj);
@@ -202,6 +208,11 @@ namespace RI.Abstractions.Dispatcher
         ///     Stops processing the delegate queue but does not wait for its shutdown.
         /// </summary>
         /// <param name="shutdownMode"> Specifies the used shutdown mode. </param>
+        /// <remarks>
+        ///     <note type="implement">
+        ///         Must be callable from the dispatcher thread.
+        ///     </note>
+        /// </remarks>
         /// <exception cref="ArgumentException"><paramref name="shutdownMode"/> is <see cref="ThreadDispatcherShutdownMode.None"/>.</exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running or it is already being shut down. </exception>
         void BeginShutdown (ThreadDispatcherShutdownMode shutdownMode);
@@ -241,10 +252,15 @@ namespace RI.Abstractions.Dispatcher
         ///     Waits until all queued operations of a specified priority have been processed.
         /// </summary>
         /// <param name="priority"> The priority. </param>
+        /// <remarks>
+        ///     <note type="implement">
+        ///         Must be callable from the dispatcher thread and can be therefore be cascaded.
+        ///     </note>
+        /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
         /// <exception cref="InvalidOperationException"> The dispatcher is not running. </exception>
         void DoProcessing (int priority);
-        
+
         /// <summary>
         ///     Waits until all queued operations of a specified priority have been processed.
         /// </summary>
@@ -252,8 +268,14 @@ namespace RI.Abstractions.Dispatcher
         /// <returns>
         ///     The task which can be used to await the completion of the processing.
         /// </returns>
+        /// <remarks>
+        ///     <note type="implement">
+        ///         <see cref="DoProcessingAsync" /> cannot be called from inside the dispatcher thread.
+        ///         Use <see cref="DoProcessing" /> from inside the dispatcher thread instead (it will cascade and therefore not block delegate execution).
+        ///     </note>
+        /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="priority" /> is less than zero. </exception>
-        /// <exception cref="InvalidOperationException"> The dispatcher is not running. </exception>
+        /// <exception cref="InvalidOperationException"> The dispatcher is not running or the method was called from the dispatcher thread itself. </exception>
         Task DoProcessingAsync (int priority);
 
         /// <summary>
@@ -290,8 +312,11 @@ namespace RI.Abstractions.Dispatcher
         /// <note type="implement">
         /// This method blocks indefinitely until the thread dispatcher has been shut down.
         /// </note>
+        ///     <note type="implement">
+        ///         <see cref="WaitForShutdown" /> cannot be called from inside the dispatcher thread.
+        ///     </note>
         /// </remarks>
-        /// <exception cref="InvalidOperationException">The dispatcher is not being shut down.</exception>
+        /// <exception cref="InvalidOperationException">The dispatcher is not being shut down or the method was called from the dispatcher thread itself.</exception>
         void WaitForShutdown();
 
         /// <summary>
@@ -301,8 +326,11 @@ namespace RI.Abstractions.Dispatcher
         /// <note type="implement">
         /// This method waits indefinitely until the thread dispatcher has been shut down.
         /// </note>
+        ///     <note type="implement">
+        ///         <see cref="WaitForShutdownAsync" /> cannot be called from inside the dispatcher thread.
+        ///     </note>
         /// </remarks>
-        /// <exception cref="InvalidOperationException">The dispatcher is not being shut down.</exception>
+        /// <exception cref="InvalidOperationException">The dispatcher is not being shut down or the method was called from the dispatcher thread itself.</exception>
         Task WaitForShutdownAsync();
 
         /// <summary>
@@ -391,7 +419,8 @@ namespace RI.Abstractions.Dispatcher
         ///         Blocks until the scheduled delegate and all previously enqueued delegates of higher or same priority were processed.
         ///     </para>
         ///     <note type="implement">
-        ///         Must be callable from the dispatcher thread and can be therefore be cascaded.
+        ///         <see cref="SendAsync" /> cannot be called from inside the dispatcher thread.
+        ///         Use <see cref="Send" /> from inside the dispatcher thread instead (it will cascade and therefore not block delegate execution).
         ///     </note>
         ///     <note type="implement">
         ///         <paramref name="timeout"/> and <paramref name="ct"/> are not used to cancel the execution of the delegate.

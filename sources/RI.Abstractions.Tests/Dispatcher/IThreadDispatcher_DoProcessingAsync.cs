@@ -20,35 +20,28 @@ namespace RI.Abstractions.Tests.Dispatcher
 
         [Theory]
         [MemberData(nameof(IThreadDispatcher_Post.GetDispatchers))]
-        public async Task DoProcessingAsync_SpecificSameThread_Success(IThreadDispatcher instance)
+        public async Task DoProcessingAsync_SpecificSameThread_InvalidOperationException(IThreadDispatcher instance)
         {
             // Arrange
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
-            int count = 0;
-            int finalCount = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
             {
                 instance.Post(i1, new Action(() =>
                 {
                     Thread.Sleep(100);
-                    count++;
                 }));
             }
 
             instance.Post(5, new Func<Task>(async () =>
             {
-                await instance.DoProcessingAsync(2);
-                finalCount = count;
+                Assert.ThrowsAsync<InvalidOperationException>(async () => await instance.DoProcessingAsync(2));
             }));
 
             instance.DoProcessing();
-
-            // Assert
-            Assert.Equal(3, finalCount);
 
             // Cleanup
             await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
@@ -69,7 +62,7 @@ namespace RI.Abstractions.Tests.Dispatcher
             {
                 instance.Post(i1, new Action(() =>
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(500);
                     count++;
                 }));
             }
@@ -85,36 +78,32 @@ namespace RI.Abstractions.Tests.Dispatcher
 
         [Theory]
         [MemberData(nameof(IThreadDispatcher_Post.GetDispatchers))]
-        public async Task DoProcessingAsync_AllSameThread_Success(IThreadDispatcher instance)
+        public async Task DoProcessingAsync_AllSameThread_InvalidOperationException(IThreadDispatcher instance)
         {
             // Arrange
             DispatcherThread thread = new DispatcherThread(instance);
             await thread.StartAsync();
 
             // Act
-            int count = 0;
 
             for (int i1 = 0; i1 < 5; i1++)
             {
                 instance.Post(i1, new Action(() =>
                 {
                     Thread.Sleep(100);
-                    count++;
                 }));
             }
 
             instance.Post(5, new Func<Task>(async () =>
             {
-                await instance.DoProcessingAsync();
+                Assert.ThrowsAsync<InvalidOperationException>(async () => await instance.DoProcessingAsync());
             }));
 
             instance.DoProcessing();
 
-            // Assert
-            Assert.Equal(5, count);
 
             // Cleanup
-            await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
+            await thread.StopAsync(ThreadDispatcherShutdownMode.FinishPending);
         }
 
         [Theory]
@@ -143,7 +132,7 @@ namespace RI.Abstractions.Tests.Dispatcher
             Assert.Equal(5, count);
 
             // Cleanup
-            await thread.StopAsync(ThreadDispatcherShutdownMode.DiscardPending);
+            await thread.StopAsync(ThreadDispatcherShutdownMode.FinishPending);
         }
     }
 }
