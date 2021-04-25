@@ -81,7 +81,7 @@ namespace RI.Abstractions.Tests.Logging
         public void Log_WithMessageAndNullArgs_NoException(ILogger instance)
         {
             // Act
-            instance.Log(DateTime.UtcNow, 0, LogLevel.Debug, null, null, "Message", (object[])null);
+            instance.Log(DateTime.UtcNow, 0, LogLevel.Debug, null, null, "Message", null);
         }
 
         [Theory]

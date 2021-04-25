@@ -2,6 +2,5 @@
 {
     public sealed class FakeServiceA : IFakeServiceA
     {
-        public FakeServiceA () { }
     }
 }

@@ -57,12 +57,13 @@ namespace RI.Abstractions.Builder
         ///     Called to perform the builder-specific registration check and completion (if any).
         /// </summary>
         /// <param name="logger"> The used logger. </param>
+        /// <param name="compositionContainer"> The used composition container. </param>
         /// <remarks>
         ///     <note type="implement">
         ///         The default implementation does nothing.
         ///     </note>
         /// </remarks>
-        protected virtual void PrepareRegistrations (ILogger logger) { }
+        protected virtual void PrepareRegistrations (ILogger logger, ICompositionContainer compositionContainer) { }
 
         #endregion
 
@@ -100,10 +101,10 @@ namespace RI.Abstractions.Builder
                 ILogger logger = this.GetInstance<ILogger>();
 
                 this.ThrowIfNotExactContractCount(typeof(ICompositionContainer), 1);
-                this.ThrowIfNotTemporary(typeof(ILogger));
+                this.ThrowIfNotTemporary(typeof(ICompositionContainer));
                 ICompositionContainer compositionContainer = this.GetInstance<ICompositionContainer>();
 
-                this.PrepareRegistrations(logger);
+                this.PrepareRegistrations(logger, compositionContainer);
 
                 logger.LogInformation(this.GetType()
                                           .Name, null, $"Registrations:{Environment.NewLine}{string.Join(Environment.NewLine, this.Registrations.Select(x => x.ToString()))}");

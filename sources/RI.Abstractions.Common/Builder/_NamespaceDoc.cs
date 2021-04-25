@@ -6,7 +6,7 @@
 namespace RI.Abstractions.Builder
 {
     /// <summary>
-    ///     Contains contracts and types to abstract builders.
+    ///     Contains contracts and types to abstract the builder pattern.
     /// </summary>
     [CompilerGenerated,]
     public sealed class NamespaceDoc { }

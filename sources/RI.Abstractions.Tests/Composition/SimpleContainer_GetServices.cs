@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 using RI.Abstractions.Composition;
-using RI.Abstractions.Tests.Fakes;
 
 using Xunit;
 
@@ -149,6 +149,7 @@ namespace RI.Abstractions.Tests.Composition
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "RedundantArgumentDefaultValue")]
         public static void GetServices_NotAlwaysTransient_ReturnsAll()
         {
             // Arrange
@@ -175,6 +176,7 @@ namespace RI.Abstractions.Tests.Composition
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "RedundantArgumentDefaultValue")]
         public static void GetServices_NotAlwaysSingleton_ReturnsAll()
         {
             // Arrange

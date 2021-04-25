@@ -3,22 +3,22 @@
 
   <HelpTOCNode Title="Start" Url="html/ccefe60f-e9ae-412d-88f8-5c9cd2c98a0a.htm" />
   <HelpTOCNode Title="Assemblies" Url="html/b63e72a8-f17e-48cb-be8f-5f34333c9c26.htm" />
-  <HelpTOCNode Id="aa88e413-8af6-452f-a402-a9a77b796634" Title="Namespaces" Url="html/12135CE0.htm">
-    <HelpTOCNode Id="270fdbc5-71ef-40db-98e0-28bf620e55f7" Title="RI.Abstractions.Builder" Url="html/3E0AEAFC.htm">
-      <HelpTOCNode Id="008f09c0-7b04-4aa1-8c0a-138fc49962c5" Title="BuilderBase Class" Url="html/7528C42A.htm">
+  <HelpTOCNode Id="b9d5f569-1cdf-4750-8396-2319debdb5fc" Title="Namespaces" Url="html/12135CE0.htm">
+    <HelpTOCNode Id="a72e5ac2-a3cf-4e03-8c8f-2c3cc2ccfd7b" Title="RI.Abstractions.Builder" Url="html/3E0AEAFC.htm">
+      <HelpTOCNode Id="f55c6ba8-c150-47e3-9ffe-3d30bbbc9c08" Title="BuilderBase Class" Url="html/7528C42A.htm">
         <HelpTOCNode Title="BuilderBase Constructor " Url="html/514A5B96.htm" />
-        <HelpTOCNode Id="cbefca5a-daac-469b-a6e2-4fb3e2d69701" Title="BuilderBase Properties" Url="html/403E0F3C.htm">
+        <HelpTOCNode Id="baf7eea0-c963-42b1-81b1-924af717ceef" Title="BuilderBase Properties" Url="html/403E0F3C.htm">
           <HelpTOCNode Title="AlreadyBuilt Property " Url="html/563CF07F.htm" />
           <HelpTOCNode Title="Registrations Property " Url="html/A16FC358.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="a32293e0-201e-4924-a21c-a4c6f77dade2" Title="BuilderBase Methods" Url="html/7684E339.htm">
+        <HelpTOCNode Id="13a4df3e-db9f-4646-be35-1531a2efb147" Title="BuilderBase Methods" Url="html/7684E339.htm">
           <HelpTOCNode Title="Build Method " Url="html/E12EB378.htm" />
           <HelpTOCNode Title="PerformRegistrations Method " Url="html/A9BCFB5.htm" />
           <HelpTOCNode Title="PrepareRegistrations Method " Url="html/CC50A1F6.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="7664aff9-4920-493c-82ca-81a817ed628f" Title="BuilderException Class" Url="html/48E6E027.htm">
-        <HelpTOCNode Id="ddee6ce7-cbe7-4562-b416-b1848f2c798e" Title="BuilderException Constructor " Url="html/A6CC2E37.htm">
+      <HelpTOCNode Id="2312eed4-5c9c-48c7-beb3-2c578a1ff1b9" Title="BuilderException Class" Url="html/48E6E027.htm">
+        <HelpTOCNode Id="da3d5ac5-beb8-41e2-bc56-d9125d5cd71b" Title="BuilderException Constructor " Url="html/A6CC2E37.htm">
           <HelpTOCNode Title="BuilderException Constructor " Url="html/86291EB6.htm" />
           <HelpTOCNode Title="BuilderException Constructor (Exception)" Url="html/E01E6444.htm" />
           <HelpTOCNode Title="BuilderException Constructor (String)" Url="html/E01C6444.htm" />
@@ -29,42 +29,42 @@
         <HelpTOCNode Title="BuilderException Methods" Url="html/6B9DD4AB.htm" />
         <HelpTOCNode Title="BuilderException Events" Url="html/72BAA12B.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="69879d10-8487-45ea-bf0e-3909a99e642e" Title="IBuilder Interface" Url="html/C458D183.htm">
-        <HelpTOCNode Id="2e7832fb-5aa1-4520-93da-832af12fd326" Title="IBuilder Properties" Url="html/DEE1F77A.htm">
+      <HelpTOCNode Id="5028fa38-0ebd-4887-8e20-c3a041cc9cc2" Title="IBuilder Interface" Url="html/C458D183.htm">
+        <HelpTOCNode Id="7dafd7e8-a005-4b7f-ba69-a2817583ce81" Title="IBuilder Properties" Url="html/DEE1F77A.htm">
           <HelpTOCNode Title="AlreadyBuilt Property " Url="html/268E80E6.htm" />
           <HelpTOCNode Title="Registrations Property " Url="html/62C7896C.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="6023f8c4-b346-4729-9a42-b4a76a1c55cb" Title="IBuilder Methods" Url="html/5F51AD4A.htm">
+        <HelpTOCNode Id="577efa38-f870-49f4-bbb0-7181fe3335b0" Title="IBuilder Methods" Url="html/5F51AD4A.htm">
           <HelpTOCNode Title="Build Method " Url="html/AB796984.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="4a586418-1015-4ea4-ad37-6e421f947634" Title="IBuilderExtensions Class" Url="html/81BA1765.htm">
-        <HelpTOCNode Id="13f1426d-a10c-471d-91a0-235c17ad3a5a" Title="IBuilderExtensions Methods" Url="html/E40ECB5C.htm">
-          <HelpTOCNode Id="f70e8952-f359-4fb0-af78-964a58c40e04" Title="AddDefaultSingleton Method " Url="html/33080040.htm">
+      <HelpTOCNode Id="eb3b0367-704c-4bf8-b290-41e34bddc00f" Title="IBuilderExtensions Class" Url="html/81BA1765.htm">
+        <HelpTOCNode Id="dd53c48d-b5f7-4f75-b4e3-a12a04f1ed2f" Title="IBuilderExtensions Methods" Url="html/E40ECB5C.htm">
+          <HelpTOCNode Id="fa444e56-027e-456e-bf7b-edfe1a66d712" Title="AddDefaultSingleton Method " Url="html/33080040.htm">
             <HelpTOCNode Title="AddDefaultSingleton Method (IBuilder, Type, Func(IServiceProvider, Object))" Url="html/56D16B05.htm" />
             <HelpTOCNode Title="AddDefaultSingleton Method (IBuilder, Type, Object)" Url="html/14A75160.htm" />
             <HelpTOCNode Title="AddDefaultSingleton Method (IBuilder, Type, Type)" Url="html/14A65160.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="b48ab851-7ccb-424d-a429-2aa08d27231e" Title="AddDefaultTemporary Method " Url="html/6193EC1.htm">
+          <HelpTOCNode Id="cb88a77a-02ea-4882-ad5b-8b46a127adb6" Title="AddDefaultTemporary Method " Url="html/6193EC1.htm">
             <HelpTOCNode Title="AddDefaultTemporary Method (IBuilder, Type, Func(IServiceProvider, Object))" Url="html/FABDB6BE.htm" />
             <HelpTOCNode Title="AddDefaultTemporary Method (IBuilder, Type, Object)" Url="html/ABB3AB57.htm" />
             <HelpTOCNode Title="AddDefaultTemporary Method (IBuilder, Type, Type)" Url="html/ABB6AB57.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="4b007373-3df5-4d80-a03c-d1863389b07d" Title="AddDefaultTransient Method " Url="html/FBA7869C.htm">
+          <HelpTOCNode Id="2375c38e-334e-44fe-9f59-55536ec0fd51" Title="AddDefaultTransient Method " Url="html/FBA7869C.htm">
             <HelpTOCNode Title="AddDefaultTransient Method (IBuilder, Type, Func(IServiceProvider, Object))" Url="html/C7CDE960.htm" />
             <HelpTOCNode Title="AddDefaultTransient Method (IBuilder, Type, Type)" Url="html/AAA3C141.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="302a610c-6f50-415f-83f4-4b65d3153fc8" Title="AddSingleton Method " Url="html/69480A03.htm">
+          <HelpTOCNode Id="6f076e46-8fcc-4f58-95d7-4929d7d3a9da" Title="AddSingleton Method " Url="html/69480A03.htm">
             <HelpTOCNode Title="AddSingleton Method (IBuilder, Type, Func(IServiceProvider, Object), Boolean)" Url="html/C5D7CB3E.htm" />
             <HelpTOCNode Title="AddSingleton Method (IBuilder, Type, Object, Boolean)" Url="html/E6D72465.htm" />
             <HelpTOCNode Title="AddSingleton Method (IBuilder, Type, Type, Boolean)" Url="html/FEE0C694.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="fe0b79e2-07db-4e10-b23a-d0592419ebdf" Title="AddTemporary Method " Url="html/A472CBB2.htm">
+          <HelpTOCNode Id="9e00b474-9027-4868-84d2-fa2791dd2919" Title="AddTemporary Method " Url="html/A472CBB2.htm">
             <HelpTOCNode Title="AddTemporary Method (IBuilder, Type, Func(IServiceProvider, Object))" Url="html/58D7513B.htm" />
             <HelpTOCNode Title="AddTemporary Method (IBuilder, Type, Object)" Url="html/3B2057C2.htm" />
             <HelpTOCNode Title="AddTemporary Method (IBuilder, Type, Type)" Url="html/5329F9F1.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="469bbc80-50ad-4363-8cbf-b6fe2a7a91db" Title="AddTransient Method " Url="html/F0D22F14.htm">
+          <HelpTOCNode Id="5d9e2905-a11c-45e3-b490-968c26e0407a" Title="AddTransient Method " Url="html/F0D22F14.htm">
             <HelpTOCNode Title="AddTransient Method (IBuilder, Type, Func(IServiceProvider, Object), Boolean)" Url="html/1A831CAC.htm" />
             <HelpTOCNode Title="AddTransient Method (IBuilder, Type, Type, Boolean)" Url="html/FC0BC542.htm" />
           </HelpTOCNode>
@@ -72,12 +72,12 @@
           <HelpTOCNode Title="CountContracts Method " Url="html/7C9D6DB5.htm" />
           <HelpTOCNode Title="GetContract Method " Url="html/9CFB6324.htm" />
           <HelpTOCNode Title="GetContracts Method " Url="html/1825B1DC.htm" />
-          <HelpTOCNode Id="6e4d36bc-b043-4867-ad15-fa43bb31597d" Title="GetInstance Method " Url="html/CC5AABF.htm">
+          <HelpTOCNode Id="5a3d49e7-a85c-473e-8278-c7710d351203" Title="GetInstance Method " Url="html/CC5AABF.htm">
             <HelpTOCNode Title="GetInstance(TContract) Method (IBuilder)" Url="html/EB778896.htm" />
             <HelpTOCNode Title="GetInstance Method (IBuilder, CompositionRegistration)" Url="html/58B07978.htm" />
             <HelpTOCNode Title="GetInstance Method (IBuilder, Type)" Url="html/CF8994DE.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="073b2881-9409-48df-8150-a0fa497dcc86" Title="GetInstances Method " Url="html/27BAAABF.htm">
+          <HelpTOCNode Id="d713e57f-bfa4-4de9-a183-85b806179758" Title="GetInstances Method " Url="html/27BAAABF.htm">
             <HelpTOCNode Title="GetInstances(TContract) Method (IBuilder)" Url="html/5F2FDA2E.htm" />
             <HelpTOCNode Title="GetInstances Method (IBuilder, Type)" Url="html/CF9A950A.htm" />
           </HelpTOCNode>
@@ -90,27 +90,40 @@
           <HelpTOCNode Title="ThrowIfNotMinContractCount Method " Url="html/6C8F5CB4.htm" />
           <HelpTOCNode Title="ThrowIfNotTemporary Method " Url="html/9D342830.htm" />
           <HelpTOCNode Title="ThrowIfTemporary Method " Url="html/D14F8EFD.htm" />
-          <HelpTOCNode Title="UseCallbackLogger(T) Method " Url="html/5A9900FB.htm" />
+          <HelpTOCNode Id="0a915a51-3b77-4ae1-a6af-66339cc738be" Title="UseCallbackLogger Method " Url="html/B13A994D.htm">
+            <HelpTOCNode Title="UseCallbackLogger(T) Method (T, CallbackLogger)" Url="html/5A9900FB.htm" />
+            <HelpTOCNode Title="UseCallbackLogger(T) Method (T, CallbackLoggerDelegate)" Url="html/D87CE66B.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="UseCompositionContainer(T) Method " Url="html/ACB3409F.htm" />
+          <HelpTOCNode Title="UseLogger(T) Method " Url="html/5BD7B465.htm" />
           <HelpTOCNode Title="UseNullLogger(T) Method " Url="html/F384E503.htm" />
-          <HelpTOCNode Title="UseSimpleContainer(T) Method " Url="html/F93760E3.htm" />
+          <HelpTOCNode Id="85beecb7-6b39-4e2a-ae46-d0c77ad48e2e" Title="UseSimpleContainer Method " Url="html/DA96A84A.htm">
+            <HelpTOCNode Title="UseSimpleContainer(T) Method (T)" Url="html/F93760E3.htm" />
+            <HelpTOCNode Title="UseSimpleContainer(T) Method (T, SimpleContainer)" Url="html/8D8A074F.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="1544282b-d2cb-43b0-9a0d-880450a48b4a" Title="UseSimpleDispatcher Method " Url="html/4CF29421.htm">
+            <HelpTOCNode Title="UseSimpleDispatcher(T) Method (T)" Url="html/86843EB0.htm" />
+            <HelpTOCNode Title="UseSimpleDispatcher(T) Method (T, SimpleDispatcher)" Url="html/5AE31097.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="UseThreadDispatcher(T) Method " Url="html/1B885DF3.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="d3cfeadc-7e2a-4d07-872d-101f72373d5a" Title="LoggerBuilderExtensions Class" Url="html/514EAA30.htm">
-        <HelpTOCNode Id="f15e8c7c-0153-4aae-a658-a064da7fb539" Title="LoggerBuilderExtensions Methods" Url="html/34FCDFF8.htm">
+      <HelpTOCNode Id="072be656-577c-4a60-8ad9-7dbc38bc7504" Title="LoggerBuilderExtensions Class" Url="html/514EAA30.htm">
+        <HelpTOCNode Id="cbbb4ee6-a0e1-467c-965a-5a4851c337f1" Title="LoggerBuilderExtensions Methods" Url="html/34FCDFF8.htm">
           <HelpTOCNode Title="UseLogger(T) Method " Url="html/3244F77E.htm" />
           <HelpTOCNode Title="UseLoggerFactory(T) Method " Url="html/72D6E511.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="bdeed5f6-a59d-460b-9710-ceba47a91fe7" Title="ServiceCollectionBuilderExtensions Class" Url="html/91EEAFB0.htm">
-        <HelpTOCNode Id="0aa54ad4-b158-4673-8837-bd59c503b54b" Title="ServiceCollectionBuilderExtensions Methods" Url="html/58F24832.htm">
+      <HelpTOCNode Id="12f71414-8c67-41f0-876e-0277798c88e5" Title="ServiceCollectionBuilderExtensions Class" Url="html/91EEAFB0.htm">
+        <HelpTOCNode Id="b097d8b3-2a05-4b13-8af0-76540d717ba0" Title="ServiceCollectionBuilderExtensions Methods" Url="html/58F24832.htm">
           <HelpTOCNode Title="UseServiceCollection(T) Method " Url="html/9BF2F25A.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="0a59485f-aa4d-4dae-80c3-d6952e355a93" Title="RI.Abstractions.Composition" Url="html/D03F23CF.htm">
-      <HelpTOCNode Id="0c8e4cfd-95a6-402c-a94e-bcb8a7218831" Title="CompositionRegistration Class" Url="html/B7909C8D.htm">
+    <HelpTOCNode Id="933d8cec-dbf1-4330-8491-9c0185863bb7" Title="RI.Abstractions.Composition" Url="html/D03F23CF.htm">
+      <HelpTOCNode Id="2552e806-91a8-4dca-a88c-d36bbdda463a" Title="CompositionRegistration Class" Url="html/B7909C8D.htm">
         <HelpTOCNode Title="CompositionRegistration Constructor " Url="html/89843702.htm" />
-        <HelpTOCNode Id="0d88ce48-b35b-4d39-96f8-d44e095c3188" Title="CompositionRegistration Properties" Url="html/47555BAB.htm">
+        <HelpTOCNode Id="e03048c0-e2d7-4ef7-a259-61158185066e" Title="CompositionRegistration Properties" Url="html/47555BAB.htm">
           <HelpTOCNode Title="AlwaysRegister Property " Url="html/5B012CC8.htm" />
           <HelpTOCNode Title="Contract Property " Url="html/BFB34832.htm" />
           <HelpTOCNode Title="Factory Property " Url="html/D4BA3423.htm" />
@@ -118,71 +131,389 @@
           <HelpTOCNode Title="Instance Property " Url="html/DC025C82.htm" />
           <HelpTOCNode Title="Mode Property " Url="html/E6C0C476.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="b9fc6252-8622-454b-b41e-26981e999ef2" Title="CompositionRegistration Methods" Url="html/CB5BEBB9.htm">
+        <HelpTOCNode Id="cecc6a83-a4e5-473c-b4da-6c9342ad79b9" Title="CompositionRegistration Methods" Url="html/CB5BEBB9.htm">
           <HelpTOCNode Title="GetOrCreateInstance Method " Url="html/542F5588.htm" />
-          <HelpTOCNode Id="e99f7642-5365-4ea3-a02c-3beda8e24610" Title="Singleton Method " Url="html/29D7A5FC.htm">
+          <HelpTOCNode Id="f7aa79b7-0af7-4929-b825-e634e94caf87" Title="Singleton Method " Url="html/29D7A5FC.htm">
             <HelpTOCNode Title="Singleton Method (Type, Func(IServiceProvider, Object), Boolean)" Url="html/1125525B.htm" />
             <HelpTOCNode Title="Singleton Method (Type, Object, Boolean)" Url="html/84185413.htm" />
             <HelpTOCNode Title="Singleton Method (Type, Type, Boolean)" Url="html/84185410.htm" />
           </HelpTOCNode>
-          <HelpTOCNode Id="175ee24b-67f8-4bda-b458-51c80bd5cfe5" Title="Temporary Method " Url="html/F0206E1D.htm">
+          <HelpTOCNode Id="cd1520b6-637b-4366-bf64-cdab62f72f9b" Title="Temporary Method " Url="html/F0206E1D.htm">
             <HelpTOCNode Title="Temporary Method (Type, Func(IServiceProvider, Object))" Url="html/6F64713F.htm" />
             <HelpTOCNode Title="Temporary Method (Type, Object)" Url="html/A9257896.htm" />
             <HelpTOCNode Title="Temporary Method (Type, Type)" Url="html/A9257895.htm" />
           </HelpTOCNode>
           <HelpTOCNode Title="ToString Method " Url="html/5DF1274F.htm" />
-          <HelpTOCNode Id="f477b5db-f5b7-4dee-87c0-a0c6cc6854d4" Title="Transient Method " Url="html/10125405.htm">
+          <HelpTOCNode Id="bce5f14f-eb6a-4905-95c8-0a07ff7fce0f" Title="Transient Method " Url="html/10125405.htm">
             <HelpTOCNode Title="Transient Method (Type, Func(IServiceProvider, Object), Boolean)" Url="html/1A301E49.htm" />
             <HelpTOCNode Title="Transient Method (Type, Type, Boolean)" Url="html/A2914EA0.htm" />
           </HelpTOCNode>
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="CompositionRegistrationMode Enumeration" Url="html/3DDC023E.htm" />
-      <HelpTOCNode Id="3f7bc6f0-332b-43d9-a263-a7fb41c549fc" Title="ICompositionContainer Interface" Url="html/EE81BBD4.htm">
-        <HelpTOCNode Id="c4e8b972-0790-4c98-8a70-0f81a1607c35" Title="ICompositionContainer Properties" Url="html/D4293726.htm">
+      <HelpTOCNode Id="431f66bb-330c-4b1e-87bc-778edb4d9157" Title="ICompositionContainer Interface" Url="html/EE81BBD4.htm">
+        <HelpTOCNode Id="4a1695cc-2fad-434e-9222-68d56bf173e0" Title="ICompositionContainer Properties" Url="html/D4293726.htm">
           <HelpTOCNode Title="Registered Property " Url="html/5CA36DD6.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="e8ef8a0d-e3be-424a-8a83-bd78ec3d026e" Title="ICompositionContainer Methods" Url="html/ACEF27C8.htm">
+        <HelpTOCNode Id="34ccdeed-b326-4edb-9c5b-a8627c95a3b5" Title="ICompositionContainer Methods" Url="html/ACEF27C8.htm">
           <HelpTOCNode Title="Register Method " Url="html/18FD7510.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="2b22fc8d-23ac-471c-a392-ddcc5d471258" Title="ServiceCollectionCompositionContainer Class" Url="html/E96CBE22.htm">
+      <HelpTOCNode Id="98e71870-cfbd-4a5c-97cd-ac177f361fd4" Title="ServiceCollectionCompositionContainer Class" Url="html/E96CBE22.htm">
         <HelpTOCNode Title="ServiceCollectionCompositionContainer Constructor " Url="html/8FE2B195.htm" />
-        <HelpTOCNode Id="5b3667b4-c6d7-4b6e-b4fe-b44e08dd5115" Title="ServiceCollectionCompositionContainer Properties" Url="html/E5F827E.htm">
+        <HelpTOCNode Id="6e8e3a5f-edd6-42c7-8c4c-2897aa0bc4ab" Title="ServiceCollectionCompositionContainer Properties" Url="html/E5F827E.htm">
           <HelpTOCNode Title="Registered Property " Url="html/6C3C01EA.htm" />
           <HelpTOCNode Title="UsedServiceCollection Property " Url="html/3511C431.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="e4452ac0-f67d-424a-a515-b736330b0851" Title="ServiceCollectionCompositionContainer Methods" Url="html/7A323010.htm">
+        <HelpTOCNode Id="1ba01fd1-0991-4686-8f47-fdd5d5a41b60" Title="ServiceCollectionCompositionContainer Methods" Url="html/7A323010.htm">
           <HelpTOCNode Title="Register Method " Url="html/BE26F9B.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="55e993d1-999d-4c5e-aed8-dcf3bd99caae" Title="SimpleContainer Class" Url="html/C20E6224.htm">
+      <HelpTOCNode Id="910ed78c-c537-4e80-afdb-41924d686955" Title="SimpleContainer Class" Url="html/C20E6224.htm">
         <HelpTOCNode Title="SimpleContainer Constructor " Url="html/FC149130.htm" />
-        <HelpTOCNode Id="15c63823-28df-4156-a8cf-be0b14d22c6d" Title="SimpleContainer Properties" Url="html/228B43AF.htm">
+        <HelpTOCNode Id="f06b9632-93c7-441a-b2df-d22f8f862dd6" Title="SimpleContainer Properties" Url="html/228B43AF.htm">
           <HelpTOCNode Title="Registered Property " Url="html/6548460.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="4e2de6b2-c36b-4c0d-b565-ff99f5191ad9" Title="SimpleContainer Methods" Url="html/3D46419F.htm">
+        <HelpTOCNode Id="a48a40ca-2b0c-41fb-8e32-ccdd8ebbe0bb" Title="SimpleContainer Methods" Url="html/3D46419F.htm">
           <HelpTOCNode Title="GetService Method " Url="html/88E4101A.htm" />
           <HelpTOCNode Title="GetServices Method " Url="html/CDB610E7.htm" />
           <HelpTOCNode Title="Register Method " Url="html/4D19DEAC.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="dd8015d0-2057-4574-aabf-0b34c7c5f5a2" Title="RI.Abstractions.Logging" Url="html/9F31A172.htm">
-      <HelpTOCNode Id="62677302-7c0c-4766-807b-170233a8e465" Title="CallbackLogger Class" Url="html/41B44732.htm">
+    <HelpTOCNode Id="1d53cdf4-3e52-458e-8178-446b6270a40c" Title="RI.Abstractions.Dispatcher" Url="html/6BA05B2D.htm">
+      <HelpTOCNode Id="abe13c17-cad6-4929-a67d-f1e527b3b2b8" Title="IThreadDispatcher Interface" Url="html/1CAB5269.htm">
+        <HelpTOCNode Id="1cae39c4-37f2-43ee-a589-b64108790e33" Title="IThreadDispatcher Properties" Url="html/7E77E42A.htm">
+          <HelpTOCNode Title="CatchExceptions Property " Url="html/81E10C0.htm" />
+          <HelpTOCNode Title="DefaultOptions Property " Url="html/5031AB3E.htm" />
+          <HelpTOCNode Title="DefaultPriority Property " Url="html/538CA220.htm" />
+          <HelpTOCNode Title="IsRunning Property " Url="html/6B9BB866.htm" />
+          <HelpTOCNode Title="IsShuttingDown Property " Url="html/A847BFED.htm" />
+          <HelpTOCNode Title="ShutdownMode Property " Url="html/66D5BA95.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/E9E9CD9A.htm" />
+          <HelpTOCNode Title="WatchdogTimeout Property " Url="html/28A39D41.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="a134ff6c-88f3-4683-a6ae-556d0b558000" Title="IThreadDispatcher Methods" Url="html/5ED4C43D.htm">
+          <HelpTOCNode Title="AddKeepAlive Method " Url="html/DB5995F2.htm" />
+          <HelpTOCNode Title="BeginShutdown Method " Url="html/C84F0EB8.htm" />
+          <HelpTOCNode Title="DoProcessing Method " Url="html/89B44CAC.htm" />
+          <HelpTOCNode Title="DoProcessingAsync Method " Url="html/AFCAED21.htm" />
+          <HelpTOCNode Title="GetCurrentOptions Method " Url="html/E7DA373A.htm" />
+          <HelpTOCNode Title="GetCurrentPriority Method " Url="html/2D69F311.htm" />
+          <HelpTOCNode Title="IsInThread Method " Url="html/92F1233A.htm" />
+          <HelpTOCNode Title="Post Method " Url="html/7BFB9D1A.htm" />
+          <HelpTOCNode Title="PostDelayed Method " Url="html/2E1986BB.htm" />
+          <HelpTOCNode Title="RemoveKeepAlive Method " Url="html/4F1EA336.htm" />
+          <HelpTOCNode Title="Run Method " Url="html/DDACA501.htm" />
+          <HelpTOCNode Title="Send Method " Url="html/AE82E6D4.htm" />
+          <HelpTOCNode Title="SendAsync Method " Url="html/98264B36.htm" />
+          <HelpTOCNode Title="Shutdown Method " Url="html/1170CA4F.htm" />
+          <HelpTOCNode Title="ShutdownAsync Method " Url="html/F17BD799.htm" />
+          <HelpTOCNode Title="WaitForShutdown Method " Url="html/7D12D4E1.htm" />
+          <HelpTOCNode Title="WaitForShutdownAsync Method " Url="html/4CB170A4.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="2068c70f-eb16-4c6f-a301-27399de93c04" Title="IThreadDispatcher Events" Url="html/33E0F308.htm">
+          <HelpTOCNode Title="Exception Event" Url="html/B55651C5.htm" />
+          <HelpTOCNode Title="Idle Event" Url="html/8DC38CD.htm" />
+          <HelpTOCNode Title="Watchdog Event" Url="html/B59F305B.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="6d6b5181-aa8d-489e-96ff-b249f8d2bc3a" Title="IThreadDispatcherExtensions Class" Url="html/EF2C7FC0.htm">
+        <HelpTOCNode Id="143555ba-fcd7-4ab8-83a2-c5cc763ba4fc" Title="IThreadDispatcherExtensions Methods" Url="html/422949C5.htm">
+          <HelpTOCNode Title="CreateAwaiter Method " Url="html/28B00C48.htm" />
+          <HelpTOCNode Title="CreateSynchronizationContext Method " Url="html/EB56C05C.htm" />
+          <HelpTOCNode Title="CreateTaskFactory Method " Url="html/DB3C39C1.htm" />
+          <HelpTOCNode Title="CreateTaskScheduler Method " Url="html/B360D7E9.htm" />
+          <HelpTOCNode Title="DoProcessing Method " Url="html/B78D87C.htm" />
+          <HelpTOCNode Title="DoProcessingAsync Method " Url="html/9229036A.htm" />
+          <HelpTOCNode Title="GetAwaiter Method " Url="html/BABD5C4B.htm" />
+          <HelpTOCNode Id="cee9cb48-eb72-4957-a24f-478a580fb3d8" Title="GetCurrentOptionsOrDefault Method " Url="html/4A9FBBD6.htm">
+            <HelpTOCNode Title="GetCurrentOptionsOrDefault Method (IThreadDispatcher)" Url="html/AEE14E92.htm" />
+            <HelpTOCNode Title="GetCurrentOptionsOrDefault Method (IThreadDispatcher, Nullable(ThreadDispatcherOptions))" Url="html/2C96ECA4.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="caa73f32-dd2a-4550-874f-e2b6f1fa85fc" Title="GetCurrentPriorityOrDefault Method " Url="html/C921A552.htm">
+            <HelpTOCNode Title="GetCurrentPriorityOrDefault Method (IThreadDispatcher)" Url="html/3B80BDD4.htm" />
+            <HelpTOCNode Title="GetCurrentPriorityOrDefault Method (IThreadDispatcher, Nullable(Int32))" Url="html/E951BF29.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="dfa18c08-f604-4d45-8798-977fdde29c7e" Title="Post Method " Url="html/C67DC355.htm">
+            <HelpTOCNode Title="Post Method (IThreadDispatcher, Delegate, Object[])" Url="html/CF045538.htm" />
+            <HelpTOCNode Title="Post Method (IThreadDispatcher, ThreadDispatcherOptions, Delegate, Object[])" Url="html/D678C935.htm" />
+            <HelpTOCNode Title="Post Method (IThreadDispatcher, Int32, Delegate, Object[])" Url="html/14533E6E.htm" />
+            <HelpTOCNode Title="Post Method (IThreadDispatcher, Int32, ThreadDispatcherOptions, Delegate, Object[])" Url="html/B6FAB309.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="356e4f0f-09d1-496f-8da0-a6d684223b9b" Title="PostDelayed Method " Url="html/531271E0.htm">
+            <HelpTOCNode Title="PostDelayed Method (IThreadDispatcher, ThreadDispatcherTimerMode, Int32, Delegate, Object[])" Url="html/2388570A.htm" />
+            <HelpTOCNode Title="PostDelayed Method (IThreadDispatcher, ThreadDispatcherTimerMode, Int32, ThreadDispatcherOptions, Delegate, Object[])" Url="html/7BA99D0D.htm" />
+            <HelpTOCNode Title="PostDelayed Method (IThreadDispatcher, ThreadDispatcherTimerMode, Int32, Int32, Delegate, Object[])" Url="html/2386570A.htm" />
+            <HelpTOCNode Title="PostDelayed Method (IThreadDispatcher, ThreadDispatcherTimerMode, Int32, Int32, ThreadDispatcherOptions, Delegate, Object[])" Url="html/2387570A.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="55ea32cf-344c-45e0-b7bc-54ea89469cdf" Title="Send Method " Url="html/8F456AD3.htm">
+            <HelpTOCNode Title="Send Method (IThreadDispatcher, Delegate, Object[])" Url="html/6F61F1CA.htm" />
+            <HelpTOCNode Title="Send Method (IThreadDispatcher, ThreadDispatcherOptions, Delegate, Object[])" Url="html/ED4B84E7.htm" />
+            <HelpTOCNode Title="Send Method (IThreadDispatcher, Int32, Delegate, Object[])" Url="html/2A130894.htm" />
+            <HelpTOCNode Title="Send Method (IThreadDispatcher, Int32, ThreadDispatcherOptions, Delegate, Object[])" Url="html/CCBA7D2F.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="3552658e-a36e-4563-ab11-a86738d6c04d" Title="SendAsync Method " Url="html/677ECB79.htm">
+            <HelpTOCNode Title="SendAsync Method (IThreadDispatcher, Delegate, Object[])" Url="html/57A3EAD6.htm" />
+            <HelpTOCNode Title="SendAsync Method (IThreadDispatcher, ThreadDispatcherOptions, Delegate, Object[])" Url="html/7593C28C.htm" />
+            <HelpTOCNode Title="SendAsync Method (IThreadDispatcher, Int32, Delegate, Object[])" Url="html/6E6DEAD6.htm" />
+            <HelpTOCNode Title="SendAsync Method (IThreadDispatcher, Int32, ThreadDispatcherOptions, Delegate, Object[])" Url="html/F9D2EAD6.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="8304c4ca-0d77-40dd-8b8f-5aafec8ba568" Title="IThreadDispatcherOperation Interface" Url="html/414177BC.htm">
+        <HelpTOCNode Id="ec70e353-db7c-4c09-b3ea-1a0bcc0e2dd0" Title="IThreadDispatcherOperation Properties" Url="html/28EDCD5C.htm">
+          <HelpTOCNode Title="Dispatched Property " Url="html/7E41ACD2.htm" />
+          <HelpTOCNode Title="Exception Property " Url="html/8A1F907B.htm" />
+          <HelpTOCNode Title="FirstExecution Property " Url="html/86265E7B.htm" />
+          <HelpTOCNode Title="LastExecution Property " Url="html/231C7567.htm" />
+          <HelpTOCNode Title="Result Property " Url="html/828ADD22.htm" />
+          <HelpTOCNode Title="State Property " Url="html/26CC7C90.htm" />
+          <HelpTOCNode Title="WatchdogEvents Property " Url="html/35408B89.htm" />
+          <HelpTOCNode Title="WatchdogTime Property " Url="html/8E155E6A.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="1f30e69f-086c-4e00-af73-743861cd1bca" Title="IThreadDispatcherOperation Methods" Url="html/9EA8F817.htm">
+          <HelpTOCNode Title="Cancel Method " Url="html/2B5DD0E9.htm" />
+          <HelpTOCNode Title="Wait Method " Url="html/63CF3500.htm" />
+          <HelpTOCNode Title="WaitAsync Method " Url="html/D7940656.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="70f78796-b258-48d9-9eef-156341d31db9" Title="IThreadDispatcherOperationExtensions Class" Url="html/3ABAAF03.htm">
+        <HelpTOCNode Id="3af7a030-be7f-4d01-84f3-6f36906c64cb" Title="IThreadDispatcherOperationExtensions Methods" Url="html/218F2130.htm">
+          <HelpTOCNode Title="IsDone Method " Url="html/D480723A.htm" />
+          <HelpTOCNode Id="2f7e5fc9-8c7d-4d10-8683-3ebef200c9ef" Title="Wait Method " Url="html/2008BA9B.htm">
+            <HelpTOCNode Title="Wait Method (IThreadDispatcherOperation)" Url="html/B2A983E9.htm" />
+            <HelpTOCNode Title="Wait Method (IThreadDispatcherOperation, Int32)" Url="html/6DA69CAA.htm" />
+            <HelpTOCNode Title="Wait Method (IThreadDispatcherOperation, CancellationToken)" Url="html/56DC9CAA.htm" />
+            <HelpTOCNode Title="Wait Method (IThreadDispatcherOperation, TimeSpan)" Url="html/269F9CAA.htm" />
+            <HelpTOCNode Title="Wait Method (IThreadDispatcherOperation, Int32, CancellationToken)" Url="html/E2419CAA.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="6bb79b47-0288-43f4-843c-2bc77a396f9b" Title="WaitAsync Method " Url="html/7F0573D3.htm">
+            <HelpTOCNode Title="WaitAsync Method (IThreadDispatcherOperation)" Url="html/58DE0C8C.htm" />
+            <HelpTOCNode Title="WaitAsync Method (IThreadDispatcherOperation, Int32)" Url="html/6E02916E.htm" />
+            <HelpTOCNode Title="WaitAsync Method (IThreadDispatcherOperation, CancellationToken)" Url="html/6E02916C.htm" />
+            <HelpTOCNode Title="WaitAsync Method (IThreadDispatcherOperation, TimeSpan)" Url="html/6E029171.htm" />
+            <HelpTOCNode Title="WaitAsync Method (IThreadDispatcherOperation, Int32, CancellationToken)" Url="html/6E02916B.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="4302b023-4610-419b-a890-5a5b2d5379a8" Title="IThreadDispatcherRunnable Interface" Url="html/52ABA218.htm">
+        <HelpTOCNode Id="790ce01e-3cb6-402b-b9e1-dd1aa1ba7d81" Title="IThreadDispatcherRunnable Properties" Url="html/9430B073.htm">
+          <HelpTOCNode Title="Action Property " Url="html/468775FF.htm" />
+          <HelpTOCNode Title="Dispatcher Property " Url="html/7EF47836.htm" />
+          <HelpTOCNode Title="ExecutionContext Property " Url="html/B0354DE3.htm" />
+          <HelpTOCNode Title="Options Property " Url="html/C5867770.htm" />
+          <HelpTOCNode Title="Priority Property " Url="html/7582AD7.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/9D76168F.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="0b821572-96c4-4a9d-9542-b4e6f06566c3" Title="IThreadDispatcherRunnable Methods" Url="html/516376D6.htm">
+          <HelpTOCNode Title="GetParameters Method " Url="html/4BBDAAB.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="31ff9dd9-f9a3-4e7d-9f8a-80fd28d668c0" Title="IThreadDispatcherRunnableExtensions Class" Url="html/EF9A2B4C.htm">
+        <HelpTOCNode Id="9b7bf0b6-e630-4bb3-b52d-268701dccfb1" Title="IThreadDispatcherRunnableExtensions Methods" Url="html/62E47E00.htm">
+          <HelpTOCNode Title="ExecuteImmediately Method " Url="html/E80C80D3.htm" />
+          <HelpTOCNode Title="PostManually Method " Url="html/BC0B4EA0.htm" />
+          <HelpTOCNode Id="ef0c6df5-6e23-4ed4-b0e6-783c957e72e5" Title="SendManually Method " Url="html/9A22C172.htm">
+            <HelpTOCNode Title="SendManually Method (IThreadDispatcherRunnable)" Url="html/E40D04D8.htm" />
+            <HelpTOCNode Title="SendManually Method (IThreadDispatcherRunnable, TimeSpan, CancellationToken)" Url="html/25973A7B.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Id="2ba661fa-07e3-42dd-8e44-d4c7eef0230c" Title="SendManuallyAsync Method " Url="html/55E39C29.htm">
+            <HelpTOCNode Title="SendManuallyAsync Method (IThreadDispatcherRunnable)" Url="html/31867F9B.htm" />
+            <HelpTOCNode Title="SendManuallyAsync Method (IThreadDispatcherRunnable, TimeSpan, CancellationToken)" Url="html/77943EF5.htm" />
+          </HelpTOCNode>
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="b73127b9-9b2e-49a9-9b73-e738e677044a" Title="IThreadDispatcherTimer Interface" Url="html/EBC0810.htm">
+        <HelpTOCNode Id="6421b73b-43ca-4e46-ad0f-138d8c62ef73" Title="IThreadDispatcherTimer Properties" Url="html/59B7237C.htm">
+          <HelpTOCNode Title="ExecutionCount Property " Url="html/72A04B1E.htm" />
+          <HelpTOCNode Title="Interval Property " Url="html/6830F4A2.htm" />
+          <HelpTOCNode Title="IsRunning Property " Url="html/BC15F6E8.htm" />
+          <HelpTOCNode Title="MissCount Property " Url="html/615A2DA3.htm" />
+          <HelpTOCNode Title="Mode Property " Url="html/4E7BB72C.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="f2c20f56-09b4-4926-8d23-07a2e86bfad6" Title="IThreadDispatcherTimer Methods" Url="html/AED2E56B.htm">
+          <HelpTOCNode Title="Start Method " Url="html/7622AECC.htm" />
+          <HelpTOCNode Title="Stop Method " Url="html/8D709FAC.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="b5d13390-a79f-4765-b96a-95e7c062fb01" Title="IThreadDispatcherTimerExtensions Class" Url="html/BF8DEE0.htm">
+        <HelpTOCNode Id="7b670700-8668-438a-b346-9065b7f2fb22" Title="IThreadDispatcherTimerExtensions Methods" Url="html/F1ACF163.htm">
+          <HelpTOCNode Id="921503b1-9d63-4319-8574-1bdb56c4423a" Title="ReStart Method " Url="html/451A4D6C.htm">
+            <HelpTOCNode Title="ReStart Method (IThreadDispatcherTimer)" Url="html/611FEA80.htm" />
+            <HelpTOCNode Title="ReStart Method (IThreadDispatcherTimer, TimeSpan)" Url="html/9A519BBA.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Start Method " Url="html/9B89DBB8.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="fee5de93-e409-44d6-84a9-cf1c707ce6bf" Title="SimpleDispatcher Class" Url="html/208D86AA.htm">
+        <HelpTOCNode Title="SimpleDispatcher Constructor " Url="html/D698D46A.htm" />
+        <HelpTOCNode Id="79aed58a-f5dd-4473-9e6a-f0950b3ac579" Title="SimpleDispatcher Properties" Url="html/6C580544.htm">
+          <HelpTOCNode Title="ISynchronizeInvoke.InvokeRequired Property " Url="html/B1B33264.htm" />
+          <HelpTOCNode Title="CatchExceptions Property " Url="html/74660A97.htm" />
+          <HelpTOCNode Title="DefaultOptions Property " Url="html/204CA81A.htm" />
+          <HelpTOCNode Title="DefaultPriority Property " Url="html/291C3FD6.htm" />
+          <HelpTOCNode Title="IsRunning Property " Url="html/A76247F.htm" />
+          <HelpTOCNode Title="IsShuttingDown Property " Url="html/E923725F.htm" />
+          <HelpTOCNode Title="ShutdownMode Property " Url="html/DF821C63.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/F776F54D.htm" />
+          <HelpTOCNode Title="WatchdogTimeout Property " Url="html/7CE9776E.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="4b844f2f-44b4-4c39-a62d-abd5add37865" Title="SimpleDispatcher Methods" Url="html/91E1F61.htm">
+          <HelpTOCNode Title="ISynchronizeInvoke.BeginInvoke Method " Url="html/F362E0F7.htm" />
+          <HelpTOCNode Title="IDisposable.Dispose Method " Url="html/BBDE8B76.htm" />
+          <HelpTOCNode Title="ISynchronizeInvoke.EndInvoke Method " Url="html/459E920A.htm" />
+          <HelpTOCNode Title="ISynchronizeInvoke.Invoke Method " Url="html/E1966A8F.htm" />
+          <HelpTOCNode Title="AddKeepAlive Method " Url="html/421A7089.htm" />
+          <HelpTOCNode Title="BeginShutdown Method " Url="html/F2DB62E.htm" />
+          <HelpTOCNode Title="DoProcessing Method " Url="html/88D6036A.htm" />
+          <HelpTOCNode Title="DoProcessingAsync Method " Url="html/14967C21.htm" />
+          <HelpTOCNode Title="Finalize Method " Url="html/8759676F.htm" />
+          <HelpTOCNode Title="GetCurrentOptions Method " Url="html/F071621C.htm" />
+          <HelpTOCNode Title="GetCurrentPriority Method " Url="html/7186B906.htm" />
+          <HelpTOCNode Title="IsInThread Method " Url="html/2F2438D9.htm" />
+          <HelpTOCNode Title="Post Method " Url="html/39ECE3A7.htm" />
+          <HelpTOCNode Title="PostDelayed Method " Url="html/C217292F.htm" />
+          <HelpTOCNode Title="RemoveKeepAlive Method " Url="html/AF5C6B38.htm" />
+          <HelpTOCNode Title="Run Method " Url="html/AFF3FA66.htm" />
+          <HelpTOCNode Title="Send Method " Url="html/9476F01.htm" />
+          <HelpTOCNode Title="SendAsync Method " Url="html/34BF5C6D.htm" />
+          <HelpTOCNode Title="Shutdown Method " Url="html/E40F74F4.htm" />
+          <HelpTOCNode Title="ShutdownAsync Method " Url="html/9B9F6CE.htm" />
+          <HelpTOCNode Title="WaitForShutdown Method " Url="html/2858B21D.htm" />
+          <HelpTOCNode Title="WaitForShutdownAsync Method " Url="html/252D1F53.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="0159e41f-ed60-47df-babc-991e5e94a6fd" Title="SimpleDispatcher Events" Url="html/D1851388.htm">
+          <HelpTOCNode Title="Exception Event" Url="html/95144A79.htm" />
+          <HelpTOCNode Title="Idle Event" Url="html/E75B18A8.htm" />
+          <HelpTOCNode Title="Watchdog Event" Url="html/F5D02B3B.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="01ee738e-fb05-4da2-8c61-6d3d71414c88" Title="SimpleDispatcher Fields" Url="html/BE1F0E1F.htm">
+          <HelpTOCNode Title="DefaultOptionsValue Field" Url="html/217C3907.htm" />
+          <HelpTOCNode Title="DefaultPriorityValue Field" Url="html/72FFDEAF.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="97dbafc2-dadc-42fc-bbbc-a5d9869cfcb1" Title="ThreadDispatcherAwaiter Class" Url="html/DF112AFE.htm">
+        <HelpTOCNode Title="ThreadDispatcherAwaiter Constructor " Url="html/C779BD3F.htm" />
+        <HelpTOCNode Id="e32e896d-55fa-4eaa-8332-71e96b7a0e5c" Title="ThreadDispatcherAwaiter Properties" Url="html/FC370F5C.htm">
+          <HelpTOCNode Title="Dispatcher Property " Url="html/4EBDCEA.htm" />
+          <HelpTOCNode Title="IsCompleted Property " Url="html/EA510763.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/15C1E0B9.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="70068358-27b3-476e-ab94-dc5d2c5af1dc" Title="ThreadDispatcherAwaiter Methods" Url="html/D8DEF32A.htm">
+          <HelpTOCNode Title="ICriticalNotifyCompletion.UnsafeOnCompleted Method " Url="html/2CC218ED.htm" />
+          <HelpTOCNode Title="GetAwaiter Method " Url="html/CB703858.htm" />
+          <HelpTOCNode Title="GetResult Method " Url="html/CDD3EF14.htm" />
+          <HelpTOCNode Title="OnCompleted Method " Url="html/86E30B2E.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="cc83444a-20aa-4fd0-99f0-21b88391b235" Title="ThreadDispatcherException Class" Url="html/DE00DC7D.htm">
+        <HelpTOCNode Id="20d36b16-b9bd-4930-8324-e05c41dd3e88" Title="ThreadDispatcherException Constructor " Url="html/92CB953E.htm">
+          <HelpTOCNode Title="ThreadDispatcherException Constructor " Url="html/BAF1A1C6.htm" />
+          <HelpTOCNode Title="ThreadDispatcherException Constructor (Exception)" Url="html/510B4FC0.htm" />
+          <HelpTOCNode Title="ThreadDispatcherException Constructor (String)" Url="html/51084FC0.htm" />
+          <HelpTOCNode Title="ThreadDispatcherException Constructor (Exception, IThreadDispatcherOperation)" Url="html/510E4FC0.htm" />
+          <HelpTOCNode Title="ThreadDispatcherException Constructor (SerializationInfo, StreamingContext)" Url="html/510D4FC0.htm" />
+          <HelpTOCNode Title="ThreadDispatcherException Constructor (String, Exception)" Url="html/51074FC0.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="bbd05684-c572-4def-b351-bbd406a3f1c5" Title="ThreadDispatcherException Properties" Url="html/55F07039.htm">
+          <HelpTOCNode Title="Operation Property " Url="html/745A410.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ThreadDispatcherException Methods" Url="html/94588FC6.htm" />
+        <HelpTOCNode Title="ThreadDispatcherException Events" Url="html/297D9D15.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="d554653b-cc6a-4363-b9f3-644d54416204" Title="ThreadDispatcherExceptionEventArgs Class" Url="html/376CEB6.htm">
+        <HelpTOCNode Title="ThreadDispatcherExceptionEventArgs Constructor " Url="html/6C3F0F4F.htm" />
+        <HelpTOCNode Id="33e7141f-2afa-4870-b91a-6f8ceca91c81" Title="ThreadDispatcherExceptionEventArgs Properties" Url="html/B035C0B1.htm">
+          <HelpTOCNode Title="CanContinue Property " Url="html/1295A26B.htm" />
+          <HelpTOCNode Title="CurrentOperation Property " Url="html/81BB4F60.htm" />
+          <HelpTOCNode Title="Exception Property " Url="html/77D53301.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ThreadDispatcherExceptionEventArgs Methods" Url="html/CF8EE65C.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="fa672104-5c3e-411e-8986-4d6146d60276" Title="ThreadDispatcherExecutionContext Class" Url="html/F4D27D90.htm">
+        <HelpTOCNode Id="60b60d2b-cf99-4233-a937-97632c7c1b4c" Title="ThreadDispatcherExecutionContext Properties" Url="html/BCFF12ED.htm">
+          <HelpTOCNode Title="IsDisposed Property " Url="html/56E82B3A.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/FE172F1A.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="44d9d383-f2e5-425e-8e59-874dc9abb315" Title="ThreadDispatcherExecutionContext Methods" Url="html/7DD76B6A.htm">
+          <HelpTOCNode Title="ICloneable.Clone Method " Url="html/F461A21B.htm" />
+          <HelpTOCNode Title="Capture Method " Url="html/F754AAB3.htm" />
+          <HelpTOCNode Title="Clone Method " Url="html/E6E810EB.htm" />
+          <HelpTOCNode Title="Dispose Method " Url="html/5FA9325D.htm" />
+          <HelpTOCNode Title="Finalize Method " Url="html/A7DDB152.htm" />
+          <HelpTOCNode Title="Run Method " Url="html/D98D983C.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="89791335-1c1e-43a6-bc42-0a3498112452" Title="ThreadDispatcherIdleEventArgs Class" Url="html/B8E8DEBC.htm">
+        <HelpTOCNode Title="ThreadDispatcherIdleEventArgs Constructor " Url="html/84DFC52F.htm" />
+        <HelpTOCNode Id="5f984edc-2683-4d9e-b3be-0ec57a8c2f8b" Title="ThreadDispatcherIdleEventArgs Properties" Url="html/48D8C3F0.htm">
+          <HelpTOCNode Title="Dispatcher Property " Url="html/484258F6.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ThreadDispatcherIdleEventArgs Methods" Url="html/4EDAB70C.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="ThreadDispatcherOperationState Enumeration" Url="html/E00EA5B4.htm" />
+      <HelpTOCNode Title="ThreadDispatcherOptions Enumeration" Url="html/E865E51E.htm" />
+      <HelpTOCNode Title="ThreadDispatcherShutdownMode Enumeration" Url="html/3A856291.htm" />
+      <HelpTOCNode Id="8253c7fe-660e-4114-99fe-da7270772816" Title="ThreadDispatcherSynchronizationContext Class" Url="html/786F1F5A.htm">
+        <HelpTOCNode Title="ThreadDispatcherSynchronizationContext Constructor " Url="html/FE1667FA.htm" />
+        <HelpTOCNode Id="75df63f2-a771-4a81-b0df-d20215bbacc9" Title="ThreadDispatcherSynchronizationContext Properties" Url="html/CEF52D71.htm">
+          <HelpTOCNode Title="Dispatcher Property " Url="html/47C7879F.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/1B687985.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="54a46954-94f5-4578-8203-ff5446b9072b" Title="ThreadDispatcherSynchronizationContext Methods" Url="html/D3F98CEC.htm">
+          <HelpTOCNode Title="CreateCopy Method " Url="html/1D0F4DD9.htm" />
+          <HelpTOCNode Title="Post Method " Url="html/1271CD99.htm" />
+          <HelpTOCNode Title="Send Method " Url="html/5EE5CAEF.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="4b271db5-ec0a-4164-98b5-e0d00d10347e" Title="ThreadDispatcherTaskFactory Class" Url="html/C24332CE.htm">
+        <HelpTOCNode Title="ThreadDispatcherTaskFactory Constructor " Url="html/A05CE10A.htm" />
+        <HelpTOCNode Id="0931be08-f2c3-49f6-8b20-fb8df149312d" Title="ThreadDispatcherTaskFactory Properties" Url="html/F866B4CC.htm">
+          <HelpTOCNode Title="Dispatcher Property " Url="html/40493C28.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/203BEDB9.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ThreadDispatcherTaskFactory Methods" Url="html/D0E7650A.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="8de7a14b-88b1-49c6-8529-a88184e147d0" Title="ThreadDispatcherTaskScheduler Class" Url="html/CC7BF8FC.htm">
+        <HelpTOCNode Title="ThreadDispatcherTaskScheduler Constructor " Url="html/3C58D544.htm" />
+        <HelpTOCNode Id="bdb05b34-6e9e-442d-9ddb-8a38594bf452" Title="ThreadDispatcherTaskScheduler Properties" Url="html/4EF3DA6A.htm">
+          <HelpTOCNode Title="Dispatcher Property " Url="html/E53B6E89.htm" />
+          <HelpTOCNode Title="MaximumConcurrencyLevel Property " Url="html/3738D0C4.htm" />
+          <HelpTOCNode Title="SyncRoot Property " Url="html/3D8EB237.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="0cc658cb-540f-4c0b-934f-33fb5e3a81ff" Title="ThreadDispatcherTaskScheduler Methods" Url="html/49354388.htm">
+          <HelpTOCNode Title="GetScheduledTasks Method " Url="html/C7BCA094.htm" />
+          <HelpTOCNode Title="QueueTask Method " Url="html/419ED597.htm" />
+          <HelpTOCNode Title="TryDequeue Method " Url="html/314981B7.htm" />
+          <HelpTOCNode Title="TryExecuteTaskInline Method " Url="html/2B003B53.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="ThreadDispatcherTimerMode Enumeration" Url="html/69D523FC.htm" />
+      <HelpTOCNode Id="fea9a9bb-0e74-40ff-90d8-01d73b0d1d9c" Title="ThreadDispatcherWatchdogEventArgs Class" Url="html/95E98328.htm">
+        <HelpTOCNode Title="ThreadDispatcherWatchdogEventArgs Constructor " Url="html/85A312C9.htm" />
+        <HelpTOCNode Id="37fc3a64-c9a1-487a-8e84-9b847772eed0" Title="ThreadDispatcherWatchdogEventArgs Properties" Url="html/7890DF41.htm">
+          <HelpTOCNode Title="CurrentOperation Property " Url="html/C8BB5CB4.htm" />
+          <HelpTOCNode Title="Timeout Property " Url="html/9C35F06C.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ThreadDispatcherWatchdogEventArgs Methods" Url="html/6D654CC2.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="50f5f4d6-bc1c-45d1-a117-2b9b9215e945" Title="RI.Abstractions.Logging" Url="html/9F31A172.htm">
+      <HelpTOCNode Id="b1352b91-e05d-451a-8873-cfd0c6abf9dc" Title="CallbackLogger Class" Url="html/41B44732.htm">
         <HelpTOCNode Title="CallbackLogger Constructor " Url="html/69405F59.htm" />
-        <HelpTOCNode Id="0339f197-0c8a-45f2-9073-70b619ef2707" Title="CallbackLogger Methods" Url="html/E1D9173E.htm">
+        <HelpTOCNode Id="2143b148-0f46-4b12-b7bd-ddf6b0472338" Title="CallbackLogger Methods" Url="html/E1D9173E.htm">
           <HelpTOCNode Title="Log Method " Url="html/F69F3D40.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="CallbackLoggerDelegate Delegate" Url="html/7EC1F9F9.htm" />
-      <HelpTOCNode Id="717a615a-5598-4873-ba20-552461705895" Title="ILogger Interface" Url="html/6C5680A6.htm">
-        <HelpTOCNode Id="f9203a79-0112-4672-89a0-d57896980c7e" Title="ILogger Methods" Url="html/CECF3318.htm">
+      <HelpTOCNode Id="714e374b-65e8-4c87-bb15-07b9ea94ce9c" Title="ILogger Interface" Url="html/6C5680A6.htm">
+        <HelpTOCNode Id="adc2dec2-05a9-4c3b-aebb-b3bb5940ce2b" Title="ILogger Methods" Url="html/CECF3318.htm">
           <HelpTOCNode Title="Log Method " Url="html/373DC036.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="e7d10dca-a40a-4ebf-9bd7-67797190e635" Title="ILoggerExtensions Class" Url="html/26D890FA.htm">
-        <HelpTOCNode Id="ced936ac-b505-4997-89b6-3a3e2ce3601c" Title="ILoggerExtensions Methods" Url="html/F2BF1D36.htm">
+      <HelpTOCNode Id="8333f7c8-2bb8-4ff1-9d87-cab79dbe7371" Title="ILoggerExtensions Class" Url="html/26D890FA.htm">
+        <HelpTOCNode Id="92f694fa-8b75-4d2d-9dab-81d8ccc6ac19" Title="ILoggerExtensions Methods" Url="html/F2BF1D36.htm">
           <HelpTOCNode Title="Log Method " Url="html/2CEE393B.htm" />
           <HelpTOCNode Title="LogDebug Method " Url="html/B4D2CBE4.htm" />
           <HelpTOCNode Title="LogError Method " Url="html/C24F435.htm" />
@@ -191,22 +522,22 @@
           <HelpTOCNode Title="LogWarning Method " Url="html/5EDB37A4.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="b37b1d7b-de82-48a0-adee-00d861c18e5d" Title="Logger Class" Url="html/2961F81C.htm">
-        <HelpTOCNode Id="a4a3312c-2df8-4bc3-ba0d-c4b92b0f200d" Title="Logger Constructor " Url="html/A82F634.htm">
+      <HelpTOCNode Id="75828b9b-7b97-4c52-bc13-5785349db968" Title="Logger Class" Url="html/2961F81C.htm">
+        <HelpTOCNode Id="8d24d8b1-8df5-45ad-bde8-97d4446a65ab" Title="Logger Constructor " Url="html/A82F634.htm">
           <HelpTOCNode Title="Logger Constructor (ILogger)" Url="html/FDED1C96.htm" />
           <HelpTOCNode Title="Logger Constructor (ILoggerFactory, String)" Url="html/F4F47EFC.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="e3ae5008-616a-44c3-b959-868d346787c9" Title="Logger Properties" Url="html/A5E2F257.htm">
+        <HelpTOCNode Id="f04d1fab-eaf5-460e-9703-f74ff5b004d8" Title="Logger Properties" Url="html/A5E2F257.htm">
           <HelpTOCNode Title="UsedLogger Property " Url="html/9A11082C.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="9a0f4e90-1cca-4524-9e84-efa782138de8" Title="Logger Methods" Url="html/8DF64027.htm">
+        <HelpTOCNode Id="b20180eb-9686-41e6-964b-e73560fcad27" Title="Logger Methods" Url="html/8DF64027.htm">
           <HelpTOCNode Title="Log Method " Url="html/FABB2F4B.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="LogLevel Enumeration" Url="html/2534EDE6.htm" />
-      <HelpTOCNode Id="77787a90-869c-4682-bce2-a77aec191e07" Title="NullLogger Class" Url="html/2D73BF4C.htm">
+      <HelpTOCNode Id="109a13c1-d3df-4dc2-aa73-de8ec8478fc3" Title="NullLogger Class" Url="html/2D73BF4C.htm">
         <HelpTOCNode Title="NullLogger Constructor " Url="html/9A12A97F.htm" />
-        <HelpTOCNode Id="41c7b4c3-902b-4418-8b2c-fb7c96ba316c" Title="NullLogger Methods" Url="html/AAC45AAE.htm">
+        <HelpTOCNode Id="443ad2bc-5450-460c-aaf6-2f0bd32a20fe" Title="NullLogger Methods" Url="html/AAC45AAE.htm">
           <HelpTOCNode Title="Log Method " Url="html/4A829622.htm" />
         </HelpTOCNode>
       </HelpTOCNode>

@@ -28,8 +28,4 @@
     <ProjectReference Include="..\RI.Abstractions.Microsoft.Logging\RI.Abstractions.Microsoft.Logging.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Builder\" />
-  </ItemGroup>
-
 </Project>
