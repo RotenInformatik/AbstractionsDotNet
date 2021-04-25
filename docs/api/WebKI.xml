@@ -1,16 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
+  <HelpKINode Title="Aborted enumeration member" Url="html/E00EA5B4.htm" />
+  <HelpKINode Title="Action property" Url="html/468775FF.htm" />
   <HelpKINode Title="AddDefaultSingleton method" Url="html/33080040.htm" />
   <HelpKINode Title="AddDefaultTemporary method" Url="html/6193EC1.htm" />
   <HelpKINode Title="AddDefaultTransient method" Url="html/FBA7869C.htm" />
+  <HelpKINode Title="AddKeepAlive method">
+    <HelpKINode Title="IThreadDispatcher.AddKeepAlive Method " Url="html/DB5995F2.htm" />
+    <HelpKINode Title="SimpleDispatcher.AddKeepAlive Method " Url="html/421A7089.htm" />
+  </HelpKINode>
   <HelpKINode Title="AddSingleton method" Url="html/69480A03.htm" />
   <HelpKINode Title="AddTemporary method" Url="html/A472CBB2.htm" />
   <HelpKINode Title="AddTransient method" Url="html/F0D22F14.htm" />
+  <HelpKINode Title="AllowNew enumeration member" Url="html/3A856291.htm" />
   <HelpKINode Title="AlreadyBuilt property">
     <HelpKINode Title="BuilderBase.AlreadyBuilt Property " Url="html/563CF07F.htm" />
     <HelpKINode Title="IBuilder.AlreadyBuilt Property " Url="html/268E80E6.htm" />
   </HelpKINode>
   <HelpKINode Title="AlwaysRegister property" Url="html/5B012CC8.htm" />
+  <HelpKINode Title="BeginShutdown method">
+    <HelpKINode Title="IThreadDispatcher.BeginShutdown Method " Url="html/C84F0EB8.htm" />
+    <HelpKINode Title="SimpleDispatcher.BeginShutdown Method " Url="html/F2DB62E.htm" />
+  </HelpKINode>
   <HelpKINode Title="Build method">
     <HelpKINode Title="BuilderBase.Build Method " Url="html/E12EB378.htm" />
     <HelpKINode Title="IBuilder.Build Method " Url="html/AB796984.htm" />
@@ -44,6 +55,21 @@
   <HelpKINode Title="CallbackLogger.CallbackLogger constructor" Url="html/69405F59.htm" />
   <HelpKINode Title="CallbackLogger.Log method" Url="html/F69F3D40.htm" />
   <HelpKINode Title="CallbackLoggerDelegate delegate" Url="html/7EC1F9F9.htm" />
+  <HelpKINode Title="Cancel method" Url="html/2B5DD0E9.htm" />
+  <HelpKINode Title="Canceled enumeration member" Url="html/E00EA5B4.htm" />
+  <HelpKINode Title="CanContinue property" Url="html/1295A26B.htm" />
+  <HelpKINode Title="Capture method" Url="html/F754AAB3.htm" />
+  <HelpKINode Title="CaptureAll enumeration member" Url="html/E865E51E.htm" />
+  <HelpKINode Title="CaptureCulture enumeration member" Url="html/E865E51E.htm" />
+  <HelpKINode Title="CaptureCurrentCulture enumeration member" Url="html/E865E51E.htm" />
+  <HelpKINode Title="CaptureCurrentUICulture enumeration member" Url="html/E865E51E.htm" />
+  <HelpKINode Title="CaptureExecutionContext enumeration member" Url="html/E865E51E.htm" />
+  <HelpKINode Title="CaptureSynchronizationContext enumeration member" Url="html/E865E51E.htm" />
+  <HelpKINode Title="CatchExceptions property">
+    <HelpKINode Title="IThreadDispatcher.CatchExceptions Property " Url="html/81E10C0.htm" />
+    <HelpKINode Title="SimpleDispatcher.CatchExceptions Property " Url="html/74660A97.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Clone method" Url="html/E6E810EB.htm" />
   <HelpKINode Title="CompositionRegistration class">
     <HelpKINode Title="CompositionRegistration Class" Url="html/B7909C8D.htm" />
     <HelpKINode Title="constructor" Url="html/89843702.htm" />
@@ -63,17 +89,96 @@
   <HelpKINode Title="CompositionRegistration.ToString method" Url="html/5DF1274F.htm" />
   <HelpKINode Title="CompositionRegistration.Transient method" Url="html/10125405.htm" />
   <HelpKINode Title="CompositionRegistrationMode enumeration" Url="html/3DDC023E.htm" />
+  <HelpKINode Title="Continuous enumeration member" Url="html/69D523FC.htm" />
   <HelpKINode Title="Contract property" Url="html/BFB34832.htm" />
   <HelpKINode Title="CountContracts method" Url="html/7C9D6DB5.htm" />
+  <HelpKINode Title="CreateAwaiter method" Url="html/28B00C48.htm" />
+  <HelpKINode Title="CreateCopy method" Url="html/1D0F4DD9.htm" />
+  <HelpKINode Title="CreateSynchronizationContext method" Url="html/EB56C05C.htm" />
+  <HelpKINode Title="CreateTaskFactory method" Url="html/DB3C39C1.htm" />
+  <HelpKINode Title="CreateTaskScheduler method" Url="html/B360D7E9.htm" />
+  <HelpKINode Title="CurrentOperation property">
+    <HelpKINode Title="ThreadDispatcherExceptionEventArgs.CurrentOperation Property " Url="html/81BB4F60.htm" />
+    <HelpKINode Title="ThreadDispatcherWatchdogEventArgs.CurrentOperation Property " Url="html/C8BB5CB4.htm" />
+  </HelpKINode>
   <HelpKINode Title="Debug enumeration member" Url="html/2534EDE6.htm" />
+  <HelpKINode Title="Default enumeration member" Url="html/E865E51E.htm" />
+  <HelpKINode Title="DefaultOptions property">
+    <HelpKINode Title="IThreadDispatcher.DefaultOptions Property " Url="html/5031AB3E.htm" />
+    <HelpKINode Title="SimpleDispatcher.DefaultOptions Property " Url="html/204CA81A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DefaultOptionsValue field" Url="html/217C3907.htm" />
+  <HelpKINode Title="DefaultPriority property">
+    <HelpKINode Title="IThreadDispatcher.DefaultPriority Property " Url="html/538CA220.htm" />
+    <HelpKINode Title="SimpleDispatcher.DefaultPriority Property " Url="html/291C3FD6.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DefaultPriorityValue field" Url="html/72FFDEAF.htm" />
+  <HelpKINode Title="DiscardPending enumeration member" Url="html/3A856291.htm" />
+  <HelpKINode Title="Dispatched property" Url="html/7E41ACD2.htm" />
+  <HelpKINode Title="Dispatcher property">
+    <HelpKINode Title="IThreadDispatcherRunnable.Dispatcher Property " Url="html/7EF47836.htm" />
+    <HelpKINode Title="ThreadDispatcherAwaiter.Dispatcher Property " Url="html/4EBDCEA.htm" />
+    <HelpKINode Title="ThreadDispatcherIdleEventArgs.Dispatcher Property " Url="html/484258F6.htm" />
+    <HelpKINode Title="ThreadDispatcherSynchronizationContext.Dispatcher Property " Url="html/47C7879F.htm" />
+    <HelpKINode Title="ThreadDispatcherTaskFactory.Dispatcher Property " Url="html/40493C28.htm" />
+    <HelpKINode Title="ThreadDispatcherTaskScheduler.Dispatcher Property " Url="html/E53B6E89.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Dispose method" Url="html/5FA9325D.htm" />
+  <HelpKINode Title="DoProcessing method">
+    <HelpKINode Title="IThreadDispatcher.DoProcessing Method " Url="html/89B44CAC.htm" />
+    <HelpKINode Title="IThreadDispatcherExtensions.DoProcessing Method " Url="html/B78D87C.htm" />
+    <HelpKINode Title="SimpleDispatcher.DoProcessing Method " Url="html/88D6036A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DoProcessingAsync method">
+    <HelpKINode Title="IThreadDispatcher.DoProcessingAsync Method " Url="html/AFCAED21.htm" />
+    <HelpKINode Title="IThreadDispatcherExtensions.DoProcessingAsync Method " Url="html/9229036A.htm" />
+    <HelpKINode Title="SimpleDispatcher.DoProcessingAsync Method " Url="html/14967C21.htm" />
+  </HelpKINode>
   <HelpKINode Title="Error enumeration member" Url="html/2534EDE6.htm" />
+  <HelpKINode Title="Exception enumeration member" Url="html/E00EA5B4.htm" />
+  <HelpKINode Title="Exception event">
+    <HelpKINode Title="IThreadDispatcher.Exception Event" Url="html/B55651C5.htm" />
+    <HelpKINode Title="SimpleDispatcher.Exception Event" Url="html/95144A79.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Exception property">
+    <HelpKINode Title="IThreadDispatcherOperation.Exception Property " Url="html/8A1F907B.htm" />
+    <HelpKINode Title="ThreadDispatcherExceptionEventArgs.Exception Property " Url="html/77D53301.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ExecuteImmediately method" Url="html/E80C80D3.htm" />
+  <HelpKINode Title="Executing enumeration member" Url="html/E00EA5B4.htm" />
+  <HelpKINode Title="ExecutionContext property" Url="html/B0354DE3.htm" />
+  <HelpKINode Title="ExecutionCount property" Url="html/72A04B1E.htm" />
   <HelpKINode Title="Factory property" Url="html/D4BA3423.htm" />
   <HelpKINode Title="Fatal enumeration member" Url="html/2534EDE6.htm" />
+  <HelpKINode Title="Finalize method">
+    <HelpKINode Title="SimpleDispatcher.Finalize Method " Url="html/8759676F.htm" />
+    <HelpKINode Title="ThreadDispatcherExecutionContext.Finalize Method " Url="html/A7DDB152.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Finished enumeration member" Url="html/E00EA5B4.htm" />
+  <HelpKINode Title="FinishPending enumeration member" Url="html/3A856291.htm" />
+  <HelpKINode Title="FirstExecution property" Url="html/86265E7B.htm" />
+  <HelpKINode Title="GetAwaiter method">
+    <HelpKINode Title="IThreadDispatcherExtensions.GetAwaiter Method " Url="html/BABD5C4B.htm" />
+    <HelpKINode Title="ThreadDispatcherAwaiter.GetAwaiter Method " Url="html/CB703858.htm" />
+  </HelpKINode>
   <HelpKINode Title="GetContract method" Url="html/9CFB6324.htm" />
   <HelpKINode Title="GetContracts method" Url="html/1825B1DC.htm" />
+  <HelpKINode Title="GetCurrentOptions method">
+    <HelpKINode Title="IThreadDispatcher.GetCurrentOptions Method " Url="html/E7DA373A.htm" />
+    <HelpKINode Title="SimpleDispatcher.GetCurrentOptions Method " Url="html/F071621C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetCurrentOptionsOrDefault method" Url="html/4A9FBBD6.htm" />
+  <HelpKINode Title="GetCurrentPriority method">
+    <HelpKINode Title="IThreadDispatcher.GetCurrentPriority Method " Url="html/2D69F311.htm" />
+    <HelpKINode Title="SimpleDispatcher.GetCurrentPriority Method " Url="html/7186B906.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetCurrentPriorityOrDefault method" Url="html/C921A552.htm" />
   <HelpKINode Title="GetInstance method" Url="html/CC5AABF.htm" />
   <HelpKINode Title="GetInstances method" Url="html/27BAAABF.htm" />
   <HelpKINode Title="GetOrCreateInstance method" Url="html/542F5588.htm" />
+  <HelpKINode Title="GetParameters method" Url="html/4BBDAAB.htm" />
+  <HelpKINode Title="GetResult method" Url="html/CDD3EF14.htm" />
+  <HelpKINode Title="GetScheduledTasks method" Url="html/C7BCA094.htm" />
   <HelpKINode Title="GetService method" Url="html/88E4101A.htm" />
   <HelpKINode Title="GetServiceProvider method" Url="html/FE9202C3.htm" />
   <HelpKINode Title="GetServices method" Url="html/CDB610E7.htm" />
@@ -110,12 +215,18 @@
   <HelpKINode Title="IBuilderExtensions.ThrowIfNotMinContractCount method" Url="html/6C8F5CB4.htm" />
   <HelpKINode Title="IBuilderExtensions.ThrowIfNotTemporary method" Url="html/9D342830.htm" />
   <HelpKINode Title="IBuilderExtensions.ThrowIfTemporary method" Url="html/D14F8EFD.htm" />
-  <HelpKINode Title="IBuilderExtensions.UseCallbackLogger(Of T) method" Url="html/5A9900FB.htm" />
-  <HelpKINode Title="IBuilderExtensions.UseCallbackLogger&lt;T&gt; method" Url="html/5A9900FB.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseCallbackLogger method" Url="html/B13A994D.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseCompositionContainer(Of T) method" Url="html/ACB3409F.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseCompositionContainer&lt;T&gt; method" Url="html/ACB3409F.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseLogger(Of T) method" Url="html/5BD7B465.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseLogger&lt;T&gt; method" Url="html/5BD7B465.htm" />
   <HelpKINode Title="IBuilderExtensions.UseNullLogger(Of T) method" Url="html/F384E503.htm" />
   <HelpKINode Title="IBuilderExtensions.UseNullLogger&lt;T&gt; method" Url="html/F384E503.htm" />
-  <HelpKINode Title="IBuilderExtensions.UseSimpleContainer(Of T) method" Url="html/F93760E3.htm" />
-  <HelpKINode Title="IBuilderExtensions.UseSimpleContainer&lt;T&gt; method" Url="html/F93760E3.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseSimpleContainer method" Url="html/DA96A84A.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseSimpleDispatcher method" Url="html/4CF29421.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseThreadDispatcher(Of T) method" Url="html/1B885DF3.htm" />
+  <HelpKINode Title="IBuilderExtensions.UseThreadDispatcher&lt;T&gt; method" Url="html/1B885DF3.htm" />
+  <HelpKINode Title="ICloneable.Clone explicitly implemented method" Url="html/F461A21B.htm" />
   <HelpKINode Title="ICompositionContainer interface">
     <HelpKINode Title="ICompositionContainer Interface" Url="html/EE81BBD4.htm" />
     <HelpKINode Title="methods" Url="html/ACEF27C8.htm" />
@@ -123,6 +234,12 @@
   </HelpKINode>
   <HelpKINode Title="ICompositionContainer.Register method" Url="html/18FD7510.htm" />
   <HelpKINode Title="ICompositionContainer.Registered property" Url="html/5CA36DD6.htm" />
+  <HelpKINode Title="ICriticalNotifyCompletion.UnsafeOnCompleted explicitly implemented method" Url="html/2CC218ED.htm" />
+  <HelpKINode Title="IDisposable.Dispose explicitly implemented method" Url="html/BBDE8B76.htm" />
+  <HelpKINode Title="Idle event">
+    <HelpKINode Title="IThreadDispatcher.Idle Event" Url="html/8DC38CD.htm" />
+    <HelpKINode Title="SimpleDispatcher.Idle Event" Url="html/E75B18A8.htm" />
+  </HelpKINode>
   <HelpKINode Title="ILogger interface">
     <HelpKINode Title="ILogger Interface" Url="html/6C5680A6.htm" />
     <HelpKINode Title="methods" Url="html/CECF3318.htm" />
@@ -141,6 +258,140 @@
   <HelpKINode Title="Implementation property" Url="html/53D7C732.htm" />
   <HelpKINode Title="Information enumeration member" Url="html/2534EDE6.htm" />
   <HelpKINode Title="Instance property" Url="html/DC025C82.htm" />
+  <HelpKINode Title="Interval property" Url="html/6830F4A2.htm" />
+  <HelpKINode Title="IsCompleted property" Url="html/EA510763.htm" />
+  <HelpKINode Title="IsDisposed property" Url="html/56E82B3A.htm" />
+  <HelpKINode Title="IsDone method" Url="html/D480723A.htm" />
+  <HelpKINode Title="IsInThread method">
+    <HelpKINode Title="IThreadDispatcher.IsInThread Method " Url="html/92F1233A.htm" />
+    <HelpKINode Title="SimpleDispatcher.IsInThread Method " Url="html/2F2438D9.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsRunning property">
+    <HelpKINode Title="IThreadDispatcher.IsRunning Property " Url="html/6B9BB866.htm" />
+    <HelpKINode Title="IThreadDispatcherTimer.IsRunning Property " Url="html/BC15F6E8.htm" />
+    <HelpKINode Title="SimpleDispatcher.IsRunning Property " Url="html/A76247F.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsShuttingDown property">
+    <HelpKINode Title="IThreadDispatcher.IsShuttingDown Property " Url="html/A847BFED.htm" />
+    <HelpKINode Title="SimpleDispatcher.IsShuttingDown Property " Url="html/E923725F.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ISynchronizeInvoke.BeginInvoke explicitly implemented method" Url="html/F362E0F7.htm" />
+  <HelpKINode Title="ISynchronizeInvoke.EndInvoke explicitly implemented method" Url="html/459E920A.htm" />
+  <HelpKINode Title="ISynchronizeInvoke.Invoke explicitly implemented method" Url="html/E1966A8F.htm" />
+  <HelpKINode Title="ISynchronizeInvoke.InvokeRequired explicitly implemented property" Url="html/B1B33264.htm" />
+  <HelpKINode Title="IThreadDispatcher interface">
+    <HelpKINode Title="IThreadDispatcher Interface" Url="html/1CAB5269.htm" />
+    <HelpKINode Title="events" Url="html/33E0F308.htm" />
+    <HelpKINode Title="methods" Url="html/5ED4C43D.htm" />
+    <HelpKINode Title="properties" Url="html/7E77E42A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcher.AddKeepAlive method" Url="html/DB5995F2.htm" />
+  <HelpKINode Title="IThreadDispatcher.BeginShutdown method" Url="html/C84F0EB8.htm" />
+  <HelpKINode Title="IThreadDispatcher.CatchExceptions property" Url="html/81E10C0.htm" />
+  <HelpKINode Title="IThreadDispatcher.DefaultOptions property" Url="html/5031AB3E.htm" />
+  <HelpKINode Title="IThreadDispatcher.DefaultPriority property" Url="html/538CA220.htm" />
+  <HelpKINode Title="IThreadDispatcher.DoProcessing method" Url="html/89B44CAC.htm" />
+  <HelpKINode Title="IThreadDispatcher.DoProcessingAsync method" Url="html/AFCAED21.htm" />
+  <HelpKINode Title="IThreadDispatcher.Exception event" Url="html/B55651C5.htm" />
+  <HelpKINode Title="IThreadDispatcher.GetCurrentOptions method" Url="html/E7DA373A.htm" />
+  <HelpKINode Title="IThreadDispatcher.GetCurrentPriority method" Url="html/2D69F311.htm" />
+  <HelpKINode Title="IThreadDispatcher.Idle event" Url="html/8DC38CD.htm" />
+  <HelpKINode Title="IThreadDispatcher.IsInThread method" Url="html/92F1233A.htm" />
+  <HelpKINode Title="IThreadDispatcher.IsRunning property" Url="html/6B9BB866.htm" />
+  <HelpKINode Title="IThreadDispatcher.IsShuttingDown property" Url="html/A847BFED.htm" />
+  <HelpKINode Title="IThreadDispatcher.Post method" Url="html/7BFB9D1A.htm" />
+  <HelpKINode Title="IThreadDispatcher.PostDelayed method" Url="html/2E1986BB.htm" />
+  <HelpKINode Title="IThreadDispatcher.RemoveKeepAlive method" Url="html/4F1EA336.htm" />
+  <HelpKINode Title="IThreadDispatcher.Run method" Url="html/DDACA501.htm" />
+  <HelpKINode Title="IThreadDispatcher.Send method" Url="html/AE82E6D4.htm" />
+  <HelpKINode Title="IThreadDispatcher.SendAsync method" Url="html/98264B36.htm" />
+  <HelpKINode Title="IThreadDispatcher.Shutdown method" Url="html/1170CA4F.htm" />
+  <HelpKINode Title="IThreadDispatcher.ShutdownAsync method" Url="html/F17BD799.htm" />
+  <HelpKINode Title="IThreadDispatcher.ShutdownMode property" Url="html/66D5BA95.htm" />
+  <HelpKINode Title="IThreadDispatcher.SyncRoot property" Url="html/E9E9CD9A.htm" />
+  <HelpKINode Title="IThreadDispatcher.WaitForShutdown method" Url="html/7D12D4E1.htm" />
+  <HelpKINode Title="IThreadDispatcher.WaitForShutdownAsync method" Url="html/4CB170A4.htm" />
+  <HelpKINode Title="IThreadDispatcher.Watchdog event" Url="html/B59F305B.htm" />
+  <HelpKINode Title="IThreadDispatcher.WatchdogTimeout property" Url="html/28A39D41.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions class">
+    <HelpKINode Title="IThreadDispatcherExtensions Class" Url="html/EF2C7FC0.htm" />
+    <HelpKINode Title="methods" Url="html/422949C5.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcherExtensions.CreateAwaiter method" Url="html/28B00C48.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.CreateSynchronizationContext method" Url="html/EB56C05C.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.CreateTaskFactory method" Url="html/DB3C39C1.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.CreateTaskScheduler method" Url="html/B360D7E9.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.DoProcessing method" Url="html/B78D87C.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.DoProcessingAsync method" Url="html/9229036A.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.GetAwaiter method" Url="html/BABD5C4B.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.GetCurrentOptionsOrDefault method" Url="html/4A9FBBD6.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.GetCurrentPriorityOrDefault method" Url="html/C921A552.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.Post method" Url="html/C67DC355.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.PostDelayed method" Url="html/531271E0.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.Send method" Url="html/8F456AD3.htm" />
+  <HelpKINode Title="IThreadDispatcherExtensions.SendAsync method" Url="html/677ECB79.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation interface">
+    <HelpKINode Title="IThreadDispatcherOperation Interface" Url="html/414177BC.htm" />
+    <HelpKINode Title="methods" Url="html/9EA8F817.htm" />
+    <HelpKINode Title="properties" Url="html/28EDCD5C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcherOperation.Cancel method" Url="html/2B5DD0E9.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.Dispatched property" Url="html/7E41ACD2.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.Exception property" Url="html/8A1F907B.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.FirstExecution property" Url="html/86265E7B.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.LastExecution property" Url="html/231C7567.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.Result property" Url="html/828ADD22.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.State property" Url="html/26CC7C90.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.Wait method" Url="html/63CF3500.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.WaitAsync method" Url="html/D7940656.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.WatchdogEvents property" Url="html/35408B89.htm" />
+  <HelpKINode Title="IThreadDispatcherOperation.WatchdogTime property" Url="html/8E155E6A.htm" />
+  <HelpKINode Title="IThreadDispatcherOperationExtensions class">
+    <HelpKINode Title="IThreadDispatcherOperationExtensions Class" Url="html/3ABAAF03.htm" />
+    <HelpKINode Title="methods" Url="html/218F2130.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcherOperationExtensions.IsDone method" Url="html/D480723A.htm" />
+  <HelpKINode Title="IThreadDispatcherOperationExtensions.Wait method" Url="html/2008BA9B.htm" />
+  <HelpKINode Title="IThreadDispatcherOperationExtensions.WaitAsync method" Url="html/7F0573D3.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnable interface">
+    <HelpKINode Title="IThreadDispatcherRunnable Interface" Url="html/52ABA218.htm" />
+    <HelpKINode Title="methods" Url="html/516376D6.htm" />
+    <HelpKINode Title="properties" Url="html/9430B073.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcherRunnable.Action property" Url="html/468775FF.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnable.Dispatcher property" Url="html/7EF47836.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnable.ExecutionContext property" Url="html/B0354DE3.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnable.GetParameters method" Url="html/4BBDAAB.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnable.Options property" Url="html/C5867770.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnable.Priority property" Url="html/7582AD7.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnable.SyncRoot property" Url="html/9D76168F.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnableExtensions class">
+    <HelpKINode Title="IThreadDispatcherRunnableExtensions Class" Url="html/EF9A2B4C.htm" />
+    <HelpKINode Title="methods" Url="html/62E47E00.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcherRunnableExtensions.ExecuteImmediately method" Url="html/E80C80D3.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnableExtensions.PostManually method" Url="html/BC0B4EA0.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnableExtensions.SendManually method" Url="html/9A22C172.htm" />
+  <HelpKINode Title="IThreadDispatcherRunnableExtensions.SendManuallyAsync method" Url="html/55E39C29.htm" />
+  <HelpKINode Title="IThreadDispatcherTimer interface">
+    <HelpKINode Title="IThreadDispatcherTimer Interface" Url="html/EBC0810.htm" />
+    <HelpKINode Title="methods" Url="html/AED2E56B.htm" />
+    <HelpKINode Title="properties" Url="html/59B7237C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcherTimer.ExecutionCount property" Url="html/72A04B1E.htm" />
+  <HelpKINode Title="IThreadDispatcherTimer.Interval property" Url="html/6830F4A2.htm" />
+  <HelpKINode Title="IThreadDispatcherTimer.IsRunning property" Url="html/BC15F6E8.htm" />
+  <HelpKINode Title="IThreadDispatcherTimer.MissCount property" Url="html/615A2DA3.htm" />
+  <HelpKINode Title="IThreadDispatcherTimer.Mode property" Url="html/4E7BB72C.htm" />
+  <HelpKINode Title="IThreadDispatcherTimer.Start method" Url="html/7622AECC.htm" />
+  <HelpKINode Title="IThreadDispatcherTimer.Stop method" Url="html/8D709FAC.htm" />
+  <HelpKINode Title="IThreadDispatcherTimerExtensions class">
+    <HelpKINode Title="IThreadDispatcherTimerExtensions Class" Url="html/BF8DEE0.htm" />
+    <HelpKINode Title="methods" Url="html/F1ACF163.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IThreadDispatcherTimerExtensions.ReStart method" Url="html/451A4D6C.htm" />
+  <HelpKINode Title="IThreadDispatcherTimerExtensions.Start method" Url="html/9B89DBB8.htm" />
+  <HelpKINode Title="LastExecution property" Url="html/231C7567.htm" />
   <HelpKINode Title="Log method">
     <HelpKINode Title="CallbackLogger.Log Method " Url="html/F69F3D40.htm" />
     <HelpKINode Title="ILogger.Log Method " Url="html/373DC036.htm" />
@@ -171,7 +422,16 @@
   <HelpKINode Title="LogInformation method" Url="html/6029D612.htm" />
   <HelpKINode Title="LogLevel enumeration" Url="html/2534EDE6.htm" />
   <HelpKINode Title="LogWarning method" Url="html/5EDB37A4.htm" />
-  <HelpKINode Title="Mode property" Url="html/E6C0C476.htm" />
+  <HelpKINode Title="MaximumConcurrencyLevel property" Url="html/3738D0C4.htm" />
+  <HelpKINode Title="MissCount property" Url="html/615A2DA3.htm" />
+  <HelpKINode Title="Mode property">
+    <HelpKINode Title="CompositionRegistration.Mode Property " Url="html/E6C0C476.htm" />
+    <HelpKINode Title="IThreadDispatcherTimer.Mode Property " Url="html/4E7BB72C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="None enumeration member">
+    <HelpKINode Title="ThreadDispatcherOptions Enumeration" Url="html/E865E51E.htm" />
+    <HelpKINode Title="ThreadDispatcherShutdownMode Enumeration" Url="html/3A856291.htm" />
+  </HelpKINode>
   <HelpKINode Title="NullLogger class">
     <HelpKINode Title="NullLogger Class" Url="html/2D73BF4C.htm" />
     <HelpKINode Title="constructor" Url="html/9A12A97F.htm" />
@@ -179,8 +439,26 @@
   </HelpKINode>
   <HelpKINode Title="NullLogger.Log method" Url="html/4A829622.htm" />
   <HelpKINode Title="NullLogger.NullLogger constructor" Url="html/9A12A97F.htm" />
+  <HelpKINode Title="OnCompleted method" Url="html/86E30B2E.htm" />
+  <HelpKINode Title="OneShot enumeration member" Url="html/69D523FC.htm" />
+  <HelpKINode Title="Operation property" Url="html/745A410.htm" />
+  <HelpKINode Title="Options property" Url="html/C5867770.htm" />
   <HelpKINode Title="PerformRegistrations method" Url="html/A9BCFB5.htm" />
+  <HelpKINode Title="Post method">
+    <HelpKINode Title="IThreadDispatcher.Post Method " Url="html/7BFB9D1A.htm" />
+    <HelpKINode Title="IThreadDispatcherExtensions.Post Method " Url="html/C67DC355.htm" />
+    <HelpKINode Title="SimpleDispatcher.Post Method " Url="html/39ECE3A7.htm" />
+    <HelpKINode Title="ThreadDispatcherSynchronizationContext.Post Method " Url="html/1271CD99.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PostDelayed method">
+    <HelpKINode Title="IThreadDispatcher.PostDelayed Method " Url="html/2E1986BB.htm" />
+    <HelpKINode Title="IThreadDispatcherExtensions.PostDelayed Method " Url="html/531271E0.htm" />
+    <HelpKINode Title="SimpleDispatcher.PostDelayed Method " Url="html/C217292F.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PostManually method" Url="html/BC0B4EA0.htm" />
   <HelpKINode Title="PrepareRegistrations method" Url="html/CC50A1F6.htm" />
+  <HelpKINode Title="Priority property" Url="html/7582AD7.htm" />
+  <HelpKINode Title="QueueTask method" Url="html/419ED597.htm" />
   <HelpKINode Title="Register method">
     <HelpKINode Title="ICompositionContainer.Register Method " Url="html/18FD7510.htm" />
     <HelpKINode Title="ServiceCollectionCompositionContainer.Register Method " Url="html/BE26F9B.htm" />
@@ -196,7 +474,13 @@
     <HelpKINode Title="IBuilder.Registrations Property " Url="html/62C7896C.htm" />
   </HelpKINode>
   <HelpKINode Title="RemoveContracts method" Url="html/7F445C5F.htm" />
+  <HelpKINode Title="RemoveKeepAlive method">
+    <HelpKINode Title="IThreadDispatcher.RemoveKeepAlive Method " Url="html/4F1EA336.htm" />
+    <HelpKINode Title="SimpleDispatcher.RemoveKeepAlive Method " Url="html/AF5C6B38.htm" />
+  </HelpKINode>
   <HelpKINode Title="RemoveTemporaryContracts method" Url="html/B2CE304F.htm" />
+  <HelpKINode Title="ReStart method" Url="html/451A4D6C.htm" />
+  <HelpKINode Title="Result property" Url="html/828ADD22.htm" />
   <HelpKINode Title="RI.Abstractions.Builder namespace" Url="html/3E0AEAFC.htm" />
   <HelpKINode Title="RI.Abstractions.Builder.BuilderBase class" Url="html/7528C42A.htm" />
   <HelpKINode Title="RI.Abstractions.Builder.BuilderException class" Url="html/48E6E027.htm" />
@@ -210,6 +494,29 @@
   <HelpKINode Title="RI.Abstractions.Composition.ICompositionContainer interface" Url="html/EE81BBD4.htm" />
   <HelpKINode Title="RI.Abstractions.Composition.ServiceCollectionCompositionContainer class" Url="html/E96CBE22.htm" />
   <HelpKINode Title="RI.Abstractions.Composition.SimpleContainer class" Url="html/C20E6224.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher namespace" Url="html/6BA05B2D.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcher interface" Url="html/1CAB5269.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcherExtensions class" Url="html/EF2C7FC0.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcherOperation interface" Url="html/414177BC.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcherOperationExtensions class" Url="html/3ABAAF03.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcherRunnable interface" Url="html/52ABA218.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcherRunnableExtensions class" Url="html/EF9A2B4C.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcherTimer interface" Url="html/EBC0810.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.IThreadDispatcherTimerExtensions class" Url="html/BF8DEE0.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.SimpleDispatcher class" Url="html/208D86AA.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherAwaiter class" Url="html/DF112AFE.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherException class" Url="html/DE00DC7D.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherExceptionEventArgs class" Url="html/376CEB6.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherExecutionContext class" Url="html/F4D27D90.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherIdleEventArgs class" Url="html/B8E8DEBC.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherOperationState enumeration" Url="html/E00EA5B4.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherOptions enumeration" Url="html/E865E51E.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherShutdownMode enumeration" Url="html/3A856291.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherSynchronizationContext class" Url="html/786F1F5A.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherTaskFactory class" Url="html/C24332CE.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherTaskScheduler class" Url="html/CC7BF8FC.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherTimerMode enumeration" Url="html/69D523FC.htm" />
+  <HelpKINode Title="RI.Abstractions.Dispatcher.ThreadDispatcherWatchdogEventArgs class" Url="html/95E98328.htm" />
   <HelpKINode Title="RI.Abstractions.Logging namespace" Url="html/9F31A172.htm" />
   <HelpKINode Title="RI.Abstractions.Logging.CallbackLogger class" Url="html/41B44732.htm" />
   <HelpKINode Title="RI.Abstractions.Logging.CallbackLoggerDelegate delegate" Url="html/7EC1F9F9.htm" />
@@ -218,6 +525,24 @@
   <HelpKINode Title="RI.Abstractions.Logging.Logger class" Url="html/2961F81C.htm" />
   <HelpKINode Title="RI.Abstractions.Logging.LogLevel enumeration" Url="html/2534EDE6.htm" />
   <HelpKINode Title="RI.Abstractions.Logging.NullLogger class" Url="html/2D73BF4C.htm" />
+  <HelpKINode Title="Run method">
+    <HelpKINode Title="IThreadDispatcher.Run Method " Url="html/DDACA501.htm" />
+    <HelpKINode Title="SimpleDispatcher.Run Method " Url="html/AFF3FA66.htm" />
+    <HelpKINode Title="ThreadDispatcherExecutionContext.Run Method " Url="html/D98D983C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Send method">
+    <HelpKINode Title="IThreadDispatcher.Send Method " Url="html/AE82E6D4.htm" />
+    <HelpKINode Title="IThreadDispatcherExtensions.Send Method " Url="html/8F456AD3.htm" />
+    <HelpKINode Title="SimpleDispatcher.Send Method " Url="html/9476F01.htm" />
+    <HelpKINode Title="ThreadDispatcherSynchronizationContext.Send Method " Url="html/5EE5CAEF.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SendAsync method">
+    <HelpKINode Title="IThreadDispatcher.SendAsync Method " Url="html/98264B36.htm" />
+    <HelpKINode Title="IThreadDispatcherExtensions.SendAsync Method " Url="html/677ECB79.htm" />
+    <HelpKINode Title="SimpleDispatcher.SendAsync Method " Url="html/34BF5C6D.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SendManually method" Url="html/9A22C172.htm" />
+  <HelpKINode Title="SendManuallyAsync method" Url="html/55E39C29.htm" />
   <HelpKINode Title="ServiceCollectionBuilderExtensions class">
     <HelpKINode Title="ServiceCollectionBuilderExtensions Class" Url="html/91EEAFB0.htm" />
     <HelpKINode Title="methods" Url="html/58F24832.htm" />
@@ -234,6 +559,18 @@
   <HelpKINode Title="ServiceCollectionCompositionContainer.Registered property" Url="html/6C3C01EA.htm" />
   <HelpKINode Title="ServiceCollectionCompositionContainer.ServiceCollectionCompositionContainer constructor" Url="html/8FE2B195.htm" />
   <HelpKINode Title="ServiceCollectionCompositionContainer.UsedServiceCollection property" Url="html/3511C431.htm" />
+  <HelpKINode Title="Shutdown method">
+    <HelpKINode Title="IThreadDispatcher.Shutdown Method " Url="html/1170CA4F.htm" />
+    <HelpKINode Title="SimpleDispatcher.Shutdown Method " Url="html/E40F74F4.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ShutdownAsync method">
+    <HelpKINode Title="IThreadDispatcher.ShutdownAsync Method " Url="html/F17BD799.htm" />
+    <HelpKINode Title="SimpleDispatcher.ShutdownAsync Method " Url="html/9B9F6CE.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ShutdownMode property">
+    <HelpKINode Title="IThreadDispatcher.ShutdownMode Property " Url="html/66D5BA95.htm" />
+    <HelpKINode Title="SimpleDispatcher.ShutdownMode Property " Url="html/DF821C63.htm" />
+  </HelpKINode>
   <HelpKINode Title="SimpleContainer class">
     <HelpKINode Title="SimpleContainer Class" Url="html/C20E6224.htm" />
     <HelpKINode Title="constructor" Url="html/FC149130.htm" />
@@ -245,32 +582,234 @@
   <HelpKINode Title="SimpleContainer.Register method" Url="html/4D19DEAC.htm" />
   <HelpKINode Title="SimpleContainer.Registered property" Url="html/6548460.htm" />
   <HelpKINode Title="SimpleContainer.SimpleContainer constructor" Url="html/FC149130.htm" />
+  <HelpKINode Title="SimpleDispatcher class">
+    <HelpKINode Title="SimpleDispatcher Class" Url="html/208D86AA.htm" />
+    <HelpKINode Title="constructor" Url="html/D698D46A.htm" />
+    <HelpKINode Title="events" Url="html/D1851388.htm" />
+    <HelpKINode Title="fields" Url="html/BE1F0E1F.htm" />
+    <HelpKINode Title="methods" Url="html/91E1F61.htm" />
+    <HelpKINode Title="properties" Url="html/6C580544.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SimpleDispatcher.AddKeepAlive method" Url="html/421A7089.htm" />
+  <HelpKINode Title="SimpleDispatcher.BeginShutdown method" Url="html/F2DB62E.htm" />
+  <HelpKINode Title="SimpleDispatcher.CatchExceptions property" Url="html/74660A97.htm" />
+  <HelpKINode Title="SimpleDispatcher.DefaultOptions property" Url="html/204CA81A.htm" />
+  <HelpKINode Title="SimpleDispatcher.DefaultOptionsValue field" Url="html/217C3907.htm" />
+  <HelpKINode Title="SimpleDispatcher.DefaultPriority property" Url="html/291C3FD6.htm" />
+  <HelpKINode Title="SimpleDispatcher.DefaultPriorityValue field" Url="html/72FFDEAF.htm" />
+  <HelpKINode Title="SimpleDispatcher.DoProcessing method" Url="html/88D6036A.htm" />
+  <HelpKINode Title="SimpleDispatcher.DoProcessingAsync method" Url="html/14967C21.htm" />
+  <HelpKINode Title="SimpleDispatcher.Exception event" Url="html/95144A79.htm" />
+  <HelpKINode Title="SimpleDispatcher.Finalize method" Url="html/8759676F.htm" />
+  <HelpKINode Title="SimpleDispatcher.GetCurrentOptions method" Url="html/F071621C.htm" />
+  <HelpKINode Title="SimpleDispatcher.GetCurrentPriority method" Url="html/7186B906.htm" />
+  <HelpKINode Title="SimpleDispatcher.IDisposable.Dispose explicitly implemented method" Url="html/BBDE8B76.htm" />
+  <HelpKINode Title="SimpleDispatcher.Idle event" Url="html/E75B18A8.htm" />
+  <HelpKINode Title="SimpleDispatcher.IsInThread method" Url="html/2F2438D9.htm" />
+  <HelpKINode Title="SimpleDispatcher.IsRunning property" Url="html/A76247F.htm" />
+  <HelpKINode Title="SimpleDispatcher.IsShuttingDown property" Url="html/E923725F.htm" />
+  <HelpKINode Title="SimpleDispatcher.ISynchronizeInvoke.BeginInvoke explicitly implemented method" Url="html/F362E0F7.htm" />
+  <HelpKINode Title="SimpleDispatcher.ISynchronizeInvoke.EndInvoke explicitly implemented method" Url="html/459E920A.htm" />
+  <HelpKINode Title="SimpleDispatcher.ISynchronizeInvoke.Invoke explicitly implemented method" Url="html/E1966A8F.htm" />
+  <HelpKINode Title="SimpleDispatcher.ISynchronizeInvoke.InvokeRequired explicitly implemented property" Url="html/B1B33264.htm" />
+  <HelpKINode Title="SimpleDispatcher.Post method" Url="html/39ECE3A7.htm" />
+  <HelpKINode Title="SimpleDispatcher.PostDelayed method" Url="html/C217292F.htm" />
+  <HelpKINode Title="SimpleDispatcher.RemoveKeepAlive method" Url="html/AF5C6B38.htm" />
+  <HelpKINode Title="SimpleDispatcher.Run method" Url="html/AFF3FA66.htm" />
+  <HelpKINode Title="SimpleDispatcher.Send method" Url="html/9476F01.htm" />
+  <HelpKINode Title="SimpleDispatcher.SendAsync method" Url="html/34BF5C6D.htm" />
+  <HelpKINode Title="SimpleDispatcher.Shutdown method" Url="html/E40F74F4.htm" />
+  <HelpKINode Title="SimpleDispatcher.ShutdownAsync method" Url="html/9B9F6CE.htm" />
+  <HelpKINode Title="SimpleDispatcher.ShutdownMode property" Url="html/DF821C63.htm" />
+  <HelpKINode Title="SimpleDispatcher.SimpleDispatcher constructor" Url="html/D698D46A.htm" />
+  <HelpKINode Title="SimpleDispatcher.SyncRoot property" Url="html/F776F54D.htm" />
+  <HelpKINode Title="SimpleDispatcher.WaitForShutdown method" Url="html/2858B21D.htm" />
+  <HelpKINode Title="SimpleDispatcher.WaitForShutdownAsync method" Url="html/252D1F53.htm" />
+  <HelpKINode Title="SimpleDispatcher.Watchdog event" Url="html/F5D02B3B.htm" />
+  <HelpKINode Title="SimpleDispatcher.WatchdogTimeout property" Url="html/7CE9776E.htm" />
   <HelpKINode Title="Singleton enumeration member" Url="html/3DDC023E.htm" />
   <HelpKINode Title="Singleton method" Url="html/29D7A5FC.htm" />
+  <HelpKINode Title="Start method">
+    <HelpKINode Title="IThreadDispatcherTimer.Start Method " Url="html/7622AECC.htm" />
+    <HelpKINode Title="IThreadDispatcherTimerExtensions.Start Method " Url="html/9B89DBB8.htm" />
+  </HelpKINode>
+  <HelpKINode Title="State property" Url="html/26CC7C90.htm" />
+  <HelpKINode Title="Stop method" Url="html/8D709FAC.htm" />
+  <HelpKINode Title="SyncRoot property">
+    <HelpKINode Title="IThreadDispatcher.SyncRoot Property " Url="html/E9E9CD9A.htm" />
+    <HelpKINode Title="IThreadDispatcherRunnable.SyncRoot Property " Url="html/9D76168F.htm" />
+    <HelpKINode Title="SimpleDispatcher.SyncRoot Property " Url="html/F776F54D.htm" />
+    <HelpKINode Title="ThreadDispatcherAwaiter.SyncRoot Property " Url="html/15C1E0B9.htm" />
+    <HelpKINode Title="ThreadDispatcherExecutionContext.SyncRoot Property " Url="html/FE172F1A.htm" />
+    <HelpKINode Title="ThreadDispatcherSynchronizationContext.SyncRoot Property " Url="html/1B687985.htm" />
+    <HelpKINode Title="ThreadDispatcherTaskFactory.SyncRoot Property " Url="html/203BEDB9.htm" />
+    <HelpKINode Title="ThreadDispatcherTaskScheduler.SyncRoot Property " Url="html/3D8EB237.htm" />
+  </HelpKINode>
   <HelpKINode Title="Temporary enumeration member" Url="html/3DDC023E.htm" />
   <HelpKINode Title="Temporary method" Url="html/F0206E1D.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter class">
+    <HelpKINode Title="ThreadDispatcherAwaiter Class" Url="html/DF112AFE.htm" />
+    <HelpKINode Title="constructor" Url="html/C779BD3F.htm" />
+    <HelpKINode Title="methods" Url="html/D8DEF32A.htm" />
+    <HelpKINode Title="properties" Url="html/FC370F5C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherAwaiter.Dispatcher property" Url="html/4EBDCEA.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter.GetAwaiter method" Url="html/CB703858.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter.GetResult method" Url="html/CDD3EF14.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter.ICriticalNotifyCompletion.UnsafeOnCompleted explicitly implemented method" Url="html/2CC218ED.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter.IsCompleted property" Url="html/EA510763.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter.OnCompleted method" Url="html/86E30B2E.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter.SyncRoot property" Url="html/15C1E0B9.htm" />
+  <HelpKINode Title="ThreadDispatcherAwaiter.ThreadDispatcherAwaiter constructor" Url="html/C779BD3F.htm" />
+  <HelpKINode Title="ThreadDispatcherException class">
+    <HelpKINode Title="ThreadDispatcherException Class" Url="html/DE00DC7D.htm" />
+    <HelpKINode Title="constructor" Url="html/92CB953E.htm" />
+    <HelpKINode Title="events" Url="html/297D9D15.htm" />
+    <HelpKINode Title="methods" Url="html/94588FC6.htm" />
+    <HelpKINode Title="properties" Url="html/55F07039.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherException.Operation property" Url="html/745A410.htm" />
+  <HelpKINode Title="ThreadDispatcherException.ThreadDispatcherException constructor" Url="html/92CB953E.htm" />
+  <HelpKINode Title="ThreadDispatcherExceptionEventArgs class">
+    <HelpKINode Title="ThreadDispatcherExceptionEventArgs Class" Url="html/376CEB6.htm" />
+    <HelpKINode Title="constructor" Url="html/6C3F0F4F.htm" />
+    <HelpKINode Title="methods" Url="html/CF8EE65C.htm" />
+    <HelpKINode Title="properties" Url="html/B035C0B1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherExceptionEventArgs.CanContinue property" Url="html/1295A26B.htm" />
+  <HelpKINode Title="ThreadDispatcherExceptionEventArgs.CurrentOperation property" Url="html/81BB4F60.htm" />
+  <HelpKINode Title="ThreadDispatcherExceptionEventArgs.Exception property" Url="html/77D53301.htm" />
+  <HelpKINode Title="ThreadDispatcherExceptionEventArgs.ThreadDispatcherExceptionEventArgs constructor" Url="html/6C3F0F4F.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext class">
+    <HelpKINode Title="ThreadDispatcherExecutionContext Class" Url="html/F4D27D90.htm" />
+    <HelpKINode Title="methods" Url="html/7DD76B6A.htm" />
+    <HelpKINode Title="properties" Url="html/BCFF12ED.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherExecutionContext.Capture method" Url="html/F754AAB3.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext.Clone method" Url="html/E6E810EB.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext.Dispose method" Url="html/5FA9325D.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext.Finalize method" Url="html/A7DDB152.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext.ICloneable.Clone explicitly implemented method" Url="html/F461A21B.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext.IsDisposed property" Url="html/56E82B3A.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext.Run method" Url="html/D98D983C.htm" />
+  <HelpKINode Title="ThreadDispatcherExecutionContext.SyncRoot property" Url="html/FE172F1A.htm" />
+  <HelpKINode Title="ThreadDispatcherIdleEventArgs class">
+    <HelpKINode Title="ThreadDispatcherIdleEventArgs Class" Url="html/B8E8DEBC.htm" />
+    <HelpKINode Title="constructor" Url="html/84DFC52F.htm" />
+    <HelpKINode Title="methods" Url="html/4EDAB70C.htm" />
+    <HelpKINode Title="properties" Url="html/48D8C3F0.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherIdleEventArgs.Dispatcher property" Url="html/484258F6.htm" />
+  <HelpKINode Title="ThreadDispatcherIdleEventArgs.ThreadDispatcherIdleEventArgs constructor" Url="html/84DFC52F.htm" />
+  <HelpKINode Title="ThreadDispatcherOperationState enumeration" Url="html/E00EA5B4.htm" />
+  <HelpKINode Title="ThreadDispatcherOptions enumeration" Url="html/E865E51E.htm" />
+  <HelpKINode Title="ThreadDispatcherShutdownMode enumeration" Url="html/3A856291.htm" />
+  <HelpKINode Title="ThreadDispatcherSynchronizationContext class">
+    <HelpKINode Title="ThreadDispatcherSynchronizationContext Class" Url="html/786F1F5A.htm" />
+    <HelpKINode Title="constructor" Url="html/FE1667FA.htm" />
+    <HelpKINode Title="methods" Url="html/D3F98CEC.htm" />
+    <HelpKINode Title="properties" Url="html/CEF52D71.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherSynchronizationContext.CreateCopy method" Url="html/1D0F4DD9.htm" />
+  <HelpKINode Title="ThreadDispatcherSynchronizationContext.Dispatcher property" Url="html/47C7879F.htm" />
+  <HelpKINode Title="ThreadDispatcherSynchronizationContext.Post method" Url="html/1271CD99.htm" />
+  <HelpKINode Title="ThreadDispatcherSynchronizationContext.Send method" Url="html/5EE5CAEF.htm" />
+  <HelpKINode Title="ThreadDispatcherSynchronizationContext.SyncRoot property" Url="html/1B687985.htm" />
+  <HelpKINode Title="ThreadDispatcherSynchronizationContext.ThreadDispatcherSynchronizationContext constructor" Url="html/FE1667FA.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskFactory class">
+    <HelpKINode Title="ThreadDispatcherTaskFactory Class" Url="html/C24332CE.htm" />
+    <HelpKINode Title="constructor" Url="html/A05CE10A.htm" />
+    <HelpKINode Title="methods" Url="html/D0E7650A.htm" />
+    <HelpKINode Title="properties" Url="html/F866B4CC.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherTaskFactory.Dispatcher property" Url="html/40493C28.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskFactory.SyncRoot property" Url="html/203BEDB9.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskFactory.ThreadDispatcherTaskFactory constructor" Url="html/A05CE10A.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler class">
+    <HelpKINode Title="ThreadDispatcherTaskScheduler Class" Url="html/CC7BF8FC.htm" />
+    <HelpKINode Title="constructor" Url="html/3C58D544.htm" />
+    <HelpKINode Title="methods" Url="html/49354388.htm" />
+    <HelpKINode Title="properties" Url="html/4EF3DA6A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.Dispatcher property" Url="html/E53B6E89.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.GetScheduledTasks method" Url="html/C7BCA094.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.MaximumConcurrencyLevel property" Url="html/3738D0C4.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.QueueTask method" Url="html/419ED597.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.SyncRoot property" Url="html/3D8EB237.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.ThreadDispatcherTaskScheduler constructor" Url="html/3C58D544.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.TryDequeue method" Url="html/314981B7.htm" />
+  <HelpKINode Title="ThreadDispatcherTaskScheduler.TryExecuteTaskInline method" Url="html/2B003B53.htm" />
+  <HelpKINode Title="ThreadDispatcherTimerMode enumeration" Url="html/69D523FC.htm" />
+  <HelpKINode Title="ThreadDispatcherWatchdogEventArgs class">
+    <HelpKINode Title="ThreadDispatcherWatchdogEventArgs Class" Url="html/95E98328.htm" />
+    <HelpKINode Title="constructor" Url="html/85A312C9.htm" />
+    <HelpKINode Title="methods" Url="html/6D654CC2.htm" />
+    <HelpKINode Title="properties" Url="html/7890DF41.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ThreadDispatcherWatchdogEventArgs.CurrentOperation property" Url="html/C8BB5CB4.htm" />
+  <HelpKINode Title="ThreadDispatcherWatchdogEventArgs.ThreadDispatcherWatchdogEventArgs constructor" Url="html/85A312C9.htm" />
+  <HelpKINode Title="ThreadDispatcherWatchdogEventArgs.Timeout property" Url="html/9C35F06C.htm" />
   <HelpKINode Title="ThrowIfAlreadyBuilt method" Url="html/D09D9398.htm" />
   <HelpKINode Title="ThrowIfNotExactContractCount method" Url="html/FA63604D.htm" />
   <HelpKINode Title="ThrowIfNotMaxContractCount method" Url="html/2359FBE5.htm" />
   <HelpKINode Title="ThrowIfNotMinContractCount method" Url="html/6C8F5CB4.htm" />
   <HelpKINode Title="ThrowIfNotTemporary method" Url="html/9D342830.htm" />
   <HelpKINode Title="ThrowIfTemporary method" Url="html/D14F8EFD.htm" />
+  <HelpKINode Title="Timeout property" Url="html/9C35F06C.htm" />
   <HelpKINode Title="ToString method" Url="html/5DF1274F.htm" />
   <HelpKINode Title="Transient enumeration member" Url="html/3DDC023E.htm" />
   <HelpKINode Title="Transient method" Url="html/10125405.htm" />
-  <HelpKINode Title="UseCallbackLogger(Of T) method" Url="html/5A9900FB.htm" />
-  <HelpKINode Title="UseCallbackLogger&lt;T&gt; method" Url="html/5A9900FB.htm" />
+  <HelpKINode Title="TryDequeue method" Url="html/314981B7.htm" />
+  <HelpKINode Title="TryExecuteTaskInline method" Url="html/2B003B53.htm" />
+  <HelpKINode Title="UseCallbackLogger method" Url="html/B13A994D.htm" />
+  <HelpKINode Title="UseCompositionContainer(Of T) method" Url="html/ACB3409F.htm" />
+  <HelpKINode Title="UseCompositionContainer&lt;T&gt; method" Url="html/ACB3409F.htm" />
   <HelpKINode Title="UsedLogger property" Url="html/9A11082C.htm" />
   <HelpKINode Title="UsedServiceCollection property" Url="html/3511C431.htm" />
-  <HelpKINode Title="UseLogger(Of T) method" Url="html/3244F77E.htm" />
-  <HelpKINode Title="UseLogger&lt;T&gt; method" Url="html/3244F77E.htm" />
+  <HelpKINode Title="UseLogger(Of T) method">
+    <HelpKINode Title="IBuilderExtensions.UseLogger(T) Method " Url="html/5BD7B465.htm" />
+    <HelpKINode Title="LoggerBuilderExtensions.UseLogger(T) Method " Url="html/3244F77E.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UseLogger&lt;T&gt; method">
+    <HelpKINode Title="IBuilderExtensions.UseLogger(T) Method " Url="html/5BD7B465.htm" />
+    <HelpKINode Title="LoggerBuilderExtensions.UseLogger(T) Method " Url="html/3244F77E.htm" />
+  </HelpKINode>
   <HelpKINode Title="UseLoggerFactory(Of T) method" Url="html/72D6E511.htm" />
   <HelpKINode Title="UseLoggerFactory&lt;T&gt; method" Url="html/72D6E511.htm" />
   <HelpKINode Title="UseNullLogger(Of T) method" Url="html/F384E503.htm" />
   <HelpKINode Title="UseNullLogger&lt;T&gt; method" Url="html/F384E503.htm" />
   <HelpKINode Title="UseServiceCollection(Of T) method" Url="html/9BF2F25A.htm" />
   <HelpKINode Title="UseServiceCollection&lt;T&gt; method" Url="html/9BF2F25A.htm" />
-  <HelpKINode Title="UseSimpleContainer(Of T) method" Url="html/F93760E3.htm" />
-  <HelpKINode Title="UseSimpleContainer&lt;T&gt; method" Url="html/F93760E3.htm" />
+  <HelpKINode Title="UseSimpleContainer method" Url="html/DA96A84A.htm" />
+  <HelpKINode Title="UseSimpleDispatcher method" Url="html/4CF29421.htm" />
+  <HelpKINode Title="UseThreadDispatcher(Of T) method" Url="html/1B885DF3.htm" />
+  <HelpKINode Title="UseThreadDispatcher&lt;T&gt; method" Url="html/1B885DF3.htm" />
+  <HelpKINode Title="Wait method">
+    <HelpKINode Title="IThreadDispatcherOperation.Wait Method " Url="html/63CF3500.htm" />
+    <HelpKINode Title="IThreadDispatcherOperationExtensions.Wait Method " Url="html/2008BA9B.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WaitAsync method">
+    <HelpKINode Title="IThreadDispatcherOperation.WaitAsync Method " Url="html/D7940656.htm" />
+    <HelpKINode Title="IThreadDispatcherOperationExtensions.WaitAsync Method " Url="html/7F0573D3.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WaitForShutdown method">
+    <HelpKINode Title="IThreadDispatcher.WaitForShutdown Method " Url="html/7D12D4E1.htm" />
+    <HelpKINode Title="SimpleDispatcher.WaitForShutdown Method " Url="html/2858B21D.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WaitForShutdownAsync method">
+    <HelpKINode Title="IThreadDispatcher.WaitForShutdownAsync Method " Url="html/4CB170A4.htm" />
+    <HelpKINode Title="SimpleDispatcher.WaitForShutdownAsync Method " Url="html/252D1F53.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Waiting enumeration member" Url="html/E00EA5B4.htm" />
   <HelpKINode Title="Warning enumeration member" Url="html/2534EDE6.htm" />
+  <HelpKINode Title="Watchdog event">
+    <HelpKINode Title="IThreadDispatcher.Watchdog Event" Url="html/B59F305B.htm" />
+    <HelpKINode Title="SimpleDispatcher.Watchdog Event" Url="html/F5D02B3B.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WatchdogEvents property" Url="html/35408B89.htm" />
+  <HelpKINode Title="WatchdogTime property" Url="html/8E155E6A.htm" />
+  <HelpKINode Title="WatchdogTimeout property">
+    <HelpKINode Title="IThreadDispatcher.WatchdogTimeout Property " Url="html/28A39D41.htm" />
+    <HelpKINode Title="SimpleDispatcher.WatchdogTimeout Property " Url="html/7CE9776E.htm" />
+  </HelpKINode>
 </HelpKI>

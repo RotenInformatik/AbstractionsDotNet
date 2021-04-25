@@ -34,14 +34,14 @@
       <para>
         <markup>
           <a href='https://github.com/RotenInformatik/AbstractionsDotNet/blob/master/README.md'>
-            <img src="https://img.shields.io/badge/docs-Readme-yellowgreen" referrerpolicy="no-referrer" alt="Documentation"/>
+            <img src="https://img.shields.io/badge/docs-Readme-yellowgreen" referrerpolicy="no-referrer" alt="Readme"/>
           </a>
         </markup>
       </para>
       <para>
         <markup>
           <a href='https://github.com/RotenInformatik/AbstractionsDotNet/blob/master/HISTORY.md'>
-            <img src="https://img.shields.io/badge/docs-History-yellowgreen" referrerpolicy="no-referrer" alt="Documentation"/>
+            <img src="https://img.shields.io/badge/docs-History-yellowgreen" referrerpolicy="no-referrer" alt="History"/>
           </a>
         </markup>
       </para>

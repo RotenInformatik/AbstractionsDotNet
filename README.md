@@ -1,6 +1,6 @@
 # RI.Abstractions
 
-[![Nuget](https://img.shields.io/nuget/v/RI.Abstractions.Common)](https://www.nuget.org/packages/RI.Abstractions.Common/) [![License](https://img.shields.io/github/license/RotenInformatik/AbstractionsDotNet)](LICENSE) [![Repository](https://img.shields.io/badge/repo-AbstractionsDotNet-lightgrey)](https://github.com/RotenInformatik/AbstractionsDotNet) [![Documentation](https://img.shields.io/badge/docs-Readme-yellowgreen)](README.md) [![Documentation](https://img.shields.io/badge/docs-History-yellowgreen)](HISTORY.md) [![Documentation](https://img.shields.io/badge/docs-API-yellowgreen)](https://roteninformatik.github.io/AbstractionsDotNet/api/) [![Support me](https://img.shields.io/badge/support%20me-Ko--fi-ff69b4?logo=Ko-fi)](https://ko-fi.com/andreasroten)
+[![Nuget](https://img.shields.io/nuget/v/RI.Abstractions.Common)](https://www.nuget.org/packages/RI.Abstractions.Common/) [![License](https://img.shields.io/github/license/RotenInformatik/AbstractionsDotNet)](LICENSE) [![Repository](https://img.shields.io/badge/repo-AbstractionsDotNet-lightgrey)](https://github.com/RotenInformatik/AbstractionsDotNet) [![Readme](https://img.shields.io/badge/docs-Readme-yellowgreen)](README.md) [![History](https://img.shields.io/badge/docs-History-yellowgreen)](HISTORY.md) [![Documentation](https://img.shields.io/badge/docs-API-yellowgreen)](https://roteninformatik.github.io/AbstractionsDotNet/api/) [![Support me](https://img.shields.io/badge/support%20me-Ko--fi-ff69b4?logo=Ko-fi)](https://ko-fi.com/andreasroten)
 
 ---
 
@@ -14,13 +14,23 @@ These abstractions are mainly used by other projects/libraries worked on by [Rot
 
 The [API documentation](https://roteninformatik.github.io/AbstractionsDotNet/api/) provides a complete list of all available functionality.
 
-Currently, the following abstractions are implemented:
+The following abstractions are implemented:
 
-* **Builder** (boilerplate for implementing the builder pattern)
+* **Builder** (abstraction for implementing the builder pattern)
 * **Composition container** (registration abstraction for dependency injection)
-* **Logging** (simple logging abstraction)
+* **Logging** (logging abstraction)
+* **Thread dispatcher** (abstraction for processing delegates using a prioritized queue)
 
-Currently, the following is being abstracted:
+The following is being abstracted:
 
 * **Microsoft.Extensions.Logging**
 * **Microsoft.Extensions.DependencyInjection**
+
+The following abstractions also have default implementations in `RI.Abstractions.Common`:
+
+* **`BuilderBase`** (abstract base class with common boilerplate for implementing the builder pattern)
+* **`SimpleContainer`** (composition container for registering types, instances, and factories)
+* **`CallbackLogger`** (logger which calls a delegate)
+* **`NullLogger`** (logger which does nothing; also used by `BuilderBase` if no other `ILogger` is registered)
+* **`SimpleDispatcher`** (full implementation for standalone use)
+

@@ -4,6 +4,15 @@
 
 ---
 
+## 1.4.0
+
+* [#6: Move thread dispatcher abstraction into this repository](https://github.com/RotenInformatik/AbstractionsDotNet/issues/6)
+* [#23: ThrowIf... methods do not check for contract type](https://github.com/RotenInformatik/AbstractionsDotNet/issues/23)
+* [#24: Insufficient tests of the builder (e.g. BuildStandalone)](https://github.com/RotenInformatik/AbstractionsDotNet/issues/24)
+* [#25: AddDefault... methods call itself instead of Add... methods](https://github.com/RotenInformatik/AbstractionsDotNet/issues/25)
+* [#26: BuilderBase.Build checks for ILogger instead for ICompositionContainer](https://github.com/RotenInformatik/AbstractionsDotNet/issues/26)
+* [#27: Implement SimpleDispatcher](https://github.com/RotenInformatik/AbstractionsDotNet/issues/27)
+
 ## 1.3.0
 
 * [#5: Create unit tests](https://github.com/RotenInformatik/AbstractionsDotNet/issues/5)
