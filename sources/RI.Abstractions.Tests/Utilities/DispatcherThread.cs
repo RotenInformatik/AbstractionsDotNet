@@ -63,6 +63,7 @@ namespace RI.Abstractions.Tests.Utilities
         public async Task StopAsync (ThreadDispatcherShutdownMode shutdownMode)
         {
             Assert.Null(this.Exception);
+
             lock (this.Dispatcher.SyncRoot)
             {
                 if ((!this.Dispatcher.IsShuttingDown) && this.Dispatcher.IsRunning)

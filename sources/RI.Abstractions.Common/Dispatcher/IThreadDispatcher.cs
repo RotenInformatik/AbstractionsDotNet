@@ -153,6 +153,9 @@ namespace RI.Abstractions.Dispatcher
         ///     <note type="implement">
         ///         The <see cref="Idle" /> event must raised from the thread <see cref="IThreadDispatcher" /> runs in.
         ///     </note>
+        ///     <note type="implement">
+        ///         The dispatcher is also considered idle when a posted async delegate is waiting for completion (because the dispatcher is able other delegate until the prior async delegates completes).
+        ///     </note>
         /// </remarks>
         event EventHandler<ThreadDispatcherIdleEventArgs> Idle;
 
